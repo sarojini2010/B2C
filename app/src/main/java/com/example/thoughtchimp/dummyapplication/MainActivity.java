@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements  Constant{
     ProgressBar progress;
     Button btn_score;
     private ArrayList<User> userlist=new ArrayList<>();
-   // static JSONObject jObj = null;
     final String url =CHILDHOMEIP;
     InputStream is=null;
 
@@ -69,11 +68,6 @@ public class MainActivity extends AppCompatActivity implements  Constant{
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-
         SessionText= (TextView) findViewById(R.id.session_text);
         ReccoText=(TextView) findViewById(R.id.recco_text);
         SessionArcText= (TextView) findViewById(R.id.archieve_text);
@@ -118,10 +112,10 @@ public class MainActivity extends AppCompatActivity implements  Constant{
                                 JSONObject id=jsonArray.getJSONObject(i);
                                 User user=new User();
                                 String title1=id.getString("id");
-//                String title2=title1.substring(7);
-//                System.out.println("PPPPPPPPPPP"+title2);
-//                String title3=title1;
-//                System.out.println("____________"+title3);
+                //                String title2=title1.substring(7);
+                //                System.out.println("PPPPPPPPPPP"+title2);
+                //                String title3=title1;
+                //                System.out.println("____________"+title3);
                                 user.setUserEmail(title1);
                                 user.setUserName(id.optString("title"));
                                 user.setUserMobile(id.optString("parent_note"));
@@ -129,11 +123,7 @@ public class MainActivity extends AppCompatActivity implements  Constant{
                                 userlist.add(user);
                                 System.out.println("userrrrrrr"+userlist);
                                 allUserAdapter.notifyDataSetChanged();
-                                // SessionTitle.add(jsonArray.get(i).toString());
-
-//                System.out.println("-----------"+title +""+SessionTitle+""+created);
                             }
-//            SessionArcText.setText(Session_archieve+" Session Archieve");
                             ReccoText.setText(Recco);
                             progress.setMax(50);
                             progress.setProgress(sesion);
