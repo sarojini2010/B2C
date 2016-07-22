@@ -17,7 +17,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SessionArchieve"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="f21d16951642c2410e83171adabc6f2f029b5783" />
