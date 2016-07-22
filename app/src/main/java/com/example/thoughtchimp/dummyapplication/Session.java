@@ -8,6 +8,7 @@ public class Session {
     String sessionnumber;
     String sessiondetails;
     String undosessionid;
+    int imageResource;
 
     public int getImageResource() {
         return imageResource;
@@ -17,7 +18,7 @@ public class Session {
         this.imageResource = imageResource;
     }
 
-    int imageResource;
+
 
 
     public String getUndosessionid() {

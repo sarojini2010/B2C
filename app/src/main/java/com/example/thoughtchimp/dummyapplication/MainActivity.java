@@ -47,12 +47,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements  Constant{
-    Toolbar toolbar;
     TextView SessionText,ReccoText,SessionArcText;
     ProgressBar progress;
     Button btn_score;
     private ArrayList<User> userlist=new ArrayList<>();
-    ArrayList SessionTitle;
     static JSONObject jObj = null;
     final String url =CHILDHOMEIP;
     InputStream is=null;
@@ -144,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements  Constant{
                 user.setUserMobile(id.optString("parent_note"));
                 user.setImageResourceId(R.drawable.arrow_hdpi);
                 userlist.add(user);
+                System.out.println("userrrrrrr"+userlist);
                // SessionTitle.add(jsonArray.get(i).toString());
 
 //                System.out.println("-----------"+title +""+SessionTitle+""+created);
@@ -167,14 +166,14 @@ public class MainActivity extends AppCompatActivity implements  Constant{
         recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(MainActivity.this,SessionArchieve.class);
+                Intent in=new Intent(MainActivity.this,SessionArchive.class);
                 startActivity(in);
             }
         });
        SessionArcText.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent in=new Intent(MainActivity.this,SessionArchieve.class);
+               Intent in=new Intent(MainActivity.this,SessionArchive.class);
                startActivity(in);
            }
        });

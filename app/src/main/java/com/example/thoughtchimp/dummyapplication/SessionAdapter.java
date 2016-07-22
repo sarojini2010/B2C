@@ -18,6 +18,7 @@ public class SessionAdapter extends RecyclerView.Adapter {
     private Context mContext;
     ArrayList<Session> sessiondetails;
 
+
     public SessionAdapter(Context mContext, ArrayList<Session> sessiondetails) {
         this.mContext = mContext;
         this.sessiondetails = sessiondetails;
@@ -51,7 +52,7 @@ public class SessionAdapter extends RecyclerView.Adapter {
 
 
 
-    public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class UserViewHolder extends RecyclerView.ViewHolder {
         private TextView sesionid;
         private TextView seriesnumber;
         private TextView sessiondetails;
@@ -60,8 +61,7 @@ public class SessionAdapter extends RecyclerView.Adapter {
 
         public UserViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
-            itemView.setClickable(true);
+
 
             sesionid = (TextView) itemView.findViewById(R.id.sesion_id);
             seriesnumber = (TextView) itemView.findViewById(R.id.session_number);
@@ -72,10 +72,6 @@ public class SessionAdapter extends RecyclerView.Adapter {
 
         }
 
-        @Override
-        public void onClick(View v) {
-            Intent in=new Intent(mContext,SessionArchieve.class);
-            mContext.startActivity(in);
-        }
+
     }
 }
