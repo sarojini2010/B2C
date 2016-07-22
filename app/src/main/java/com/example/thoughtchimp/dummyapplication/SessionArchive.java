@@ -37,8 +37,9 @@ import java.util.Map;
  * Created by thoughtchimp on 7/22/2016.
  */
 public class SessionArchive  extends AppCompatActivity implements Constant {
-    private ArrayList<User> sessionlist=new ArrayList<>();
-    User user;
+    private ArrayList<Session> sessionlist=new ArrayList<>();
+    String url = SessionArchieveIp;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,10 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.session);
-        String url = CHILDHOMEIP;
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final SessionAdapter sessionAdapter = new SessionAdapter(this, sessionlist);
+        recyclerView.setAdapter(sessionAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -54,37 +58,23 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
                         System.out.println("------------------"+response);
                         try {
                             JSONObject jsonObject=new JSONObject(response);
-//                            String undo=jsonObject.getString("undo_session_id");
-//                            JSONArray sesionarray=jsonObject.getJSONArray("sessions");
-//                            for(int i=0;i<sesionarray.length();i++) {
-//                                JSONObject sessionsid = sesionarray.getJSONObject(i);
-//                                String id=sessionsid.getString("id");
-//                                String title=sessionsid.getString("title");
-//                                String parentnote=sessionsid.getString("parent_note");
-//                                String milestoneid=sessionsid.getString("milestone_id");
-//                                Session sessiondetails=new Session();
-//                                sessiondetails.setSessionid(id);
-//                                sessiondetails.setUndosessionid(milestoneid);
-//                                sessiondetails.setSessionnumber(title);
-//                                sessiondetails.setImageResource(R.drawable.arrow);
-//                                sessiondetails.setSessiondetails(parentnote);
-//                                sessionlist.add(sessiondetails);
-//                                System.out.println("sssss"+id+""+title+""+parentnote+""+milestoneid+""+sessiondetails+"");
-
-                            JSONArray jsonArray=jsonObject.getJSONArray("sessions");
-                            for(int i=0;i<jsonArray.length();i++){
-                                JSONObject id=jsonArray.getJSONObject(i);
-                                User user=new User();
-                                String title1=id.getString("id");
-//                String title2=title1.substring(7);
-//                System.out.println("PPPPPPPPPPP"+title2);
-//                String title3=title1;
-//                System.out.println("____________"+title3);
-                                user.setUserEmail(title1);
-                                user.setUserName(id.optString("title"));
-                                user.setUserMobile(id.optString("parent_note"));
-                                user.setImageResourceId(R.drawable.arrow_hdpi);
-                                sessionlist.add(user);
+                            String undo=jsonObject.getString("undo_session_id");
+                            JSONArray sesionarray=jsonObject.getJSONArray("sessions");
+                            for(int i=0;i<sesionarray.length();i++) {
+                                JSONObject sessionsid = sesionarray.getJSONObject(i);
+                                String id=sessionsid.getString("id");
+                                String title=sessionsid.getString("title");
+                                String parentnote=sessionsid.getString("parent_note");
+                                String milestoneid=sessionsid.getString("milestone_id");
+                                Session sessiondetails=new Session();
+                                sessiondetails.setSessionid(id);
+                                sessiondetails.setUndosessionid("undo");
+                                sessiondetails.setSessionnumber(title);
+                                sessiondetails.setImageResource(R.drawable.arrow_hdpi);
+                                sessiondetails.setSessiondetails(parentnote);
+                                sessionlist.add(sessiondetails);
+                                System.out.println("sssss"+id+""+title+""+parentnote+""+milestoneid+""+sessiondetails+"");
+                                sessionAdapter.notifyDataSetChanged();
 //                                System.out.println("userrrrrrr"+userlist);
                             }
 
@@ -102,7 +92,7 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> httpget =   new HashMap<>();;
+                Map<String,String> httpget =   new HashMap<>();
                 httpget.put("X-API-KEY","123456");
                 httpget.put("Authorization","Basic YWRtaW46MTIzNA==");
                 httpget.put("access-token","6InFDMC1mYyvJ0QoxiL8dEUSj_2");
@@ -129,11 +119,7 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
 
        queue.add(stringRequest);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        AllUsersAdapter allUserAdapter = new AllUsersAdapter(this, sessionlist);
-//       recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.INVALID_OFFSET));
-        recyclerView.setAdapter(allUserAdapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
 
     }
 }

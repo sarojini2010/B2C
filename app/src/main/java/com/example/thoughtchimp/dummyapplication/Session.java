@@ -13,27 +13,19 @@ public class Session {
     public int getImageResource() {
         return imageResource;
     }
-
     public void setImageResource(int imageResource) {
         this.imageResource = imageResource;
     }
-
-
-
-
     public String getUndosessionid() {
         return undosessionid;
     }
-
     public void setUndosessionid(String undosessionid) {
         this.undosessionid = undosessionid;
     }
 
-
     public String getSessionid() {
         return sessionid;
     }
-
     public void setSessionid(String sessionid) {
         this.sessionid = sessionid;
     }
@@ -41,15 +33,12 @@ public class Session {
     public String getSessionnumber() {
         return sessionnumber;
     }
-
     public void setSessionnumber(String sessionnumber) {
         this.sessionnumber = sessionnumber;
     }
-
     public String getSessiondetails() {
         return sessiondetails;
     }
-
     public void setSessiondetails(String sessiondetails) {
         this.sessiondetails = sessiondetails;
     }

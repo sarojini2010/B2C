@@ -55,7 +55,7 @@
                 android:textColor="#fbfafd"
                 android:layout_toRightOf="@+id/sesion_id"
                 android:layout_toEndOf="@+id/sesion_id"
-                android:layout_marginLeft="290dp"
+                android:layout_marginLeft="240dp"
                 />
             <TextView
                 android:id="@+id/session_description"
@@ -64,7 +64,7 @@
                 android:textSize="11sp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:layout_marginRight="45dp"
+                android:layout_marginRight="60dp"
                 android:textColor="#d8bbe6"
                 android:layout_marginTop="19dp"
                 android:text="error somethingggggggggggggggggg wrong wrong wrong dpdp"
