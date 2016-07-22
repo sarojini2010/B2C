@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements  Constant{
     Button btn_score;
     private ArrayList<User> userlist=new ArrayList<>();
     final String url =CHILDHOMEIP;
-    InputStream is=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,21 +120,16 @@ public class MainActivity extends AppCompatActivity implements  Constant{
                                 user.setUserMobile(id.optString("parent_note"));
                                 user.setImageResourceId(R.drawable.arrow_hdpi);
                                 userlist.add(user);
-                                System.out.println("userrrrrrr"+userlist);
                                 allUserAdapter.notifyDataSetChanged();
                             }
                             ReccoText.setText(Recco);
                             progress.setMax(50);
                             progress.setProgress(sesion);
                             btn_score.setText(Karmascore);
-                            SessionText.setText(""+sesion +" Sessions Completed");
-
-
+                            SessionText.setText(+sesion +" Sessions Completed");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -144,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements  Constant{
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> httpget =   new HashMap<>();
+                Map<String,String> httpget = new HashMap<>();
                 httpget.put("X-API-KEY","123456");
                 httpget.put("Authorization","Basic YWRtaW46MTIzNA==");
                 httpget.put("access-token","6InFDMC1mYyvJ0QoxiL8dEUSj_2");
@@ -161,8 +155,6 @@ public class MainActivity extends AppCompatActivity implements  Constant{
                             Collections.<String, String>emptyMap(), // this is the important line, set an empty but non-null map.
                             response.notModified,
                             response.networkTimeMs);
-
-
                 }
 
                 return super.parseNetworkResponse(response);
@@ -170,8 +162,6 @@ public class MainActivity extends AppCompatActivity implements  Constant{
         };
 
         queue.add(stringRequest);
-
-
     }
 
 //    @Override
