@@ -18,7 +18,13 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,14 +50,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements  Constant{
     TextView SessionText,ReccoText,SessionArcText;
     ProgressBar progress;
     Button btn_score;
     private ArrayList<User> userlist=new ArrayList<>();
-    static JSONObject jObj = null;
+   // static JSONObject jObj = null;
     final String url =CHILDHOMEIP;
     InputStream is=null;
 
@@ -71,95 +80,9 @@ public class MainActivity extends AppCompatActivity implements  Constant{
         progress= (ProgressBar) findViewById(R.id.progressBar);
         btn_score=(Button)findViewById(R.id.button_score);
         final RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-
-
-        String body="" ;
-
-        try {
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpget = new HttpGet(url);
-            httpget.addHeader("X-API-KEY","123456");
-            httpget.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
-            httpget.addHeader("access-token","6InFDMC1mYyvJ0QoxiL8dEUSj_2");
-
-            HttpResponse httpResponse = httpClient.execute(httpget);
-            final int statusCode = httpResponse.getStatusLine().getStatusCode();
-
-            if (statusCode != HttpStatus.SC_OK) {
-                Log.w(getClass().getSimpleName(),
-                        "Error " + statusCode + " for URL " + url);
-
-            }
-            HttpEntity httpEntity = httpResponse.getEntity();
-            is = httpEntity.getContent();
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "iso-8859-1"), 8);
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "n");
-            }
-            is.close();
-            body = sb.toString();
-        } catch (Exception e) {
-            Log.e("Buffer Error", "Error converting result " + e.toString());
-        }
-
-        // try parse the string to a JSON object
-        try {
-            jObj = new JSONObject(body);
-            System.out.println("---------------------------"+jObj);
-        } catch (JSONException e) {
-            Log.e("JSON Parser", "Error parsing data " + e.toString());
-        }
-
-        try {
-            int sesion=jObj.getInt("session_completed");
-            String Karmascore=jObj.getString("karma_score");
-            String Recco=jObj.getString("recco");
-            String Session_archieve=jObj.getString("session_total");
-            JSONArray jsonArray=jObj.getJSONArray("sessions");
-            for(int i=0;i<jsonArray.length();i++){
-                JSONObject id=jsonArray.getJSONObject(i);
-                User user=new User();
-                String title1=id.getString("id");
-//                String title2=title1.substring(7);
-//                System.out.println("PPPPPPPPPPP"+title2);
-//                String title3=title1;
-//                System.out.println("____________"+title3);
-                user.setUserEmail(title1);
-                user.setUserName(id.optString("title"));
-                user.setUserMobile(id.optString("parent_note"));
-                user.setImageResourceId(R.drawable.arrow_hdpi);
-                userlist.add(user);
-                System.out.println("userrrrrrr"+userlist);
-               // SessionTitle.add(jsonArray.get(i).toString());
-
-//                System.out.println("-----------"+title +""+SessionTitle+""+created);
-            }
-//            SessionArcText.setText(Session_archieve+" Session Archieve");
-            ReccoText.setText(Recco);
-            progress.setMax(50);
-            progress.setProgress(sesion);
-            btn_score.setText(Karmascore);
-            SessionText.setText(""+sesion +" Sessions Completed");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvAllUsers);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        AllUsersAdapter allUserAdapter = new AllUsersAdapter(this, userlist);
+        final AllUsersAdapter allUserAdapter = new AllUsersAdapter(this, userlist);
 //       recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.INVALID_OFFSET));
         recyclerView.setAdapter(allUserAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -177,6 +100,88 @@ public class MainActivity extends AppCompatActivity implements  Constant{
                startActivity(in);
            }
        });
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println("------------------"+response);
+                        try {
+                            JSONObject jObj=new JSONObject(response);
+                            int sesion=jObj.getInt("session_completed");
+                            String Karmascore=jObj.getString("karma_score");
+                            String Recco=jObj.getString("recco");
+                            String Session_archieve=jObj.getString("session_total");
+                            JSONArray jsonArray=jObj.getJSONArray("sessions");
+                            for(int i=0;i<jsonArray.length();i++){
+                                JSONObject id=jsonArray.getJSONObject(i);
+                                User user=new User();
+                                String title1=id.getString("id");
+//                String title2=title1.substring(7);
+//                System.out.println("PPPPPPPPPPP"+title2);
+//                String title3=title1;
+//                System.out.println("____________"+title3);
+                                user.setUserEmail(title1);
+                                user.setUserName(id.optString("title"));
+                                user.setUserMobile(id.optString("parent_note"));
+                                user.setImageResourceId(R.drawable.arrow_hdpi);
+                                userlist.add(user);
+                                System.out.println("userrrrrrr"+userlist);
+                                allUserAdapter.notifyDataSetChanged();
+                                // SessionTitle.add(jsonArray.get(i).toString());
+
+//                System.out.println("-----------"+title +""+SessionTitle+""+created);
+                            }
+//            SessionArcText.setText(Session_archieve+" Session Archieve");
+                            ReccoText.setText(Recco);
+                            progress.setMax(50);
+                            progress.setProgress(sesion);
+                            btn_score.setText(Karmascore);
+                            SessionText.setText(""+sesion +" Sessions Completed");
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> httpget =   new HashMap<>();
+                httpget.put("X-API-KEY","123456");
+                httpget.put("Authorization","Basic YWRtaW46MTIzNA==");
+                httpget.put("access-token","6InFDMC1mYyvJ0QoxiL8dEUSj_2");
+                //..add other headers
+                return httpget;
+            }
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                if (response.headers == null) {
+                    // cant just set a new empty map because the member is final.
+                    response = new NetworkResponse(
+                            response.statusCode,
+                            response.data,
+                            Collections.<String, String>emptyMap(), // this is the important line, set an empty but non-null map.
+                            response.notModified,
+                            response.networkTimeMs);
+
+
+                }
+
+                return super.parseNetworkResponse(response);
+            }
+        };
+
+        queue.add(stringRequest);
+
+
     }
 
 //    @Override
