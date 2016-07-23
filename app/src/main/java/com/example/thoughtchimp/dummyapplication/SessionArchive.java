@@ -59,6 +59,7 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
                         try {
                             JSONObject jsonObject=new JSONObject(response);
                             String undo=jsonObject.getString("undo_session_id");
+                            String undoid;
                             JSONArray sesionarray=jsonObject.getJSONArray("sessions");
                             for(int i=0;i<sesionarray.length();i++) {
                                 JSONObject sessionsid = sesionarray.getJSONObject(i);
@@ -67,12 +68,15 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
                                 String parentnote=sessionsid.getString("parent_note");
                                 String milestoneid=sessionsid.getString("milestone_id");
                                 Session sessiondetails=new Session();
+                                System.out.println("-------------"+id+undo);
+                                if(undo.equals(id))
+                                    sessiondetails.setUndosessionid("undo");
                                 sessiondetails.setSessionid(id);
-                                sessiondetails.setUndosessionid("undo");
                                 sessiondetails.setSessionnumber(title);
                                 sessiondetails.setImageResource(R.drawable.arrow_hdpi);
                                 sessiondetails.setSessiondetails(parentnote);
                                 sessionlist.add(sessiondetails);
+                                Collections.reverse(sessionlist);
                                 System.out.println("sssss"+id+""+title+""+parentnote+""+milestoneid+""+sessiondetails+"");
                                 sessionAdapter.notifyDataSetChanged();
 //                                System.out.println("userrrrrrr"+userlist);

@@ -40,6 +40,7 @@ public class SessionAdapter extends RecyclerView.Adapter {
         holder1.seriesnumber.setText(sessiondetails.get(position).sessionnumber);
         holder1.sessiondetails.setText(sessiondetails.get(position).sessiondetails);
         holder1.iamge.setImageResource(sessiondetails.get(position).imageResource);
+
         holder1.undo.setText(sessiondetails.get(position).undosessionid);
 
 
