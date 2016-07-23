@@ -69,7 +69,7 @@ public  class  AllUsersAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            Intent in=new Intent(mContext,SessionArchive.class);
+            Intent in=new Intent(mContext,ActivationCode.class);
             mContext.startActivity(in);
         }
     }

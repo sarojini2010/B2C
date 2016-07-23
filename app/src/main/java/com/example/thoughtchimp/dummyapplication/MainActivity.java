@@ -79,13 +79,7 @@ public class MainActivity extends AppCompatActivity implements  Constant{
 //       recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.INVALID_OFFSET));
         recyclerView.setAdapter(allUserAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in=new Intent(MainActivity.this,SessionArchive.class);
-                startActivity(in);
-            }
-        });
+
        SessionArcText.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -93,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements  Constant{
                startActivity(in);
            }
        });
-
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
