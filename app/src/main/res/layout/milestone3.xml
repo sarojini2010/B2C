@@ -62,10 +62,13 @@
                 android:textColor="#666"
                 android:textSize="14dp"
                 android:id="@+id/valid_text3" />
-            <Button
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="80dp"
                 android:layout_height="25dp"
                 android:text="Add child"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:id="@+id/childname3"
                 android:textColor="@color/color_stroke"
                 android:background="@color/colorPrimaryDark"
                 android:layout_alignTop="@+id/activation_text3"

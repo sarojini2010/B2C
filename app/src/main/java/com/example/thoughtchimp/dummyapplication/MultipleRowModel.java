@@ -3,7 +3,7 @@ package com.example.thoughtchimp.dummyapplication;
 public class MultipleRowModel{
 
     public int type;
-    public String[] activation,validfrom;
+    public String[] activation,validfrom,childname;
 
     public MultipleRowModel(){ 
     }
@@ -12,6 +12,7 @@ public class MultipleRowModel{
         this.type = type;
         this.activation = activation;
         this.validfrom=validfrom;
+
     }
 
 }

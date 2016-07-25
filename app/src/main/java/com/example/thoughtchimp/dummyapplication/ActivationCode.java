@@ -55,6 +55,7 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
     final String url = ACTIVATIONIP;
     Multiplerow madapter;
     ListView listview;
+    String[] milestone;
     String[] validfrom;
     JSONArray activation = null;
     InputStream is=null;
@@ -162,13 +163,20 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
 
                             validfrom = new String[activation.length()];
                             code = new String[activation.length()];
+                            milestone = new String[activation.length()];
+
                             for (int i = 0; i < activation.length(); i++) {
                                 JSONObject activecode = activation.getJSONObject(i);
                                 code[i] = activecode.getString("code");
-                                int milestone = activecode.getInt("milestone");
+                                milestone[i] = activecode.getString("milestone");
                                 validfrom[i] = activecode.getString("valid_from");
-                                String child = activecode.getString("child");
-                                System.out.println("hjhjhhjk" + validfrom + code);
+                                JSONObject child=activecode.getJSONObject("child");
+                                String firstname = child.getString("firstname");
+                                String lastname=child.getString("lastname");
+                                String childname=firstname.concat(lastname);
+
+
+                                System.out.println("hjhjhhjkhhhhhhhhh" + validfrom[i] + code[i]+firstname+lastname+childname);
 
                             }
                         } catch (JSONException e) {
@@ -187,20 +195,25 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
 
 
 
-        String[] content=validfrom;
-        String [] code1=code;
+        String[] content=code;
+        String [] code1=validfrom;
+//        String [] childname=new String[]{"Roonie"};
+
         int type=0;
-        int i=0;
+        int i;
         for ( i = 0; i < activation.length(); i++) {
+            for(String s:milestone) {
+                System.out.println("--------------" + s);
 
-            if (i==1 ) {
-                type = Actionconstant.Milestone1;
+                if (s.equals("milestone 1")){
+                    type = Actionconstant.Milestone1;
 
-            } else if(i==2)  {
-                type = Actionconstant.Milestone2;
+                } else if (s.equals("milestone 2")) {
+                    type = Actionconstant.Milestone2;
 
-            }else if(i==3) {
-                type = Actionconstant.Milestone3;
+                } else if (s.equals("milestone 3")) {
+                    type = Actionconstant.Milestone3;
+                }
             }
             multipleRowModelList.add(new MultipleRowModel(type , content,code1));
         }
