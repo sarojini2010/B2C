@@ -18,7 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.thoughtchimp.com.example.thoughtchimp.adapter.Activationdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +25,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +58,7 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
     String[] milestone;
     String[] validfrom;
     JSONArray activation = null;
+    String childname;
     InputStream is=null;
     // ArrayList<Milestonedetails> miledetails;
     private List<MultipleRowModel> multipleRowModelList = new ArrayList<>();
@@ -75,48 +76,13 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         RequestQueue queue = Volley.newRequestQueue(this);
         String body="";
-//        String response = "[\n" +
-//                "  {\n" +
-//                "    \"code\": \"twertfvg4\",\n" +
-//                "    \"child\": {\n" +
-//                "      \"child_id\": \"11\",\n" +
-//                "      \"firstname\": \"karan\",\n" +
-//                "      \"lastname\": \"sharma\",\n" +
-//                "      \"child_image\": null\n" +
-//                "    },\n" +
-//                "    \"milestone\": \"milestone 1\",\n" +
-//                "    \"valid_from\": \"2016-07-13 09:12:18\"\n" +
-//                "  },\n" +
-//                "  {\n" +
-//                "    \"code\": \"dsgdfgh\",\n" +
-//                "    \"child\": {\n" +
-//                "      \"child_id\": \"12\",\n" +
-//                "      \"firstname\": \"punam\",\n" +
-//                "      \"lastname\": \"pandey\",\n" +
-//                "      \"child_image\": \"12_1468932052172.jpeg\"\n" +
-//                "    },\n" +
-//                "    \"milestone\": \"milestone 3\",\n" +
-//                "    \"valid_from\": \"2016-07-13 09:12:18\"\n" +
-//                "  },\n" +
-//                "  {\n" +
-//                "    \"code\": \"t5674jhg\",\n" +
-//                "    \"child\": null,\n" +
-//                "    \"milestone\": \"milestone 3\",\n" +
-//                "    \"valid_from\": \"2016-07-13 09:12:18\"\n" +
-//                "  },\n" +
-//                "  {\n" +
-//                "    \"code\": \"gfdgfshg4\",\n" +
-//                "    \"child\": null,\n" +
-//                "    \"milestone\": \"milestone 2\",\n" +
-//                "    \"valid_from\": \"2016-07-13 09:12:18\"\n" +
-//                "  }\n" +
-//                "]";
+
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpGet httpget = new HttpGet(url);
             httpget.addHeader("X-API-KEY","123456");
             httpget.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
-            httpget.addHeader("access-token","6InFDMC1mYyvJ0QoxiL8dEUSj_2");
+            httpget.addHeader("access-token","V49wH0yUXBQZuPMfshEqWgxbY_4");
 
             HttpResponse httpResponse = httpClient.execute(httpget);
             final int statusCode = httpResponse.getStatusLine().getStatusCode();
@@ -170,13 +136,15 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
                                 code[i] = activecode.getString("code");
                                 milestone[i] = activecode.getString("milestone");
                                 validfrom[i] = activecode.getString("valid_from");
+//                                String s= String.valueOf(milestone);
                                 JSONObject child=activecode.getJSONObject("child");
                                 String firstname = child.getString("firstname");
                                 String lastname=child.getString("lastname");
-                                String childname=firstname.concat(lastname);
+                                childname=firstname.concat(lastname);
 
-
-                                System.out.println("hjhjhhjkhhhhhhhhh" + validfrom[i] + code[i]+firstname+lastname+childname);
+//                                String s=  Arrays.toString(milestone);
+                                System.out.println("hjhjhhjkhhhhhhhhh" + validfrom[i] + code[i]+ childname+milestone[i]);
+                                System.out.println("-----------dssddss");
 
                             }
                         } catch (JSONException e) {
@@ -184,7 +152,7 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
                         }
 
 
-        fillAdapter();
+      fillAdapter();
 
         madapter = new Multiplerow(ActivationCode.this, multipleRowModelList);
 
@@ -192,31 +160,33 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
 
     }
     private void fillAdapter() {
-
-
-
         String[] content=code;
         String [] code1=validfrom;
-//        String [] childname=new String[]{"Roonie"};
 
         int type=0;
         int i;
-        for ( i = 0; i < activation.length(); i++) {
-            for(String s:milestone) {
-                System.out.println("--------------" + s);
+        for(String s:milestone) {
+            System.out.println("----------------"+s);
 
-                if (s.equals("milestone 1")){
-                    type = Actionconstant.Milestone1;
+            if (s != null) {
+                    if (s.equals("milestone 1")) {
+                        System.out.println("--------------" + s.equals("milestone 1"));
+                        type = Actionconstant.Milestone1;
 
-                } else if (s.equals("milestone 2")) {
-                    type = Actionconstant.Milestone2;
+                    } else if (s.equals("milestone 2")) {
+                    System.out.println("--------------" + s.equals("milestone 2"));
+                        type = Actionconstant.Milestone2;
 
-                } else if (s.equals("milestone 3")) {
-                    type = Actionconstant.Milestone3;
+                    } else if (s.equals("milestone 3")) {
+                        type = Actionconstant.Milestone3;
+                    }
                 }
+                multipleRowModelList.add(new MultipleRowModel(type,content,code1));
             }
-            multipleRowModelList.add(new MultipleRowModel(type , content,code1));
-        }
+
+
+//        }
+
     }
 
 }

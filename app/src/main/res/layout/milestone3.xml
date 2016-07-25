@@ -2,18 +2,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="190dp"
     android:layout_margin="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       >
+        >
 
         <RelativeLayout
             android:id="@+id/thumbnail"
             android:layout_width="match_parent"
-            android:layout_height="98dp"
+            android:layout_height="130dp"
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop"
             android:background="@drawable/milestone3bg">
@@ -29,8 +29,6 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
-
-
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -43,37 +41,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/thumbnail"
-                android:maxLines="3"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginLeft="10dp"
                 android:text="Activation Code :"
-                android:textColor="#222"
                 android:textStyle="bold"
+                android:textSize="14dp"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/activation_text3"
                 android:maxLines="3"
-                android:layout_marginLeft="10dp"
                 android:text="Validationfrom"
-                android:layout_marginTop="5dp"
-                android:textColor="#666"
-                android:textSize="14dp"
-                android:id="@+id/valid_text3" />
+                android:textColor="#8b8282"
+                android:textSize="11dp"
+                android:id="@+id/valid_text3"
+                android:layout_marginTop="35dp"
+                android:layout_alignLeft="@+id/activation_text3"
+                android:layout_alignStart="@+id/activation_text3" />
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="25dp"
                 android:text="Add child"
+                android:id="@+id/childname3"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:id="@+id/childname3"
                 android:textColor="@color/color_stroke"
                 android:background="@color/colorPrimaryDark"
                 android:layout_alignTop="@+id/activation_text3"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="20dp"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
-    </RelativeLayout>
+    </RelativeLayout>-->
 </RelativeLayout>

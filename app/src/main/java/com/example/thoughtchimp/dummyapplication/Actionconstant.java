@@ -6,4 +6,5 @@ package com.example.thoughtchimp.dummyapplication;
 public class Actionconstant {
     public  static int Milestone1=1;
     public static int Milestone2=2;
-    public static int Milestone3=3;}
+    public static int Milestone3=3;
+}
