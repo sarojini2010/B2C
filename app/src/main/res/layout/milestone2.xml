@@ -37,7 +37,7 @@
             android:scaleType="centerCrop"
             android:background="@color/color_stroke">
             <TextView
-                android:id="@+id/activation_text"
+                android:id="@+id/activation_text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/thumbnail"
@@ -52,21 +52,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/activation_text"
+                android:layout_below="@+id/activation_text1"
                 android:maxLines="3"
                 android:layout_marginLeft="10dp"
                 android:text="Validationfrom"
                 android:layout_marginTop="5dp"
                 android:textColor="#666"
                 android:textSize="14dp"
-                android:id="@+id/valid_text" />
+                android:id="@+id/valid_text1" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:text="Add child"
                 android:textColor="@color/color_stroke"
                 android:background="@color/colorPrimaryDark"
-                android:layout_alignTop="@+id/activation_text"
+                android:layout_alignTop="@+id/activation_text1"
                 android:layout_marginRight="10dp"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
