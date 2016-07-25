@@ -41,7 +41,6 @@ public class Multiplerow extends RecyclerView.Adapter<MultipleRowViewHolder> {
     public void onBindViewHolder(MultipleRowViewHolder holder, int position) {
         holder.activationcode.setText("Activation Code :"+multipleRowModelList.get(position).activation[position]);
         holder.valid.setText("Valid From :"+multipleRowModelList.get(position).validfrom[position]);
-
 //        holder.childname.setText(multipleRowModelList.get(position).childname[position]);
     }
 

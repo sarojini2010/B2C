@@ -71,7 +71,6 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
             StrictMode.setThreadPolicy(policy);
         }
         final RecyclerView recyclerview = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerview.setHasFixedSize(true);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -144,7 +143,7 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
 
 //                                String s=  Arrays.toString(milestone);
                                 System.out.println("hjhjhhjkhhhhhhhhh" + validfrom[i] + code[i]+ childname+milestone[i]);
-                                System.out.println("-----------dssddss");
+                                System.out.println("-----------dssddss"+validfrom[i]);
 
                             }
                         } catch (JSONException e) {
@@ -177,7 +176,7 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
                     System.out.println("--------------" + s.equals("milestone 2"));
                         type = Actionconstant.Milestone2;
 
-                    } else if (s.equals("milestone 3")) {
+                    } else {
                         type = Actionconstant.Milestone3;
                     }
                 }
