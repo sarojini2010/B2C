@@ -143,7 +143,7 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
 
 //                                String s=  Arrays.toString(milestone);
                                 System.out.println("hjhjhhjkhhhhhhhhh" + validfrom[i] + code[i]+ childname+milestone[i]);
-                                System.out.println("-----------dssddss"+validfrom[i]);
+                                System.out.println("-----------dssddss"+milestone[i]);
 
                             }
                         } catch (JSONException e) {
@@ -169,11 +169,9 @@ public class ActivationCode extends AppCompatActivity implements  Constant {
 
             if (s != null) {
                     if (s.equals("milestone 1")) {
-                        System.out.println("--------------" + s.equals("milestone 1"));
                         type = Actionconstant.Milestone1;
 
-                    } else if (s.equals("milestone 2")) {
-                    System.out.println("--------------" + s.equals("milestone 2"));
+                    }  if (s.equals("milestone 2")) {
                         type = Actionconstant.Milestone2;
 
                     } else {
