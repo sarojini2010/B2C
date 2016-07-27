@@ -9,21 +9,22 @@
     <string-array name="nav_drawer_items">
         <item >Freadom</item>
         <item >Find People</item>
-        <item >Photos</item>
-        <item >Communities</item>
-        <item >Pages</item>
-        <item >What\'s Hot</item>
+        <!--<item >Photos</item>-->
+        <!--<item >Communities</item>-->
+        <!--<item >Pages</item>-->
+        <!--<item >What\'s Hot</item>-->
     </string-array>
+
 
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
         <item>@drawable/arrow_hdpi</item>
         <item>@drawable/arrow_hdpi</item>
-        <item>@drawable/arrow_hdpi</item>
-        <item>@drawable/arrow_hdpi</item>
-        <item>@drawable/arrow_hdpi</item>
-        <item>@drawable/arrow_hdpi</item>
+        <!--<item>@drawable/arrow_hdpi</item>-->
+        <!--<item>@drawable/arrow_hdpi</item>-->
+        <!--<item>@drawable/arrow_hdpi</item>-->
+        <!--<item>@drawable/arrow_hdpi</item>-->
     </array>
 
     <!-- Content Description -->
