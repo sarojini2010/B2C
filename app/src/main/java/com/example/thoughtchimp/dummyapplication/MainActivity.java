@@ -204,7 +204,7 @@ public class MainActivity extends ActionBarActivity {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new HomeFragment();
+//                fragment = new HomeFragment();
                 break;
             case 1:
 //              fragment=new Profile();
