@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".SessionArchive"/>
         <activity android:name=".ActivationCode"/>
+        <activity android:name=".DoinPlanWebview"/>
+
         <activity android:name=".Storylistener">
             <meta-data
             android:name="android.support.PARENT_ACTIVITY"
