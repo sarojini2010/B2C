@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
+    android:background="@color/color_stroke"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/layout_user_profile_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/user_hdpi"
+            android:scaleType="centerInside"
+           android:layout_marginTop="5dp"
+            android:id="@+id/imageView_profile_name"
+            android:layout_alignTop="@+id/linearLayout_profile_name"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+        <LinearLayout
+            android:id="@+id/linearLayout_profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_toRightOf="@+id/imageView_profile_name"
+            android:layout_toEndOf="@+id/imageView_profile_name">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lalit Pratap Singh"
+                android:textSize="14sp"
+                android:hint="Name"
+                android:id="@+id/textView_profile_name"
+                android:textColor="@color/counter_text_bg"/>
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Name"-->
+                <!--android:textSize="12sp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:textColor="@color/counter_text_bg"-->
+                <!--android:id="@+id/textView_profile_name_tag"/>-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/counter_text_bg"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_user_profile_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/gender_hdpi"
+            android:scaleType="centerInside"
+            android:id="@+id/imageView_profile_email"
+            android:layout_marginTop="10dp"
+            android:layout_alignTop="@+id/linearLayout_profile_school"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_profile_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_toRightOf="@+id/imageView_profile_email"
+            android:layout_toEndOf="@+id/imageView_profile_email">
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:id="@+id/gender_spinner"
+               />
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Email"-->
+                <!--android:textSize="12sp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:textColor="@color/counter_text_bg"-->
+                <!--android:id="@+id/textView_profile_email_tag"/>-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+
+                android:background="@color/counter_text_bg"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="25dp"
+        android:id="@+id/layout_user_profile_mobile_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/birthday_hdpi"
+            android:scaleType="centerInside"
+            android:id="@+id/imageView_profile_mobile_number"
+            android:layout_alignTop="@+id/linearLayout_profile_mobile_number"
+            android:layout_alignParentLeft="true"
+
+            android:layout_alignParentStart="true"/>
+        <LinearLayout
+            android:id="@+id/linearLayout_profile_mobile_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:onClick="setDate"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_toRightOf="@+id/imageView_profile_mobile_number"
+            android:layout_toEndOf="@+id/imageView_profile_mobile_number">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/counter_text_bg"
+                android:id="@+id/datetext"/>
+
+            <!--<Button-->
+                <!--android:layout_width="11dp"-->
+                <!--android:layout_height="11dp"-->
+                <!--android:textSize="14sp"-->
+                <!--android:id="@+id/setdate1"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:onClick="setDate"-->
+                <!--android:background="@drawable/spinnerarrow"-->
+                <!--android:textColor="@color/counter_text_bg"-->
+                <!--android:layout_gravity="right|end" />-->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/counter_text_bg"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="25dp"
+        android:id="@+id/layout_user_profile_school"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/class_hdpi"
+            android:scaleType="centerInside"
+            android:id="@+id/imageView_profile_school"
+            android:layout_alignTop="@+id/linearLayout_profile_school"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout_profile_school"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_toRightOf="@+id/imageView_profile_school"
+            android:layout_toEndOf="@+id/imageView_profile_school">
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="AMIS Academy"-->
+                <!--android:textSize="14sp"-->
+                <!--android:id="@+id/textView_profile_school"-->
+                <!--android:textColor="@color/counter_text_bg"/>-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Class2"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/counter_text_bg"
+                android:id="@+id/textView_profile_school_tag"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/counter_text_bg"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--date of birth-->
+    <RelativeLayout
+        android:layout_marginTop="25dp"
+        android:id="@+id/layout_user_profile_date_of_birth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/school_hdpi"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerInside"
+            android:id="@+id/imageView_profile_date_of_birth"
+            android:layout_alignTop="@+id/linearLayout_profile_date_of_birth"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout_profile_date_of_birth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_toRightOf="@+id/imageView_profile_date_of_birth"
+            android:layout_toEndOf="@+id/imageView_profile_date_of_birth">
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="AMIS Academy"-->
+                <!--android:textSize="14sp"-->
+                <!--android:id="@+id/textView_profile_date_of_birth"-->
+                <!--android:textColor="@color/counter_text_bg"/>-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aims Academy"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/counter_text_bg"
+                android:id="@+id/textView_profile_date_of_birth_tag"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/counter_text_bg"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <!--date of anniversary-->
+    <RelativeLayout
+        android:layout_marginTop="25dp"
+        android:id="@+id/layout_user_profile_anniversary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/interest_hdpi"
+            android:scaleType="centerInside"
+            android:layout_marginTop="8dp"
+            android:id="@+id/imageView_profile_anniversary"
+            android:layout_alignTop="@+id/linearLayout_profile_anniversary"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout_profile_anniversary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_toRightOf="@+id/imageView_profile_anniversary"
+            android:layout_toEndOf="@+id/imageView_profile_anniversary">
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Cricket,Football"-->
+                <!--android:textSize="14sp"-->
+                <!--android:id="@+id/textView_profile_anniversary"-->
+                <!--android:textColor="@color/counter_text_color"/>-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cricket,Football"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/counter_text_bg"
+                android:id="@+id/textView_profile_anniversary_tag"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/counter_text_bg"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
