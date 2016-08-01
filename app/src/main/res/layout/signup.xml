@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="READY . PLAY . GO!"
+            android:text="READY . PLAY GO!"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="38dp"
             android:textSize="12dp"
