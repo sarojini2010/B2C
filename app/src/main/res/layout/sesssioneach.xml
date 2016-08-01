@@ -65,7 +65,7 @@
                 android:layout_marginRight="60dp"
                 android:textColor="#d8bbe6"
                 android:layout_marginTop="19dp"
-                android:text="error somethingggggggggggggggggg wrong wrong wrong dpdp"
+                android:text="error something wrong wrong wrong dpdp"
                 android:layout_alignParentTop="true"
                 android:layout_alignLeft="@+id/session_number"
                 android:layout_alignStart="@+id/session_number" />
