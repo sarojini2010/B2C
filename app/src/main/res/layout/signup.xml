@@ -7,30 +7,30 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:id="@+id/relative_1"
-        android:layout_marginTop="20dp">
-        <!--android:gravity="center_horizontal|center_vertical"-->
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal">
+
         <ImageView
-            android:layout_width="80dp"
+            android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginLeft="30dp"
-            android:src="@mipmap/freadom"
+            android:src="@mipmap/logo"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="FREADOM"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="10dp"
-            android:textSize="28dp"
-            android:textColor="@color/list_item_title"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="READY . PLAY ls -al ~/.sshGO!"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="38dp"
-            android:textSize="12dp"
-            android:textColor="@color/list_item_title"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="FREADOM"-->
+            <!--android:layout_marginLeft="100dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:textSize="28dp"-->
+            <!--android:textColor="@color/list_item_title"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="READY . PLAY ls -al ~/.sshGO!"-->
+            <!--android:layout_marginLeft="100dp"-->
+            <!--android:layout_marginTop="38dp"-->
+            <!--android:textSize="12dp"-->
+            <!--android:textColor="@color/list_item_title"/>-->
     </RelativeLayout>
 
     <RelativeLayout
@@ -91,8 +91,10 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:hint="Name"
+                android:id="@+id/name_edit"
                 android:background="@null"
                 android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
@@ -116,6 +118,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:hint="Email"
+                android:textColor="#FFFFFF"
+                android:id="@+id/email_edit"
                 android:background="@null"
                 android:textColorHint="#FFFFFF"
                 android:layout_height="wrap_content" />
@@ -142,6 +146,9 @@
                 android:layout_marginRight="15dp"
                 android:hint="Phone"
                 android:background="@null"
+                android:textColor="#FFFFFF"
+                android:inputType="phone"
+                android:id="@+id/phonenumber_edit"
                 android:textColorHint="#FFFFFF"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -157,6 +164,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Signup"
+                android:id="@+id/signup_btn"
                 android:textColor="@color/gray"/>
         </LinearLayout>
         <LinearLayout
