@@ -1,30 +1,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:id="@+id/relative1"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:background="@drawable/singingboy"/>
-           <!-- Set background instead of src -->
+            android:layout_height="wrap_content"
+            android:id="@+id/relative1">
+            <!-- Set background instead of src -->
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/relative1"
+            android:layout_height="160dp"
+            android:layout_alignParentBottom="true"
             android:background="@color/orange"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:id="@+id/relativeLayout2">
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,5 +83,18 @@
                 android:layout_below="@+id/seekBar"/>
                 </RelativeLayout>
                 </RelativeLayout>
-        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:srcBounds="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/singingboy"
+            android:layout_alignTop="@+id/relative1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/relativeLayout2" />
+</RelativeLayout>
 
