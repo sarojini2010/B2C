@@ -4,12 +4,29 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,12 +37,17 @@ public class Signup  extends Activity implements Constant {
     EditText name,email,phonenumber;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    Boolean isFirstTime=false;
+    String Url=SIGNUPIP;
+    String emailid,phone,names;
     Button signup;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferences=getSharedPreferences(USER_SESSION_ID, MODE_PRIVATE);
-        String emailids= sharedPreferences.getString("Email", null);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+        final String emailids= sharedPreferences.getString("Email", null);
         String namess= sharedPreferences.getString("Name", null);
         String Ph= sharedPreferences.getString("Phonenumber", null);
         if(emailids==null && namess==null && Ph==null) {
@@ -42,9 +64,10 @@ public class Signup  extends Activity implements Constant {
                 @Override
                 public void onClick(View v) {
 
-                    String names = name.getText().toString();
-                    String emailid = email.getText().toString();
-                    String phone = phonenumber.getText().toString();
+                     names = name.getText().toString();
+                    emailid= email.getText().toString();
+                    phone = phonenumber.getText().toString();
+
                     editor.putString("Name", names);
                     editor.putString("Email", emailid);
                     editor.putString("Phonenumber", phone);
@@ -52,7 +75,8 @@ public class Signup  extends Activity implements Constant {
 
                     if ((emailValidator(emailid)) && validateNumber(phone)) {
                     if (names != null && emailid != null && phone != null) {
-                        Intent in = new Intent(Signup.this, LoginPage.class);
+                        makePostRequest();
+                        Intent in = new Intent(Signup.this, OTPScreen.class);
                         startActivity(in);
                         Toast.makeText(getApplicationContext(),"Login Sucess",Toast.LENGTH_LONG).show();
                     }
@@ -65,12 +89,13 @@ public class Signup  extends Activity implements Constant {
                 }
             });
         }
-        else {
-            Intent in = new Intent(Signup.this, LoginPage.class);
-            startActivity(in);
-        }
+//        else {
+//            Intent in = new Intent(Signup.this, LoginPage.class);
+//            startActivity(in);
+//        }
 
     }
+
     public static boolean emailValidator(final String mailAddress) {
 
         Pattern pattern;
@@ -87,6 +112,55 @@ public class Signup  extends Activity implements Constant {
         String Regex = "[^\\d]";
         String PhoneDigits = S.replaceAll(Regex, "");
         return (PhoneDigits.length()==10);
+    }
+    private void makePostRequest() {
+
+
+        HttpClient httpClient = new DefaultHttpClient();
+        // replace with your url
+        HttpPost httpPost = new HttpPost(Url);
+        httpPost.addHeader("X-API-KEY","123456");
+
+
+        //Post Data
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+        nameValuePair.add(new BasicNameValuePair("fullname",names));
+        nameValuePair.add(new BasicNameValuePair("email", emailid));
+        nameValuePair.add(new BasicNameValuePair("mobile",phone ));
+
+
+        //Encoding POST data
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+        } catch (UnsupportedEncodingException e) {
+            // log exception
+            e.printStackTrace();
+        }
+
+        //making POST request.
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            StringBuilder builder = new StringBuilder();
+            String str = "";
+
+            while ((str = rd.readLine()) != null) {
+                builder.append(str);
+            }
+
+            String text = builder.toString();
+            // write response to log
+            Log.d("Http Post Response:", text.toString());
+            // write response to log
+
+        } catch (ClientProtocolException e) {
+            // Log exception
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Log exception
+            e.printStackTrace();
+        }
+
     }
 
 }

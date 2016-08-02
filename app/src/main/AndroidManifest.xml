@@ -25,6 +25,8 @@
         <activity android:name=".SessionArchive"/>
         <activity android:name=".ActivationCode"/>
         <activity android:name=".DoinPlanWebview"/>
+        <activity android:name=".HomeFragment"/>
+        <activity android:name=".OTPScreen"/>
         <activity android:name=".LoginPage"/>
         <activity android:name=".Imageshow">
 

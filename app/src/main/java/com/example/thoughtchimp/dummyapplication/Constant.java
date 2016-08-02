@@ -11,7 +11,9 @@ public interface Constant
     String SessionArchieveIp="http://192.168.0.105/s2m-b2c/Api/archive?child_id=9";
     String ACTIVATIONIP="http://192.168.0.105/s2m-b2c/Api/activation_details";
     String USER_SESSION_ID = "usersessionid";
-    String SIGNIN="http://192.168.0.103/s2m-b2c/Authapi/auth_email&format=json";
+    String SIGNUPIP="http://192.168.0.103/s2m-b2c/Api/signup";
     String USER_NAME="name";
+    String OTPsend="http://192.168.0.103/s2m-b2c/api/send_otp?mobile=8802779728";
+    String LOGINIP="http://192.168.0.103/s2m-b2c/Api/login";
 
 }
