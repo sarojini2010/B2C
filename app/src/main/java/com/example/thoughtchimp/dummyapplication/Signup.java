@@ -28,19 +28,19 @@ public class Signup  extends Activity implements Constant {
         String emailids= sharedPreferences.getString("Email", null);
         String namess= sharedPreferences.getString("Name", null);
         String Ph= sharedPreferences.getString("Phonenumber", null);
-        setContentView(R.layout.signup);
-        name= (EditText) findViewById(R.id.name_edit);
-        email= (EditText) findViewById(R.id.email_edit);
-        phonenumber= (EditText) findViewById(R.id.phonenumber_edit);
-        signup=(Button) findViewById(R.id.signup_btn);
+        if(emailids==null && namess==null && Ph==null) {
+            setContentView(R.layout.signup);
+            name = (EditText) findViewById(R.id.name_edit);
+            email = (EditText) findViewById(R.id.email_edit);
+            phonenumber = (EditText) findViewById(R.id.phonenumber_edit);
+            signup = (Button) findViewById(R.id.signup_btn);
 
 
+            editor = sharedPreferences.edit();
 
-        editor=sharedPreferences.edit();
-
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            signup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
                     String names = name.getText().toString();
                     String emailid = email.getText().toString();
@@ -50,22 +50,25 @@ public class Signup  extends Activity implements Constant {
                     editor.putString("Phonenumber", phone);
                     editor.commit();
 
-//                    if ((emailValidator(emailid)) && validateNumber(phone)) {
-                        if (names != null && emailid != null && phone != null) {
-                            Intent in = new Intent(Signup.this, LoginPage.class);
-                            startActivity(in);
-                        }
-//                    }
+                    if ((emailValidator(emailid)) && validateNumber(phone)) {
+                    if (names != null && emailid != null && phone != null) {
+                        Intent in = new Intent(Signup.this, LoginPage.class);
+                        startActivity(in);
+                        Toast.makeText(getApplicationContext(),"Login Sucess",Toast.LENGTH_LONG).show();
+                    }
+                    }
                     else {
                         Toast.makeText(Signup.this, "please input valid email addrees and password", Toast.LENGTH_SHORT).show();
                     }
 
 
-
-
-
-            }
-        });
+                }
+            });
+        }
+        else {
+            Intent in = new Intent(Signup.this, LoginPage.class);
+            startActivity(in);
+        }
 
     }
     public static boolean emailValidator(final String mailAddress) {
