@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
@@ -33,12 +34,25 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.CustomAdapter;
+import com.squareup.picasso.Picasso;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,12 +73,18 @@ public class SessionDetails extends ActionBarActivity implements Constant {
     private ScaleGestureDetector SGD;
     Context context;
     ImageView imageView;
+    InputStream is=null;
+    JSONObject sessiondetails = null;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sessiondetails);
-//        final ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         parent_note= (TextView) findViewById(R.id.parenttext);
         doinplan= (RelativeLayout) findViewById(R.id.doingplan);
         doin_plan=(TextView) findViewById(R.id.doingtext);
@@ -72,108 +92,116 @@ public class SessionDetails extends ActionBarActivity implements Constant {
         parent_note.setMovementMethod(new ScrollingMovementMethod());
         doin_plan.setMovementMethod(new ScrollingMovementMethod());
         final LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
-        for (int i = 0; i < 5; i++) {
-            final ImageView imageView = new ImageView(this);
-            imageView.setId(i);
-            imageView.setPadding(15, 15, 15, 15);
-            final Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.profile);
+//        for (int i = 0; i < 5; i++) {
+//           imageView = new ImageView(this);
+//            imageView.setId(i);
+//            imageView.setPadding(15, 15, 15, 15);
+//            final Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.profile);
+//
+//            imageView.setImageBitmap(b);
+//            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//            layout.addView(imageView);
+//            imageView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent in = new Intent(SessionDetails.this, Imageshow.class);
+//                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+////                    b.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//                    byte[] bytes = stream.toByteArray();
+//                    in.putExtra("display1", bytes);
+//                    startActivity(in);
+//
+//
+//                }
+//            });
+//        }
+        String body="";
 
-            imageView.setImageBitmap(b);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            layout.addView(imageView);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent in = new Intent(SessionDetails.this, Imageshow.class);
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    b.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    byte[] bytes = stream.toByteArray();
-                    in.putExtra("display1", bytes);
-                    startActivity(in);
+        try {
+            DefaultHttpClient httpClient = new DefaultHttpClient();
+            HttpGet httpget = new HttpGet(url);
+            httpget.addHeader("X-API-KEY","123456");
+            httpget.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
+            httpget.addHeader("access-token","V49wH0yUXBQZuPMfshEqWgxbY_4");
 
+            HttpResponse httpResponse = httpClient.execute(httpget);
+            final int statusCode = httpResponse.getStatusLine().getStatusCode();
 
-                }
-            });
+            if (statusCode != HttpStatus.SC_OK) {
+                Log.w(getClass().getSimpleName(),
+                        "Error " + statusCode + " for URL " + url);
+
+            }
+            HttpEntity httpEntity = httpResponse.getEntity();
+            is = httpEntity.getContent();
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-//        ImageRequest request = new ImageRequest(url,
-//                new Response.Listener<Bitmap>() {
-//                    @Override
-//                    public void onResponse(Bitmap bitmap) {
-//
-//                        imageView.setImageBitmap(bitmap);
-//                    }
-//                }, 0, 0, null,
-//                new Response.ErrorListener() {
-//                    public void onErrorResponse(VolleyError error) {
-//                        imageView.setImageResource(R.drawable.play_hdpi);
-//                    }
-//                });
-//
-//
 
-
-
-
-        final RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        System.out.println("------------------"+response);
-                        try {
-                            JSONObject jObj=new JSONObject(response);
-                            String parentnote=jObj.getString("parent_note");
-                            String doinplan=jObj.getString("doing_plan");
-                            String youtube=jObj.getString("youtube_url");
-                            String story=jObj.getString("story");
-                            JSONArray resource=jObj.getJSONArray("resource");
-
-//                            String image= String.valueOf(resource);
-//                            int images=Integer.parseInt(image);
-                            parent_note.setText(parentnote);
-
-//                            imageView.setImageResource(image);
-//                            layout.addView(imageView);
-//                            webviewurl=doinplan;
-                           doin_plan.setText(doinplan);
-
-                            System.out.println("-----------checking"+parentnote+doinplan+youtube+story+"imagesdddd");
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    is, "iso-8859-1"), 8);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "n");
             }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> httpget = new HashMap<>();
-                httpget.put("X-API-KEY","123456");
-                httpget.put("Authorization","Basic YWRtaW46MTIzNA==");
-                httpget.put("access-token","6InFDMC1mYyvJ0QoxiL8dEUSj_2");
-                //..add other headers
-                return httpget;
-            }
-            @Override
-            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                if (response.headers == null) {
-                    // cant just set a new empty map because the member is final.
-                    response = new NetworkResponse(
-                            response.statusCode,
-                            response.data,
-                            Collections.<String, String>emptyMap(), // this is the important line, set an empty but non-null map.
-                            response.notModified,
-                            response.networkTimeMs);
-                }
+            is.close();
+            body = sb.toString();
+        } catch (Exception e) {
+            Log.e("Buffer Error", "Error converting result " + e.toString());
+        }
 
-                return super.parseNetworkResponse(response);
-            }
-        };
+        // try parse the string to a JSON object
+        try {
+            sessiondetails = new JSONObject(body);
+            System.out.println("---------------------------"+sessiondetails);
+        } catch (JSONException e) {
+            Log.e("JSON Parser", "Error parsing data " + e.toString());
+        }
 
-        queue.add(stringRequest);
+        try {
+//            String sessionid=sessiondetails.getString("session_id");
+            String parentnote=sessiondetails.getString("parent_note");
+            String doingplan=sessiondetails.getString("doing_plan");
+            if(doingplan==null){
+                doin_plan.setVisibility(View.GONE);
+            }
+            else {
+                doin_plan.setVisibility(View.VISIBLE);
+                doin_plan.setText(doingplan);
+            }
+//            String youtube=sessiondetails.getString("youtube_url");
+            JSONObject story=sessiondetails.getJSONObject("story");
+            String images=story.getString("image");
+            String audio=story.getString("audio");
+            JSONArray resourcearray= sessiondetails.getJSONArray("resource");
+            parent_note.setText(parentnote);
+            doin_plan.setText(doingplan);
+            Picasso.with(getApplicationContext()).load(images).into(imageView);
+            layout.addView(imageView);
+
+//            imageView.setImageResource(images);
+//            layout.addView(imageView);
+
+            for (int i = 0; i < resourcearray.length(); i++) {
+                String value =   (String)resourcearray.get(i);
+
+                System.out.println("----"+value);
+            }
+            System.out.println("checkinggggggggg"+parentnote+doingplan+images+audio);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+//
+//        queue.add(stringRequest);
 //        doinplan.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

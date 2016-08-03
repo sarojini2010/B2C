@@ -3,6 +3,8 @@
     package="com.example.thoughtchimp.dummyapplication">
     <uses-permission android:name="android.permission.INTERNET"/>
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <supports-screens
         android:resizeable="true"
         android:smallScreens="true"
@@ -26,6 +28,7 @@
         <activity android:name=".ActivationCode"/>
         <activity android:name=".DoinPlanWebview"/>
         <activity android:name=".HomeFragment"/>
+        <activity android:name=".SessionDetails"/>
         <activity android:name=".OTPScreen"/>
         <activity android:name=".LoginPage"/>
         <activity android:name=".Imageshow">

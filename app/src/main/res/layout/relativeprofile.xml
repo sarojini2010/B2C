@@ -138,10 +138,10 @@
             android:layout_toRightOf="@+id/imageView_profile_mobile_number"
             android:layout_toEndOf="@+id/imageView_profile_mobile_number">
 
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Date"
+                android:text="Select Date of birth"
                 android:background="@null"
                 android:textSize="12sp"
                 android:layout_marginTop="5dp"

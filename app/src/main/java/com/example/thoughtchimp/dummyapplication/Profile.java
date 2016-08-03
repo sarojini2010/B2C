@@ -53,10 +53,11 @@ import java.util.Locale;
 /**
  * Created by thoughtchimp on 7/26/2016.
  */
-public class Profile  extends ActionBarActivity implements Constant {
+public class Profile  extends AppCompatActivity implements Constant {
     private CollapsingToolbarLayout collapsingToolbar;
-    EditText dateView,profilename,classname,Interest,schoolname;
+    EditText profilename,classname,Interest,schoolname;
     Context context;
+    TextView dateView;
     Spinner gender,setdate1;
     String item;
     private DatePicker datePicker;
@@ -68,7 +69,6 @@ public class Profile  extends ActionBarActivity implements Constant {
     public int currentDateView;
 
 
-    @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile2);
@@ -89,7 +89,7 @@ public class Profile  extends ActionBarActivity implements Constant {
         collapsingToolbar.setTitle("");
 
         gender= (Spinner) findViewById(R.id.gender_spinner);
-        dateView= (EditText)findViewById(R.id.datetext);
+        dateView= (TextView)findViewById(R.id.datetext);
         String[] gendercategory = { "Male","Female"};
         ArrayAdapter adapter = new ArrayAdapter(
                 this,R.layout.customizespinner ,gendercategory);
@@ -108,9 +108,6 @@ public class Profile  extends ActionBarActivity implements Constant {
 
         }
     });
-
-       
-
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
@@ -145,8 +142,7 @@ public class Profile  extends ActionBarActivity implements Constant {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.manu, menu);
-        menu.getItem(0).setIcon(R.drawable.right);
-        //Menu Resource, Menu
+
         return true;
     }
     @Override
@@ -185,8 +181,6 @@ public class Profile  extends ActionBarActivity implements Constant {
         httpPost.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
         httpPost.addHeader("access-token","V49wH0yUXBQZuPMfshEqWgxbY_4");
 
-
-
         //Post Data
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
         nameValuePair.add(new BasicNameValuePair("fullname",profilename.getText().toString()));
@@ -195,9 +189,6 @@ public class Profile  extends ActionBarActivity implements Constant {
         nameValuePair.add(new BasicNameValuePair("school",schoolname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("class",classname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("interest",Interest.getText().toString()));
-
-
-
 
         //Encoding POST data
         try {

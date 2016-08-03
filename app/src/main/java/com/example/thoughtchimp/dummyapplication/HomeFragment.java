@@ -44,14 +44,13 @@ public class HomeFragment extends ActionBarActivity implements  Constant {
     public HomeFragment() {
     }
 
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        View rootView = inflater.inflate(R.layout.activity_main, container, false);
+
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        SessionText= (TextView)findViewById(R.id.session_text);
+            SessionText= (TextView)findViewById(R.id.session_text);
             Username= (TextView)findViewById(R.id.username);
             Bundle extras = getIntent().getExtras();
             final String names = extras.getString("name");
@@ -146,6 +145,5 @@ public class HomeFragment extends ActionBarActivity implements  Constant {
 
         queue.add(stringRequest);
 
-//        return rootView;
     }
 }

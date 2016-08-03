@@ -210,18 +210,18 @@
                             android:paddingLeft="10dp"
                             android:layout_marginRight="20dp"
                             />
-                            <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/child"
-                            android:paddingLeft="10dp"
-                            android:layout_marginRight="20dp"/>
-                            <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/child"
-                            android:paddingLeft="10dp"
-                            android:layout_marginRight="20dp"/>
+                            <!--<ImageView-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:src="@drawable/child"-->
+                            <!--android:paddingLeft="10dp"-->
+                            <!--android:layout_marginRight="20dp"/>-->
+                            <!--<ImageView-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:src="@drawable/child"-->
+                            <!--android:paddingLeft="10dp"-->
+                            <!--android:layout_marginRight="20dp"/>-->
                         </LinearLayout>
 
                     </HorizontalScrollView>
