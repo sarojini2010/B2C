@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by thoughtchimp on 8/2/2016.
@@ -57,7 +58,7 @@ public class OTPScreen extends Activity implements Constant {
                                    meessage = object.getString("message");
                                     System.out.println("------2"+meessage);
 
-                                    Intent in=new Intent(OTPScreen.this,SessionArchive.class);
+                                    Intent in=new Intent(OTPScreen.this,Profile.class);
                                     startActivity(in);
                                     Toast.makeText(getApplicationContext(),"Login Succesfull",Toast.LENGTH_LONG).show();
                                 } catch (JSONException e) {

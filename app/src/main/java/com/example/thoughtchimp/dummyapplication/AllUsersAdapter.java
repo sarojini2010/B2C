@@ -69,7 +69,9 @@ public  class  AllUsersAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
+            System.out.println("----------"+getItemId());
             Intent in=new Intent(mContext,SessionDetails.class);
+            in.putExtra("Sessionid",HomeFragment.title1);
             mContext.startActivity(in);
         }
     }

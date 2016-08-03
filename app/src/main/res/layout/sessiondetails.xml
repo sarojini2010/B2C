@@ -89,6 +89,7 @@
                         android:layout_height="wrap_content"
                         android:minHeight="120dp"
                         android:layout_marginLeft="10dp"
+                        android:visibility="gone"
                         android:background="@color/list_item_title"
                         android:layout_marginRight="10dp"
                         android:id="@+id/doingplan">
@@ -130,10 +131,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:background="#eebb00"
+                    android:id="@+id/imagelayout"
                     android:layout_marginRight="10dp"
                     android:minHeight="120dp"
                     android:layout_marginBottom="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -202,14 +205,15 @@
                             android:layout_height="wrap_content"
                             android:src="@drawable/child"
                             android:paddingLeft="10dp"
+                                android:id="@+id/image1"
                             android:layout_marginRight="20dp"/>
-                            <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/child"
-                            android:paddingLeft="10dp"
-                            android:layout_marginRight="20dp"
-                            />
+                            <!--<ImageView-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:src="@drawable/child"-->
+                            <!--android:paddingLeft="10dp"-->
+                            <!--android:layout_marginRight="20dp"-->
+                            <!--/>-->
                             <!--<ImageView-->
                             <!--android:layout_width="100dp"-->
                             <!--android:layout_height="wrap_content"-->
@@ -232,6 +236,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="#559922"
+                    android:id="@+id/youtubelayout"
+                    android:visibility="gone"
                     android:layout_marginRight="10dp"
                     android:orientation="vertical">
                     <LinearLayout
@@ -261,7 +267,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:onClick="storylistenr"
+
                         android:layout_marginTop="10dp">
                         <include layout="@layout/audioplay"/>
                     </RelativeLayout>
@@ -272,6 +278,9 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="#0099cc"
+                    android:visibility="gone"
+                    android:onClick="storylistenr"
+                    android:id="@+id/musiclayout"
                     android:layout_marginRight="10dp"
                     android:orientation="vertical">
                     <LinearLayout
@@ -301,7 +310,6 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:onClick="storylistenr"
                         android:layout_marginTop="10dp">
                         <include layout="@layout/audioplay"/>
                     </RelativeLayout>

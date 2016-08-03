@@ -83,6 +83,7 @@ public class LoginPage extends Activity implements Constant{
         nameValuePair.add(new BasicNameValuePair("otp", "12345"));
         nameValuePair.add(new BasicNameValuePair("device_token","Tokenid"));
 
+
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
         } catch (UnsupportedEncodingException e) {

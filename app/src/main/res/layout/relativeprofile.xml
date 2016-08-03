@@ -36,9 +36,8 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lalit Pratap Singh"
-                android:textSize="14sp"
                 android:hint="Name"
+                android:textSize="14sp"
                 android:background="@null"
                 android:id="@+id/textView_profile_name"
                 android:textColor="@color/counter_text_bg"/>
@@ -141,7 +140,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Date of birth"
+                android:hint="Select Date of birth"
                 android:background="@null"
                 android:textSize="12sp"
                 android:layout_marginTop="5dp"
@@ -206,7 +205,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Class2"
+                android:hint="Class"
                 android:textSize="12sp"
                 android:background="@null"
                 android:layout_marginTop="5dp"
@@ -263,7 +262,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Aims Academy"
+                android:hint="Schoolname"
                 android:textSize="12sp"
                 android:background="@null"
                 android:layout_marginTop="5dp"
@@ -321,7 +320,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cricket,Football"
+                android:hint="interest"
                 android:textSize="12sp"
                 android:background="@null"
                 android:layout_marginTop="5dp"

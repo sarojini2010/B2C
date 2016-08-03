@@ -1,6 +1,10 @@
 package com.example.thoughtchimp.dummyapplication;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -26,6 +30,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -50,6 +56,9 @@ public class Storylistener extends AppCompatActivity  {
     private TextView textcompleted,textduration;
     DrawerLayout drawerLayout;
     ListView mlistview;
+    Bitmap b;
+    String ImagesUrl="http://192.168.0.103/s2m-b2c/uploads/resource/";
+    String storyurl="http://192.168.0.103/s2m-b2c/uploads/story/10_1468496103.mp3";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +69,33 @@ public class Storylistener extends AppCompatActivity  {
         forwardbutton = (Button) findViewById(R.id.btn_forward);
         backwardbutton = (Button) findViewById(R.id.btn_backward);
         start=(Button)findViewById(R.id.btn_stop);
-        image=(ImageView)findViewById(R.id.imageView);
+        image=(ImageView)findViewById(R.id.audioiamge);
         textcompleted=(TextView) findViewById(R.id.complete_text);
         textduration=(TextView) findViewById(R.id.totalduration);
-        mediaPlayer = MediaPlayer.create(this,R.raw.testing);
         progress=(ProgressBar) findViewById(R.id.seekBar);
+//        mediaPlayer = MediaPlayer.create(this,R.raw.testing);
+
+
+        Intent in=getIntent();
+        Bundle extras = getIntent().getExtras();
+        final String imagesid = extras.getString("Images");
+        String songurl=extras.getString("Song");
+
+        mediaPlayer = MediaPlayer.create(this, Uri.parse("http://192.168.0.103/s2m-b2c/uploads/story/"+songurl));
+//        mediaPlayer.start();
+        URL newurl ;
+        try {
+            newurl = new URL(ImagesUrl+imagesid);
+            b = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        image.setImageBitmap(b);
+        image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+
         utils = new Utilities();
 
         progress.setClickable(false);

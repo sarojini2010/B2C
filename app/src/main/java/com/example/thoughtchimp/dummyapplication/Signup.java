@@ -68,7 +68,7 @@ public class Signup  extends Activity implements Constant {
                 @Override
                 public void onClick(View v) {
 
-                     names = name.getText().toString();
+                    names = name.getText().toString();
                     emailid= email.getText().toString();
                     phone = phonenumber.getText().toString();
 

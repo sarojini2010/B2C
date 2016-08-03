@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -67,6 +68,8 @@ public class Profile  extends AppCompatActivity implements Constant {
     String Url=CHILDADD;
     Activity activity;
     public int currentDateView;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editTor;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +79,12 @@ public class Profile  extends AppCompatActivity implements Constant {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        sharedPreferences=getSharedPreferences("ChildProfile",1);
+        editTor=sharedPreferences.edit();
+
          profilename= (EditText) findViewById(R.id.textView_profile_name);
          classname= (EditText) findViewById(R.id.class_section);
          Interest= (EditText) findViewById(R.id.interest);
-
         schoolname= (EditText) findViewById(R.id.school);
 
 
@@ -189,6 +194,9 @@ public class Profile  extends AppCompatActivity implements Constant {
         nameValuePair.add(new BasicNameValuePair("school",schoolname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("class",classname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("interest",Interest.getText().toString()));
+//        editTor.putString("name",profilename.getText().toString());
+//        editTor.putString("birthdate",dateView.getText().toString());
+//        editTor.commit();
 
         //Encoding POST data
         try {
@@ -210,6 +218,8 @@ public class Profile  extends AppCompatActivity implements Constant {
             }
 
             String text = builder.toString();
+            editTor.putString("result",text);
+            editTor.commit();
             // write response to log
             Log.d("Http Post Response:", text.toString());
             // write response to log

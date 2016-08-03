@@ -17,7 +17,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".Profile">
+        <activity android:name=".HomeFragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,11 +27,15 @@
         <activity android:name=".SessionArchive"/>
         <activity android:name=".ActivationCode"/>
         <activity android:name=".DoinPlanWebview"/>
-        <activity android:name=".HomeFragment"/>
+        <!--<activity android:name=".HomeFragment"/>-->
         <activity android:name=".SessionDetails"/>
         <activity android:name=".OTPScreen"/>
         <activity android:name=".LoginPage"/>
+        <activity android:name=".Profile"/>
+        <activity android:name=".Youtubevideo"/>
         <activity android:name=".Imageshow">
+
+
 
        </activity>
         <activity android:name=".Storylistener">

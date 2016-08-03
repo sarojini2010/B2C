@@ -41,6 +41,7 @@ public class HomeFragment extends ActionBarActivity implements  Constant {
     Button btn_score;
     private ArrayList<User> userlist=new ArrayList<>();
     final String url =CHILDHOMEIP;
+    static String title1,sequenceid;
     public HomeFragment() {
     }
 
@@ -53,20 +54,18 @@ public class HomeFragment extends ActionBarActivity implements  Constant {
             SessionText= (TextView)findViewById(R.id.session_text);
             Username= (TextView)findViewById(R.id.username);
             Bundle extras = getIntent().getExtras();
-            final String names = extras.getString("name");
-            Username.setText(names);
-
+//            final String names = extras.getString("name");
+//            Username.setText(names);
             ReccoText=(TextView)findViewById(R.id.recco_text);
-        SessionArcText= (TextView)findViewById(R.id.archieve_text);
-        progress= (ProgressBar)findViewById(R.id.progressBar);
-        btn_score=(Button)findViewById(R.id.button_score);
-        final RequestQueue queue = Volley.newRequestQueue(this);
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rvAllUsers);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        final AllUsersAdapter allUserAdapter = new AllUsersAdapter(this, userlist);
-//       recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.INVALID_OFFSET));
-        recyclerView.setAdapter(allUserAdapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+            SessionArcText= (TextView)findViewById(R.id.archieve_text);
+            progress= (ProgressBar)findViewById(R.id.progressBar);
+            btn_score=(Button)findViewById(R.id.button_score);
+            final RequestQueue queue = Volley.newRequestQueue(this);
+            RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rvAllUsers);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            final AllUsersAdapter allUserAdapter = new AllUsersAdapter(this, userlist);
+            recyclerView.setAdapter(allUserAdapter);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         SessionArcText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,14 +84,14 @@ public class HomeFragment extends ActionBarActivity implements  Constant {
                             JSONObject jObj=new JSONObject(response);
                             int sesion=jObj.getInt("session_completed");
                             String Karmascore=jObj.getString("freado");
-                            String Recco=jObj.getString("recco");
+                            String Recco=jObj.getString("booster_bite");
                             String Session_archieve=jObj.getString("session_total");
                             JSONArray jsonArray=jObj.getJSONArray("sessions");
                             for(int i=0;i<jsonArray.length();i++){
                                 JSONObject id=jsonArray.getJSONObject(i);
                                 User user=new User();
-                                String title1=id.getString("id");
-                                String sequenceid=id.getString("sequence");
+                                title1=id.getString("id");
+                                 sequenceid=id.getString("sequence");
                                 //                String title2=title1.substring(7);
                                 //                System.out.println("PPPPPPPPPPP"+title2);
                                 //                String title3=title1;
