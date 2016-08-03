@@ -36,7 +36,7 @@ import java.util.Map;
  * Created by thoughtchimp on 7/27/2016.
  */
 public class HomeFragment extends ActionBarActivity implements  Constant {
-    TextView SessionText,ReccoText,SessionArcText;
+    TextView SessionText,ReccoText,SessionArcText,Username;
     ProgressBar progress;
     Button btn_score;
     private ArrayList<User> userlist=new ArrayList<>();
@@ -49,8 +49,15 @@ public class HomeFragment extends ActionBarActivity implements  Constant {
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         SessionText= (TextView)findViewById(R.id.session_text);
-        ReccoText=(TextView)findViewById(R.id.recco_text);
+            Username= (TextView)findViewById(R.id.username);
+            Bundle extras = getIntent().getExtras();
+            final String names = extras.getString("name");
+            Username.setText(names);
+
+            ReccoText=(TextView)findViewById(R.id.recco_text);
         SessionArcText= (TextView)findViewById(R.id.archieve_text);
         progress= (ProgressBar)findViewById(R.id.progressBar);
         btn_score=(Button)findViewById(R.id.button_score);
@@ -78,7 +85,7 @@ public class HomeFragment extends ActionBarActivity implements  Constant {
                         try {
                             JSONObject jObj=new JSONObject(response);
                             int sesion=jObj.getInt("session_completed");
-                            String Karmascore=jObj.getString("karma_score");
+                            String Karmascore=jObj.getString("freado");
                             String Recco=jObj.getString("recco");
                             String Session_archieve=jObj.getString("session_total");
                             JSONArray jsonArray=jObj.getJSONArray("sessions");

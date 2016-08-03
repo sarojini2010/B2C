@@ -61,8 +61,6 @@ public class LoginPage extends Activity implements Constant{
         login=(Button) findViewById(R.id.login_btn);
         final String number=sharedPreferences.getString("Phonenumber",null);
 
-//        phonenumber.setText(number);
-//        System.out.println("------------"+number);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,31 +69,20 @@ public class LoginPage extends Activity implements Constant{
                 makePostRequest();
                 Intent in=new Intent(getApplicationContext(),OTPScreen.class);
                 startActivity(in);
-//
-
             }
-
-
         });
     }
 
     private void makePostRequest() {
 
-
         HttpClient httpClient = new DefaultHttpClient();
-        // replace with your url
         HttpPost httpPost = new HttpPost(URL);
         httpPost.addHeader("X-API-KEY","123456");
-
-
-        //Post Data
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
         nameValuePair.add(new BasicNameValuePair("mobile", phonenum));
         nameValuePair.add(new BasicNameValuePair("otp", "12345"));
         nameValuePair.add(new BasicNameValuePair("device_token","Tokenid"));
 
-
-        //Encoding POST data
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
         } catch (UnsupportedEncodingException e) {
@@ -116,7 +103,7 @@ public class LoginPage extends Activity implements Constant{
 
             String text = builder.toString();
             // write response to log
-            Log.d("Http Post Response:", text.toString());
+            Log.w("Http Post Response:", text.toString());
 
         } catch (ClientProtocolException e) {
             // Log exception

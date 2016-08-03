@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -33,11 +34,13 @@ import java.util.Map;
 public class OTPScreen extends Activity implements Constant {
     String Url=OTPsend;
     String meessage;
+    TextView requestagain;
     Context ctx;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.otpcode);
         final Button Otplogin = (Button) findViewById(R.id.otplog_btn);
+        requestagain= (TextView) findViewById(R.id.request);
         Otplogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +100,13 @@ public class OTPScreen extends Activity implements Constant {
 
 
 
+            }
+        });
+        requestagain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(getApplicationContext(),LoginPage.class);
+                startActivity(in);
             }
         });
     }

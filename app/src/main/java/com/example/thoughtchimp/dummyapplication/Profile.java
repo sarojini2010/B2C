@@ -1,68 +1,95 @@
 package com.example.thoughtchimp.dummyapplication;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.cookie.DateUtils;
+import org.apache.http.message.BasicNameValuePair;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
  * Created by thoughtchimp on 7/26/2016.
  */
-public class Profile  extends ActionBarActivity {
+public class Profile  extends ActionBarActivity implements Constant {
     private CollapsingToolbarLayout collapsingToolbar;
-    TextView dateView;
+    EditText dateView,profilename,classname,Interest,schoolname;
     Context context;
     Spinner gender,setdate1;
+    String item;
     private DatePicker datePicker;
     private Calendar calendar;
     private int year, month, day;
             String week;
+    String Url=CHILDADD;
     Activity activity;
     public int currentDateView;
-    
 
 
+    @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile2);
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//            Bundle savedInstanceState)
-//        {
-//        View rootView = inflater.inflate(R.layout.profile2, container, false);
-//            Button setdate= (Button)findViewById(R.id.setdate1);
-            FloatingActionButton editsave= (FloatingActionButton) findViewById(R.id.fabButton_edit_save);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+         profilename= (EditText) findViewById(R.id.textView_profile_name);
+         classname= (EditText) findViewById(R.id.class_section);
+         Interest= (EditText) findViewById(R.id.interest);
 
-//            context = container.getContext();
+        schoolname= (EditText) findViewById(R.id.school);
+
+
+        FloatingActionButton editsave= (FloatingActionButton) findViewById(R.id.fabButton_edit_save);
         collapsingToolbar =
                 (CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle("");
 
         gender= (Spinner) findViewById(R.id.gender_spinner);
-        dateView= (TextView)findViewById(R.id.datetext);
+        dateView= (EditText)findViewById(R.id.datetext);
         String[] gendercategory = { "Male","Female"};
         ArrayAdapter adapter = new ArrayAdapter(
                 this,R.layout.customizespinner ,gendercategory);
@@ -71,7 +98,7 @@ public class Profile  extends ActionBarActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-            String item = parent.getItemAtPosition(position).toString();
+             item = parent.getItemAtPosition(position).toString();
 
 //            Toast.makeText(parent.getContext(), "Android Custom Spinner Example Output..." + item, Toast.LENGTH_LONG).show();
         }
@@ -88,21 +115,9 @@ public class Profile  extends ActionBarActivity {
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
-//        //week =calendar.get(Calendar.DAY_OF_WEEK);
-//        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
-       SimpleDateFormat simpleformat=new SimpleDateFormat("EEE, dd MMM yyyy ",Locale.US);
-        dateView.setText(DateUtil.getFormattedDate(day,month,year,DateUtil.MONTH_DAY_YEAR));
-//        week= dayFormat.format(calendar.getTime());
-//        String month2=simpleformat.format(new Date());
-//        System.out.println("-------------week"+month2);
-//        showDate(year, month+1, day);
-//            setdate.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    showDialog(999);
-//                }
-//            });
-//        return rootView;
+        SimpleDateFormat simpleformat=new SimpleDateFormat("EEE, dd MMM yyyy ",Locale.US);
+//        dateView.setText(DateUtil.getFormattedDate(day,month,year,DateUtil.MONTH_DAY_YEAR));
+
     }
 
 
@@ -117,7 +132,7 @@ public class Profile  extends ActionBarActivity {
         DatePickerDialog  mdiDialog =new DatePickerDialog(this,new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String textViewDateStr = DateUtil.getFormattedDate(dayOfMonth,monthOfYear,year,DateUtil.MONTH_DAY_YEAR);
+                String textViewDateStr = DateUtil.getFormattedDate(dayOfMonth,monthOfYear,year,DateUtil.YEAR_MONTH_DATE);
                 //Toast.makeText(getApplicationContext(),year+ " "+monthOfYear+" "+dayOfMonth,Toast.LENGTH_LONG).show();
                 dateView.setText(textViewDateStr);
 
@@ -126,38 +141,98 @@ public class Profile  extends ActionBarActivity {
         mdiDialog.show();
 
     }
-
-
-    protected android.app.Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
-        if (id == 999) {
-            return new DatePickerDialog(this, myDateListener, year, month, day);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.manu, menu);
+        menu.getItem(0).setIcon(R.drawable.right);
+        //Menu Resource, Menu
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+              adddetails();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return null;
     }
 
-    private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
-            // TODO Auto-generated method stub
-            // arg1 = year
-            // arg2 = month
-            // arg3 = day
-            showDate(arg1, arg2+1, arg3);
+    public void adddetails() {
+        String name=profilename.getText().toString();
+//        String date=dateView.getText().toString();
+//        String classes=classname.getText().toString();
+//        String school=schoolname.getText().toString();
+//        String intersted=Interest.getText().toString();
+//        String genders=item.toString();
+        makePostRequest();
+        Intent in=new Intent(getApplicationContext(),HomeFragment.class);
+        in.putExtra("name",name);
+        startActivity(in);
+//        System.out.println("checking"+genders+intersted+date+classes+school+name);
+
+
+    }
+    private void makePostRequest() {
+
+
+        HttpClient httpClient = new DefaultHttpClient();
+        // replace with your url
+        HttpPost httpPost = new HttpPost(Url);
+        httpPost.addHeader("X-API-KEY","123456");
+        httpPost.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
+        httpPost.addHeader("access-token","V49wH0yUXBQZuPMfshEqWgxbY_4");
+
+
+
+        //Post Data
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
+        nameValuePair.add(new BasicNameValuePair("fullname",profilename.getText().toString()));
+        nameValuePair.add(new BasicNameValuePair("birthdate", dateView.getText().toString()));
+        nameValuePair.add(new BasicNameValuePair("gender",item.toString()));
+        nameValuePair.add(new BasicNameValuePair("school",schoolname.getText().toString()));
+        nameValuePair.add(new BasicNameValuePair("class",classname.getText().toString()));
+        nameValuePair.add(new BasicNameValuePair("interest",Interest.getText().toString()));
+
+
+
+
+        //Encoding POST data
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+        } catch (UnsupportedEncodingException e) {
+            // log exception
+            e.printStackTrace();
         }
-    };
 
-    private void showDate(int year, int month, int day) {
-        StringBuilder date=new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year);
+        //making POST request.
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            StringBuilder builder = new StringBuilder();
+            String str = "";
 
-       // dateView.setText(DateFormat.getDateInstance().format(calendar.getTime()));
+            while ((str = rd.readLine()) != null) {
+                builder.append(str);
+            }
+
+            String text = builder.toString();
+            // write response to log
+            Log.d("Http Post Response:", text.toString());
+            // write response to log
+
+        } catch (ClientProtocolException e) {
+            // Log exception
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Log exception
+            e.printStackTrace();
+        }
+
     }
 
-//    @Override
-//    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-//        String textViewDateStr = DateUtil.getFormattedDate(dayOfMonth,monthOfYear,year,DateUtil.MONTH_DAY_YEAR);
-//        String serverDateStr = DateUtil.getFormattedDate(dayOfMonth,monthOfYear,year,DateUtil.YEAR_MONTH_DATE);
-//        dateView.setText(textViewDateStr);
-//    }
+
+
 }

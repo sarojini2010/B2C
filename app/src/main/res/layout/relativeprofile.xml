@@ -33,12 +33,13 @@
             android:layout_toRightOf="@+id/imageView_profile_name"
             android:layout_toEndOf="@+id/imageView_profile_name">
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lalit Pratap Singh"
                 android:textSize="14sp"
                 android:hint="Name"
+                android:background="@null"
                 android:id="@+id/textView_profile_name"
                 android:textColor="@color/counter_text_bg"/>
 
@@ -137,10 +138,11 @@
             android:layout_toRightOf="@+id/imageView_profile_mobile_number"
             android:layout_toEndOf="@+id/imageView_profile_mobile_number">
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phone"
+                android:text="Date"
+                android:background="@null"
                 android:textSize="12sp"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/counter_text_bg"
@@ -201,14 +203,15 @@
                 <!--android:id="@+id/textView_profile_school"-->
                 <!--android:textColor="@color/counter_text_bg"/>-->
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Class2"
                 android:textSize="12sp"
+                android:background="@null"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/counter_text_bg"
-                android:id="@+id/textView_profile_school_tag"/>
+                android:id="@+id/class_section"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
@@ -257,14 +260,15 @@
                 <!--android:id="@+id/textView_profile_date_of_birth"-->
                 <!--android:textColor="@color/counter_text_bg"/>-->
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Aims Academy"
                 android:textSize="12sp"
+                android:background="@null"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/counter_text_bg"
-                android:id="@+id/textView_profile_date_of_birth_tag"/>
+                android:id="@+id/school"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
@@ -314,14 +318,15 @@
                 <!--android:id="@+id/textView_profile_anniversary"-->
                 <!--android:textColor="@color/counter_text_color"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
+            <EditText
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cricket,Football"
                 android:textSize="12sp"
+                android:background="@null"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/counter_text_bg"
-                android:id="@+id/textView_profile_anniversary_tag"/>
+                android:id="@+id/interest"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"

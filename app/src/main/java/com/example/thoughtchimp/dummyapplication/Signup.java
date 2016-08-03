@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -39,6 +40,7 @@ public class Signup  extends Activity implements Constant {
     SharedPreferences.Editor editor;
     String Url=SIGNUPIP;
     String emailid,phone,names;
+    TextView loginpage;
     Button signup;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +52,14 @@ public class Signup  extends Activity implements Constant {
         final String emailids= sharedPreferences.getString("Email", null);
         String namess= sharedPreferences.getString("Name", null);
         String Ph= sharedPreferences.getString("Phonenumber", null);
-        if(emailids==null && namess==null && Ph==null) {
+//        if(emailids==null && namess==null && Ph==null) {
             setContentView(R.layout.signup);
+
             name = (EditText) findViewById(R.id.name_edit);
             email = (EditText) findViewById(R.id.email_edit);
             phonenumber = (EditText) findViewById(R.id.phonenumber_edit);
             signup = (Button) findViewById(R.id.signup_btn);
+            loginpage= (TextView) findViewById(R.id.logindetails);
 
 
             editor = sharedPreferences.edit();
@@ -88,7 +92,14 @@ public class Signup  extends Activity implements Constant {
 
                 }
             });
-        }
+//        }
+        loginpage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(Signup.this, LoginPage.class);
+                startActivity(in);
+            }
+        });
 //        else {
 //            Intent in = new Intent(Signup.this, LoginPage.class);
 //            startActivity(in);
