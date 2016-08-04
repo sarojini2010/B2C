@@ -130,7 +130,7 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, mDrawerLayout,
-                R.drawable.ic_nav_icon,R.string.app_name, R.string.app_name) {
+                R.drawable.ic_drawer,R.string.app_name, R.string.app_name) {
             public void onDrawerClosed(View view) {
                 getSupportActionBar().setTitle(mTitle);
                 // calling onPrepareOptionsMenu() to show action bar icons

@@ -25,9 +25,10 @@ public class Imageshow extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.largeimage);
         view = (ImageView) findViewById(R.id.expanded_image);
-        Intent in=getIntent();
-        Bundle extras = getIntent().getExtras();
-        byte[] byteArray = Base64.decode(getIntent().getStringExtra("display1"), Base64.DEFAULT);
+//        Intent in=getIntent();
+//        Bundle extras = getIntent().getExtras();
+//        byte[] bytes = getIntent().getByteArrayExtra("display1");
+        byte[] byteArray = getIntent().getByteArrayExtra("display1");
         Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         view.setImageBitmap(bmp);
 

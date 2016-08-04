@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import java.io.IOException;
 
 /**
  * Created by thoughtchimp on 8/3/2016.
@@ -33,7 +36,7 @@ public class Youtubevideo extends ActionBarActivity  {
         });
         Bundle extras = getIntent().getExtras();
         String youtubeurl= extras.getString("Youtubeurl");
-        wv.loadData("<html><body>Video From YouTube<br><iframe width=\"350\" height=\"315\" src=\"https://www.youtube.com/embed/"+youtubeurl+"\" frameborder=\"0\" allowfullscreen></iframe></body></html>","text/html", "utf-8");
+        wv.loadData("<html><body>Video<br><iframe width=\"350\" height=\"315\" src=\"https://www.youtube.com/embed/"+youtubeurl+"\" frameborder=\"0\" allowfullscreen></iframe></body></html>","text/html", "utf-8");
 
     }
     @Override
@@ -53,8 +56,9 @@ public class Youtubevideo extends ActionBarActivity  {
             this.finish();
         }
         catch ( Exception e )
-        {
 
+        {
+            e.printStackTrace();
         }
 
         }
@@ -64,4 +68,19 @@ public class Youtubevideo extends ActionBarActivity  {
         wv = null;
         super.onDestroy();
     }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+//            // do something on back.
+//            System.out.println("on finish");
+//            wv.loadUrl("");
+//            wv.removeAllViews();
+//            wv.destroy();
+//            wv = null;
+//            finish();
+//            return true;
+//        }
+//
+//        return super.onKeyDown(keyCode, event);
+//    }
 }

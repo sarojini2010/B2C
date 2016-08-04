@@ -13,6 +13,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -89,7 +90,7 @@ public class SessionDetails extends ActionBarActivity implements Constant {
         Bundle extras = getIntent().getExtras();
         final String sessionid = extras.getString("Sessionid");
         String sessionss=sessionid.substring(8);
-//
+
         sesionurl=url+sessionss;
         System.out.println("-----url"+sesionurl);
 
@@ -259,6 +260,7 @@ public class SessionDetails extends ActionBarActivity implements Constant {
                     for (int j = 0; j < list.size(); j++) {
                         URL newurl;
                         final Bitmap bmp;
+                        final String img ;
                         try {
                             newurl = new URL(BaseUrl + "/uploads/resource/" + value);
                             ImageView imageView2 = new ImageView(this);
@@ -274,7 +276,7 @@ public class SessionDetails extends ActionBarActivity implements Constant {
                             imageView2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                System.out.println("==========");
+                                System.out.println("=========="+v.getId());
                                 Intent in = new Intent(SessionDetails.this, Imageshow.class);
                                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);

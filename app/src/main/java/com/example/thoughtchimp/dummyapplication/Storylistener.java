@@ -188,7 +188,13 @@ public class Storylistener extends AppCompatActivity  {
         }
     };
 
-
-
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        mediaPlayer.stop();
+//        startTime = mediaPlayer.getCurrentPosition();
+//       progress.setProgress((int) startTime);
+//
+//    }
 }
 

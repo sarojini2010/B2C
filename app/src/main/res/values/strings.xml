@@ -21,8 +21,8 @@
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
-        <item>@drawable/arrow_hdpi</item>
-        <item>@drawable/arrow_hdpi</item>
+        <item>@drawable/profile</item>
+        <item>@drawable/profile</item>
         <!--<item>@drawable/arrow_hdpi</item>-->
         <!--<item>@drawable/arrow_hdpi</item>-->
         <!--<item>@drawable/arrow_hdpi</item>-->
@@ -31,5 +31,6 @@
 
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
+
 
 </resources>
