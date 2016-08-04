@@ -76,12 +76,20 @@ public class Storylistener extends AppCompatActivity  {
 //        mediaPlayer = MediaPlayer.create(this,R.raw.testing);
 
 
-        Intent in=getIntent();
+//        Intent in=getIntent();
         Bundle extras = getIntent().getExtras();
         final String imagesid = extras.getString("Images");
-        String songurl=extras.getString("Song");
+        String songurl= extras.getString("Song");
+        try{
+            mediaPlayer = MediaPlayer.create(this, Uri.parse("http://192.168.0.103/s2m-b2c/uploads/story/"+songurl));
 
-        mediaPlayer = MediaPlayer.create(this, Uri.parse("http://192.168.0.103/s2m-b2c/uploads/story/"+songurl));
+        } catch (IllegalArgumentException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
+        } catch (SecurityException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
+        } catch (IllegalStateException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
+        }
 //        mediaPlayer.start();
         URL newurl ;
         try {

@@ -83,7 +83,9 @@ public class HomeFragment extends ActionBarActivity implements  Constant {
                         try {
                             JSONObject jObj=new JSONObject(response);
                             int sesion=jObj.getInt("session_completed");
-                            String Karmascore=jObj.getString("freado");
+                            int Karmascore=jObj.getInt("freado");
+                            int score=Karmascore/1000;
+                            System.out.println("------------score"+score);
                             String Recco=jObj.getString("booster_bite");
                             String Session_archieve=jObj.getString("session_total");
                             JSONArray jsonArray=jObj.getJSONArray("sessions");
@@ -104,9 +106,9 @@ public class HomeFragment extends ActionBarActivity implements  Constant {
                                 allUserAdapter.notifyDataSetChanged();
                             }
                             ReccoText.setText(Recco);
-                            progress.setMax(50);
+                            progress.setMax(Integer.valueOf(Session_archieve));
                             progress.setProgress(sesion);
-                            btn_score.setText(Karmascore);
+                            btn_score.setText(String.valueOf(score));
                             SessionText.setText(+sesion +" Sessions Completed");
                         } catch (JSONException e) {
                             e.printStackTrace();

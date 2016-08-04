@@ -22,20 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.thoughtchimp.com.example.thoughtchimp.adapter.CustomAdapter;
-import com.squareup.picasso.Picasso;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -66,16 +52,17 @@ import java.util.Map;
 public class SessionDetails extends ActionBarActivity implements Constant {
 
     final String url =SessionDetailIp;
+    String  audiourl=BaseUrl;
     String sesionurl,storyimages;
     TextView parent_note,doin_plan,resource,story;
     RelativeLayout doinplan;
-    LinearLayout youtubelayout,musiclayout,imglayout;
+    LinearLayout youtubelayout,musiclayout,imglayout,layout;
     ViewPager viewPager;
     static String UPLOADS_Image_URL = "http://192.168.0.103/s2m-b2c/uploads/resource/13_1468496597.jpeg";
     static String UPLOADS_STORY_URL = SessionDetailIp + "/uploads/story/";
     String webviewurl;
     Context context;
-    ImageView imageView;
+    ImageView imageView,audioiamge,youtubeimages;
     InputStream is=null;
     JSONObject sessiondetails = null;
     Bitmap b;
@@ -94,53 +81,49 @@ public class SessionDetails extends ActionBarActivity implements Constant {
         youtubelayout= (LinearLayout) findViewById(R.id.youtubelayout);
         musiclayout= (LinearLayout) findViewById(R.id.musiclayout);
         imglayout= (LinearLayout) findViewById(R.id.imagelayout);
+        audioiamge= (ImageView) findViewById(R.id.audioimagelayout1);
+        youtubeimages= (ImageView) findViewById(R.id.youtubeimagelayout1);
 
         doin_plan=(TextView) findViewById(R.id.doingtext);
         resource= (TextView) findViewById(R.id.parenttext);
         Bundle extras = getIntent().getExtras();
         final String sessionid = extras.getString("Sessionid");
-//        User user=new User();
-//        String urlid=user.getUserName();
-        sesionurl=url+sessionid;
+        String sessionss=sessionid.substring(8);
+//
+        sesionurl=url+sessionss;
         System.out.println("-----url"+sesionurl);
 
         parent_note.setMovementMethod(new ScrollingMovementMethod());
         doin_plan.setMovementMethod(new ScrollingMovementMethod());
-        final LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
-        imageView= (ImageView) findViewById(R.id.image1);
-        for (int i = 0; i < 3; i++) {
-//           imageView = new ImageView(this);
-            imageView.setId(i);
-//            imageView.setPadding(15, 15, 15, 15);
-//                b= BitmapFactory.decodeResource(getResources(), R.drawable.profile);
-            URL newurl ;
-            try {
-                newurl = new URL(UPLOADS_Image_URL);
-                b = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        layout = (LinearLayout) findViewById(R.id.linear);
+//        imageView= (ImageView) findViewById(R.id.resourceimage);
+//        for (int i = 0; i < 3; i++) {
+////           imageView = new ImageView(this);
+//            imageView.setId(i);
+////            imageView.setPadding(15, 15, 15, 15);
+////                b= BitmapFactory.decodeResource(getResources(), R.drawable.profile);
+//            URL newurl ;
+//            try {
+//                newurl = new URL(UPLOADS_Image_URL);
+//                BitmapFactory.Options options = new BitmapFactory.Options();
+//                b = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
+//                options.inJustDecodeBounds = true;
+////                int imageHeight = options.outHeight;
+////                int imageWidth = options.outWidth;
+////                String imageType = options.outMimeType;
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//            imageView.setImageBitmap(Bitmap.createScaledBitmap(b, 120, 120, false));
 
-
-            imageView.setImageBitmap(b);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 //            layout.addView(imageView);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent in = new Intent(SessionDetails.this, Imageshow.class);
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    b.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    byte[] bytes = stream.toByteArray();
-                    in.putExtra("display1", bytes);
-                    startActivity(in);
-
-
-                }
-            });
-        }
+//
+//        }
         String body="";
 
         try {
@@ -192,8 +175,7 @@ public class SessionDetails extends ActionBarActivity implements Constant {
         }
 
         try {
-            String sessionids=sessiondetails.getString("session_id");
-
+                String sessionids=sessiondetails.getString("session_id");
                 String parentnote = sessiondetails.getString("parent_note");
                 String doingplan = sessiondetails.getString("doing_plan");
                 if (doingplan == null) {
@@ -207,13 +189,25 @@ public class SessionDetails extends ActionBarActivity implements Constant {
                     youtubelayout.setVisibility(View.GONE);
                 } else {
                     youtubelayout.setVisibility(View.VISIBLE);
+                    URL youtubeurl ;
+
+                    try {
+                        youtubeurl = new URL("https://img.youtube.com/vi/"+youtube+"/sddefault.jpg");
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        b = BitmapFactory.decodeStream(youtubeurl.openConnection() .getInputStream());
+                        youtubeimages.setImageBitmap(b);
+                        youtubeimages.setScaleType(ImageView.ScaleType.FIT_XY);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                     youtubelayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String Youtubeurl=youtube;
+                            String Youtubeurl=youtube.toString();
                             System.out.println("youtubeurl"+Youtubeurl);
                             Intent in=new Intent(SessionDetails.this,Youtubevideo.class);
-                            in.putExtra("Youtubeurl", Uri.parse(Youtubeurl));
+                            in.putExtra("Youtubeurl", Youtubeurl);
                             startActivity(in);
                         }
                     });
@@ -232,13 +226,24 @@ public class SessionDetails extends ActionBarActivity implements Constant {
                     musiclayout.setVisibility(View.GONE);
                 } else {
                     musiclayout.setVisibility(View.VISIBLE);
+                    URL newurl ;
+                    try {
+                        newurl = new URL(BaseUrl+"/uploads/story/"+storyimages);
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        b = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
+                        audioiamge.setImageBitmap(b);
+                        audioiamge.setScaleType(ImageView.ScaleType.FIT_XY);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                     musiclayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String songurl=audio;
+                            String songurl= audio.toString();
                             System.out.println("checkingggggggggg song"+audio);
                             Intent song=new Intent(getApplicationContext(),Storylistener.class);
-                            song.putExtra("Song", Uri.parse(songurl));
+                            song.putExtra("Song", songurl);
                             song.putExtra("Images",storyimages);
                             startActivity(song);
                         }
@@ -249,11 +254,44 @@ public class SessionDetails extends ActionBarActivity implements Constant {
                 doin_plan.setText(doingplan);
                 for (int i = 0; i < resourcearray.length(); i++) {
                     String value = (String) resourcearray.get(i);
+                    ArrayList<String> list = new ArrayList<String>();
+                    list.add(value);
+                    for (int j = 0; j < list.size(); j++) {
+                        URL newurl;
+                        final Bitmap bmp;
+                        try {
+                            newurl = new URL(BaseUrl + "/uploads/resource/" + value);
+                            ImageView imageView2 = new ImageView(this);
+                            imageView2.setId(i);
+                            imageView2.setPadding(2, 2, 2, 2);
+                            BitmapFactory.Options options = new BitmapFactory.Options();
+                            bmp = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+                            options.inJustDecodeBounds = true;
+                            imageView2.setImageBitmap(Bitmap.createScaledBitmap(bmp, 250, 150, false));
 
-                    System.out.println("----" + value);
+//                            imageView2.setScaleType(ImageView.ScaleType.FIT_XY);
+                            layout.addView(imageView2);
+                            imageView2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                System.out.println("==========");
+                                Intent in = new Intent(SessionDetails.this, Imageshow.class);
+                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                                byte[] bytes = stream.toByteArray();
+                                in.putExtra("display1", bytes);
+                                startActivity(in);
+
+
+                            }
+                        });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("----" + list);
+                    }
                 }
 
-//            System.out.println("checkinggggggggg"+parentnote+doingplan+images+audio);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -270,6 +308,9 @@ public class SessionDetails extends ActionBarActivity implements Constant {
 //        });
 
     }
+
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -281,5 +322,6 @@ public class SessionDetails extends ActionBarActivity implements Constant {
 //        startActivity(in);
 //
 //    }
+
 
 }

@@ -121,6 +121,7 @@
                             android:id="@+id/doingtext"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
                             android:layout_below="@+id/imageView4"
                             android:layout_alignLeft="@+id/imageView4"
                             android:layout_alignStart="@+id/imageView4" />
@@ -134,9 +135,10 @@
                     android:id="@+id/imagelayout"
                     android:layout_marginRight="10dp"
                     android:minHeight="120dp"
+                    android:visibility="gone"
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                   >
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -191,6 +193,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:layout_below="@+id/textView5"
+                        android:layout_marginLeft="15dp"
                         android:minHeight="110dp">
 
                         <LinearLayout
@@ -200,13 +203,13 @@
                             android:orientation="horizontal"
                             android:layout_gravity="center"
                             android:paddingLeft="20dp">
-                            <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/child"
-                            android:paddingLeft="10dp"
-                                android:id="@+id/image1"
-                            android:layout_marginRight="20dp"/>
+                            <!--<ImageView-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:src="@drawable/child"-->
+                            <!--android:paddingLeft="10dp"-->
+                                <!--android:id="@+id/resourceimage"-->
+                            <!--android:layout_marginRight="20dp"/>-->
                             <!--<ImageView-->
                             <!--android:layout_width="100dp"-->
                             <!--android:layout_height="wrap_content"-->
@@ -267,9 +270,8 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-
                         android:layout_marginTop="10dp">
-                        <include layout="@layout/audioplay"/>
+                        <include layout="@layout/youtubeiamges"/>
                     </RelativeLayout>
                 </LinearLayout>
                 <LinearLayout

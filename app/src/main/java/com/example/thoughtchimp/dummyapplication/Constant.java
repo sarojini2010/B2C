@@ -16,5 +16,6 @@ public interface Constant
     String OTPsend="http://192.168.0.103/s2m-b2c/api/send_otp?mobile=8802779728";
     String LOGINIP="http://192.168.0.103/s2m-b2c/Api/login";
     String CHILDADD="http://192.168.0.103/s2m-b2c/Api/create_child";
+    String BaseUrl="http://192.168.0.103/s2m-b2c/";
 
 }

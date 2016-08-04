@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -67,12 +69,31 @@ public  class  AllUsersAdapter extends RecyclerView.Adapter {
 
         }
 
+//        @Override
+//        public void onClick(View v ,int pos) {
+//            System.out.println("----------"+getItemId());
+//            Intent in=new Intent(mContext,SessionDetails.class);
+//            in.putExtra("Sessionid",HomeFragment.title1);
+//            mContext.startActivity(in);
+//        }
+
         @Override
         public void onClick(View v) {
             System.out.println("----------"+getItemId());
+            int position = getLayoutPosition();
+            User user = userList.get(position);
             Intent in=new Intent(mContext,SessionDetails.class);
-            in.putExtra("Sessionid",HomeFragment.title1);
+            Toast.makeText(mContext, tvName.getText(), Toast.LENGTH_SHORT).show();
+            in.putExtra("Sessionid",tvName.getText());
             mContext.startActivity(in);
         }
+
+//        @Override
+//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            Intent in=new Intent(mContext,SessionDetails.class);
+//            String titles=HomeFragment.title1.
+//            in.putExtra("Sessionid",HomeFragment.title1);
+//            mContext.startActivity(in);
+//        }
     }
 }

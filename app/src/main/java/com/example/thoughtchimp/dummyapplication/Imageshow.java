@@ -9,6 +9,7 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -26,7 +27,7 @@ public class Imageshow extends ActionBarActivity {
         view = (ImageView) findViewById(R.id.expanded_image);
         Intent in=getIntent();
         Bundle extras = getIntent().getExtras();
-        byte[] byteArray = extras.getByteArray("display1");
+        byte[] byteArray = Base64.decode(getIntent().getStringExtra("display1"), Base64.DEFAULT);
         Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         view.setImageBitmap(bmp);
 
