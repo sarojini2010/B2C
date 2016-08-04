@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:weightSum="1"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    >
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/youtubeimagelayout1"/>
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/play_xxhdpi"
+        android:id="@+id/button2"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal" />
+
+</RelativeLayout>

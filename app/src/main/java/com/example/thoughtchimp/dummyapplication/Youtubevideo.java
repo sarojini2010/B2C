@@ -47,7 +47,6 @@ public class Youtubevideo extends ActionBarActivity  {
                 wv.getSettings().setAppCacheEnabled(false);
                 wv.stopLoading();
                 wv.destroy();
-//                sendEmail ("in pause " , "");
                 wv = new WebView(this);
             }
 
