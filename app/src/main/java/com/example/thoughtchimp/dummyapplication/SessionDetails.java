@@ -125,6 +125,7 @@ public class SessionDetails extends ActionBarActivity implements Constant {
 //            layout.addView(imageView);
 //
 //        }
+
         String body="";
 
         try {

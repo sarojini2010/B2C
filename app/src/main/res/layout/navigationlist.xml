@@ -5,60 +5,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerlayout"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/gray"
     tools:context=".MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/frame_container">
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </RelativeLayout>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="250dp"
         android:layout_height="match_parent"
-        android:background="@color/counter_text_bg"
+        android:background="@color/gray"
         android:layout_gravity="start"
         android:id="@+id/drawerlinearlayout"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@mipmap/interest_hdpi"
             android:id="@+id/innerll"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/profile"
+               />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="name"
-                android:layout_marginTop="10dp"
-                android:textColor="#ffffff"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:id="@+id/txtname"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="email"
+                android:layout_marginLeft="20dp"
+                android:text="Name"
+                android:layout_marginTop="120dp"
                 android:textColor="#ffffff"
                 android:textStyle="italic"
                 android:id="@+id/txtemail"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/interest_hdpi"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
+        <!--<ListView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/lv_drawer"-->
+            <!--android:background="#D8D8D8">-->
+
+        <!--</ListView>-->
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/lv_drawer"
+            android:id="@+id/lv_drawer2"
             android:background="#D8D8D8">
 
         </ListView>

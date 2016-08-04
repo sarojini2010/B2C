@@ -65,7 +65,6 @@ public class Storylistener extends AppCompatActivity  {
         setContentView(R.layout.audioplayer);
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
-        mlistview = (ListView) findViewById(R.id.lv_drawer);
         forwardbutton = (Button) findViewById(R.id.btn_forward);
         backwardbutton = (Button) findViewById(R.id.btn_backward);
         start=(Button)findViewById(R.id.btn_stop);

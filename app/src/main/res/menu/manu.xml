@@ -7,5 +7,12 @@
         android:icon="@android:drawable/btn_plus"
         android:title="adddetails"
         />
+    <item
+        android:id="@+id/fredo"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@android:drawable/btn_plus"
+        android:title="fredo"
+        />
 
 </menu>
