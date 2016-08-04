@@ -74,9 +74,6 @@ public class Storylistener extends AppCompatActivity  {
         textduration=(TextView) findViewById(R.id.totalduration);
         progress=(ProgressBar) findViewById(R.id.seekBar);
 //        mediaPlayer = MediaPlayer.create(this,R.raw.testing);
-
-
-//        Intent in=getIntent();
         Bundle extras = getIntent().getExtras();
         final String imagesid = extras.getString("Images");
         String songurl= extras.getString("Song");

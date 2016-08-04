@@ -34,7 +34,10 @@
         <activity android:name=".OTPScreen"/>
         <activity android:name=".LoginPage"/>
         <activity android:name=".Profile"/>
-        <activity android:name=".Youtubevideo"/>
+        <activity android:name=".Youtubevideo">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="SessionDetails"/></activity>
         <activity android:name=".Imageshow">
 
 
