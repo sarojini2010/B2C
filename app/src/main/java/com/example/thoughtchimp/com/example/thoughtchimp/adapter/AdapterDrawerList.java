@@ -11,6 +11,10 @@ import android.widget.TextView;
 import com.example.thoughtchimp.dummyapplication.ObjectDrawerItem;
 import com.example.thoughtchimp.dummyapplication.R;
 
+import java.io.ObjectInputValidation;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by admin on 21/12/15.
  */
@@ -18,15 +22,15 @@ public class AdapterDrawerList extends ArrayAdapter<ObjectDrawerItem>
 {
     Context mContext;
     int layoutResourceId;
-    ObjectDrawerItem data[] = null;
+    ArrayList<ObjectDrawerItem> datas;
 
-    public AdapterDrawerList(Context mContext, int layoutResourceId, ObjectDrawerItem[] data)
+    public AdapterDrawerList(Context mContext, int layoutResourceId, ArrayList<ObjectDrawerItem> data)
     {
-        super(mContext,layoutResourceId,data);
+        super(mContext,layoutResourceId,  data);
 
         this.layoutResourceId = layoutResourceId;
         this.mContext = mContext;
-        this.data = data;
+        this.datas = data;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -38,11 +42,10 @@ public class AdapterDrawerList extends ArrayAdapter<ObjectDrawerItem>
 
         ImageView imageViewIcon = (ImageView) listItem.findViewById(R.id.imglistviewrowitem);
         TextView textViewName = (TextView) listItem.findViewById(R.id.txtlistviewrowitem);
-
-        ObjectDrawerItem folder = data[position];
-
-        imageViewIcon.setImageResource(folder.icon);
-        textViewName.setText(folder.name);
+        ObjectDrawerItem dItem = (ObjectDrawerItem) this.datas.get(position);
+//        ObjectDrawerItem folder=new ObjectDrawerItem();
+        imageViewIcon.setImageResource(dItem.icon);
+        textViewName.setText(dItem.name);
 
         return listItem;
     }

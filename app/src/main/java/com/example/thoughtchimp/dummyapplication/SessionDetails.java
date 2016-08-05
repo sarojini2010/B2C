@@ -1,5 +1,6 @@
 package com.example.thoughtchimp.dummyapplication;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.view.PagerAdapter;
@@ -15,6 +17,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -26,9 +30,14 @@ import android.widget.Toast;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,6 +54,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,7 +63,8 @@ import java.util.Map;
 public class SessionDetails extends ActionBarActivity implements Constant {
 
     final String url =SessionDetailIp;
-    String  audiourl=BaseUrl;
+    String Sessiondoneurl=SESSIONDONE_URL;
+
     String sesionurl,storyimages;
     TextView parent_note,doin_plan,resource,story;
     RelativeLayout doinplan;
@@ -77,6 +88,8 @@ public class SessionDetails extends ActionBarActivity implements Constant {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+//        getActionBar().setHomeButtonEnabled(true);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
         parent_note= (TextView) findViewById(R.id.parenttext);
         doinplan= (RelativeLayout) findViewById(R.id.doingplan);
         youtubelayout= (LinearLayout) findViewById(R.id.youtubelayout);
@@ -93,10 +106,16 @@ public class SessionDetails extends ActionBarActivity implements Constant {
 
         sesionurl=url+sessionss;
         System.out.println("-----url"+sesionurl);
-
-        parent_note.setMovementMethod(new ScrollingMovementMethod());
-        doin_plan.setMovementMethod(new ScrollingMovementMethod());
         layout = (LinearLayout) findViewById(R.id.linear);
+
+        String childurl=url.substring(url.lastIndexOf("=") + 1);
+        System.out.println("sessionurl--------------"+childurl);
+        int sessions=Integer.parseInt(sessionss);
+        int sesin1=sessions-1;
+        String sessiondetils=String.valueOf(sesin1);
+        System.out.println("------------"+sessionid+sessiondetils);
+        new Sessiondetail().execute();
+
 //        imageView= (ImageView) findViewById(R.id.resourceimage);
 //        for (int i = 0; i < 3; i++) {
 ////           imageView = new ImageView(this);
@@ -126,11 +145,307 @@ public class SessionDetails extends ActionBarActivity implements Constant {
 //
 //        }
 
+//        String body="";
+//
+//        try {
+//            DefaultHttpClient httpClient = new DefaultHttpClient();
+//            HttpGet httpget = new HttpGet(url);
+//            httpget.addHeader("X-API-KEY","123456");
+//            httpget.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
+//            httpget.addHeader("access-token","V49wH0yUXBQZuPMfshEqWgxbY_4");
+//
+//            HttpResponse httpResponse = httpClient.execute(httpget);
+//            final int statusCode = httpResponse.getStatusLine().getStatusCode();
+//
+//            if (statusCode != HttpStatus.SC_OK) {
+//                Log.w(getClass().getSimpleName(),
+//                        "Error " + statusCode + " for URL " + url);
+//
+//            }
+//            HttpEntity httpEntity = httpResponse.getEntity();
+//            is = httpEntity.getContent();
+//
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        } catch (ClientProtocolException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(
+//                    is, "iso-8859-1"), 8);
+//            StringBuilder sb = new StringBuilder();
+//            String line = null;
+//            while ((line = reader.readLine()) != null) {
+//                sb.append(line + "n");
+//            }
+//            is.close();
+//            body = sb.toString();
+//        } catch (Exception e) {
+//            Log.e("Buffer Error", "Error converting result " + e.toString());
+//        }
+//
+//        // try parse the string to a JSON object
+//        try {
+//            sessiondetails = new JSONObject(body);
+//            System.out.println("---------------------------"+sessiondetails);
+//        } catch (JSONException e) {
+//            Log.e("JSON Parser", "Error parsing data " + e.toString());
+//        }
+//
+//        try {
+//                String sessionids=sessiondetails.getString("session_id");
+//                String parentnote = sessiondetails.getString("parent_note");
+//                String doingplan = sessiondetails.getString("doing_plan");
+//                if (doingplan == null) {
+//                    doinplan.setVisibility(View.GONE);
+//                } else {
+//                    doinplan.setVisibility(View.VISIBLE);
+//                    doin_plan.setText(doingplan);
+//                }
+//                final String youtube = sessiondetails.getString("youtube_url");
+//                if (youtube == null) {
+//                    youtubelayout.setVisibility(View.GONE);
+//                } else {
+//                    youtubelayout.setVisibility(View.VISIBLE);
+//                    URL youtubeurl ;
+//
+//                    try {
+//                        youtubeurl = new URL("https://img.youtube.com/vi/"+youtube+"/sddefault.jpg");
+//                        BitmapFactory.Options options = new BitmapFactory.Options();
+//                        b = BitmapFactory.decodeStream(youtubeurl.openConnection() .getInputStream());
+//                        youtubeimages.setImageBitmap(b);
+//                        youtubeimages.setScaleType(ImageView.ScaleType.FIT_XY);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    youtubelayout.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            String Youtubeurl=youtube.toString();
+//                            System.out.println("youtubeurl"+Youtubeurl);
+//                            Intent in=new Intent(SessionDetails.this,Youtubevideo.class);
+//                            in.putExtra("Youtubeurl", Youtubeurl);
+//                            startActivity(in);
+//                        }
+//                    });
+//
+//                }
+//                JSONObject story = sessiondetails.getJSONObject("story");
+//                 storyimages = story.getString("image");
+//                final String audio = story.getString("audio");
+//                if(storyimages== null){
+//                    imglayout.setVisibility(View.GONE);
+//                }
+//                else {
+//                    imglayout.setVisibility(View.VISIBLE);
+//                }
+//                if (audio == null) {
+//                    musiclayout.setVisibility(View.GONE);
+//                } else {
+//                    musiclayout.setVisibility(View.VISIBLE);
+//                    URL newurl ;
+//                    try {
+//                        newurl = new URL(BaseUrl+"/uploads/story/"+storyimages);
+//                        BitmapFactory.Options options = new BitmapFactory.Options();
+//                        b = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
+//                        audioiamge.setImageBitmap(b);
+//                        audioiamge.setScaleType(ImageView.ScaleType.FIT_XY);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    musiclayout.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            String songurl= audio.toString();
+//                            System.out.println("checkingggggggggg song"+audio);
+//                            Intent song=new Intent(getApplicationContext(),Storylistener.class);
+//                            song.putExtra("Song", songurl);
+//                            song.putExtra("Images",storyimages);
+//                            startActivity(song);
+//                        }
+//                    });
+//                }
+//                JSONArray resourcearray = sessiondetails.getJSONArray("resource");
+//                parent_note.setText(parentnote);
+//                doin_plan.setText(doingplan);
+//                for (int i = 0; i < resourcearray.length(); i++) {
+//                    String value = (String) resourcearray.get(i);
+//                    ArrayList<String> list = new ArrayList<String>();
+//                    list.add(value);
+//                    for (int j = 0; j < list.size(); j++) {
+//                        URL newurl;
+//                        final Bitmap bmp;
+//                        final String img ;
+//                        try {
+//                            newurl = new URL(BaseUrl + "/uploads/resource/" + value);
+//                            ImageView imageView2 = new ImageView(this);
+//                            imageView2.setId(i);
+//                            imageView2.setPadding(2, 2, 2, 2);
+//                            BitmapFactory.Options options = new BitmapFactory.Options();
+//                            bmp = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+//                            options.inJustDecodeBounds = true;
+//                            imageView2.setImageBitmap(Bitmap.createScaledBitmap(bmp, 250, 150, false));
+//
+////                            imageView2.setScaleType(ImageView.ScaleType.FIT_XY);
+//                            layout.addView(imageView2);
+//                            imageView2.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                System.out.println("=========="+v.getId());
+//                                Intent in = new Intent(SessionDetails.this, Imageshow.class);
+//                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//                                byte[] bytes = stream.toByteArray();
+//                                in.putExtra("display1", bytes);
+//                                startActivity(in);
+//
+//
+//                            }
+//                        });
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                        System.out.println("----" + list);
+//                    }
+//                }
+//
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+
+
+//        doinplan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent in=new Intent(SessionDetails.this,DoinPlanWebview.class);
+//                in.putExtra("URL",webviewurl);
+//                startActivity(in);
+//            }
+//        });
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.sessionmenu, menu);
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, HomeFragment.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            case R.id.sessiondone:
+                sesssiondone();
+                Intent in=new Intent(getApplicationContext(),HomeFragment.class);
+                startActivity(in);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void sesssiondone() {
+        String childid=CHILDHOMEIP;
+        String childId=childid.substring(childid.lastIndexOf("=") + 1);
+        String sessionid=sesionurl.substring(sesionurl.lastIndexOf("=") + 1);
+        int sessions=Integer.parseInt(sessionid);
+        int sesin1=sessions-1;
+        String sessiondetils=String.valueOf(sesin1);
+        System.out.println("------------childddddddd"+childId+sessionid+sessiondetils);
+        HttpClient httpClient = new DefaultHttpClient();
+        // replace with your url
+        HttpPost httpPost = new HttpPost(Sessiondoneurl);
+        httpPost.addHeader("X-API-KEY","123456");
+        httpPost.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
+        httpPost.addHeader("access-token","6InFDMC1mYyvJ0QoxiL8dEUSj_2");
+
+        //Post Data
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+        nameValuePair.add(new BasicNameValuePair("session_id",sessionid));
+        nameValuePair.add(new BasicNameValuePair("child_id", childId));
+        nameValuePair.add(new BasicNameValuePair("feedback","true"));
+
+//        editTor.putString("birthdate",dateView.getText().toString());
+
+        //Encoding POST data
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+        } catch (UnsupportedEncodingException e) {
+            // log exception
+            e.printStackTrace();
+        }
+
+        //making POST request.
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            StringBuilder builder = new StringBuilder();
+            String str = "";
+
+            while ((str = rd.readLine()) != null) {
+                builder.append(str);
+            }
+
+            String text = builder.toString();
+
+            // write response to log
+            Log.d("Http Post Response:", text.toString());
+            // write response to log
+
+        } catch (ClientProtocolException e) {
+            // Log exception
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Log exception
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+//    public void storylistenr(View view){
+//        Intent in= new Intent(this,Storylistener.class);
+////        in.putExtra("Images",)
+//        startActivity(in);
+//
+//    }
+public class Sessiondetail extends AsyncTask<String,Void,String> implements Constant {
+
+    ProgressDialog pd;
+    @Override
+    protected void onPreExecute() {
+        pd=new ProgressDialog(SessionDetails.this);
+        pd.setMessage("Please wait.");
+        pd.show();
+        super.onPreExecute();
+        super.onPreExecute();
+    }
+
+    @Override
+    protected String doInBackground(String... args) {
         String body="";
 
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpget = new HttpGet(url);
+            HttpGet httpget = new HttpGet(sesionurl);
             httpget.addHeader("X-API-KEY","123456");
             httpget.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
             httpget.addHeader("access-token","V49wH0yUXBQZuPMfshEqWgxbY_4");
@@ -140,7 +455,7 @@ public class SessionDetails extends ActionBarActivity implements Constant {
 
             if (statusCode != HttpStatus.SC_OK) {
                 Log.w(getClass().getSimpleName(),
-                        "Error " + statusCode + " for URL " + url);
+                        "Error " + statusCode + " for URL " + sesionurl);
 
             }
             HttpEntity httpEntity = httpResponse.getEntity();
@@ -167,114 +482,117 @@ public class SessionDetails extends ActionBarActivity implements Constant {
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
+        return body;
+    }
 
-        // try parse the string to a JSON object
+    @Override
+    protected void onPostExecute(String s) {
         try {
-            sessiondetails = new JSONObject(body);
+            sessiondetails = new JSONObject(s);
             System.out.println("---------------------------"+sessiondetails);
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
 
         try {
-                String sessionids=sessiondetails.getString("session_id");
-                String parentnote = sessiondetails.getString("parent_note");
-                String doingplan = sessiondetails.getString("doing_plan");
-                if (doingplan == null) {
-                    doinplan.setVisibility(View.GONE);
-                } else {
-                    doinplan.setVisibility(View.VISIBLE);
-                    doin_plan.setText(doingplan);
-                }
-                final String youtube = sessiondetails.getString("youtube_url");
-                if (youtube == null) {
-                    youtubelayout.setVisibility(View.GONE);
-                } else {
-                    youtubelayout.setVisibility(View.VISIBLE);
-                    URL youtubeurl ;
-
-                    try {
-                        youtubeurl = new URL("https://img.youtube.com/vi/"+youtube+"/sddefault.jpg");
-                        BitmapFactory.Options options = new BitmapFactory.Options();
-                        b = BitmapFactory.decodeStream(youtubeurl.openConnection() .getInputStream());
-                        youtubeimages.setImageBitmap(b);
-                        youtubeimages.setScaleType(ImageView.ScaleType.FIT_XY);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    youtubelayout.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String Youtubeurl=youtube.toString();
-                            System.out.println("youtubeurl"+Youtubeurl);
-                            Intent in=new Intent(SessionDetails.this,Youtubevideo.class);
-                            in.putExtra("Youtubeurl", Youtubeurl);
-                            startActivity(in);
-                        }
-                    });
-
-                }
-                JSONObject story = sessiondetails.getJSONObject("story");
-                 storyimages = story.getString("image");
-                final String audio = story.getString("audio");
-                if(storyimages== null){
-                    imglayout.setVisibility(View.GONE);
-                }
-                else {
-                    imglayout.setVisibility(View.VISIBLE);
-                }
-                if (audio == null) {
-                    musiclayout.setVisibility(View.GONE);
-                } else {
-                    musiclayout.setVisibility(View.VISIBLE);
-                    URL newurl ;
-                    try {
-                        newurl = new URL(BaseUrl+"/uploads/story/"+storyimages);
-                        BitmapFactory.Options options = new BitmapFactory.Options();
-                        b = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
-                        audioiamge.setImageBitmap(b);
-                        audioiamge.setScaleType(ImageView.ScaleType.FIT_XY);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    musiclayout.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String songurl= audio.toString();
-                            System.out.println("checkingggggggggg song"+audio);
-                            Intent song=new Intent(getApplicationContext(),Storylistener.class);
-                            song.putExtra("Song", songurl);
-                            song.putExtra("Images",storyimages);
-                            startActivity(song);
-                        }
-                    });
-                }
-                JSONArray resourcearray = sessiondetails.getJSONArray("resource");
-                parent_note.setText(parentnote);
+            String sessionids=sessiondetails.getString("session_id");
+            String parentnote = sessiondetails.getString("parent_note");
+            String doingplan = sessiondetails.getString("doing_plan");
+            if (doingplan == null) {
+                doinplan.setVisibility(View.GONE);
+            } else {
+                doinplan.setVisibility(View.VISIBLE);
                 doin_plan.setText(doingplan);
-                for (int i = 0; i < resourcearray.length(); i++) {
-                    String value = (String) resourcearray.get(i);
-                    ArrayList<String> list = new ArrayList<String>();
-                    list.add(value);
-                    for (int j = 0; j < list.size(); j++) {
-                        URL newurl;
-                        final Bitmap bmp;
-                        final String img ;
-                        try {
-                            newurl = new URL(BaseUrl + "/uploads/resource/" + value);
-                            ImageView imageView2 = new ImageView(this);
-                            imageView2.setId(i);
-                            imageView2.setPadding(2, 2, 2, 2);
-                            BitmapFactory.Options options = new BitmapFactory.Options();
-                            bmp = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
-                            options.inJustDecodeBounds = true;
-                            imageView2.setImageBitmap(Bitmap.createScaledBitmap(bmp, 250, 150, false));
+            }
+            final String youtube = sessiondetails.getString("youtube_url");
+            if (youtube == null) {
+                youtubelayout.setVisibility(View.GONE);
+            } else {
+                youtubelayout.setVisibility(View.VISIBLE);
+                URL youtubeurl ;
+
+                try {
+                    youtubeurl = new URL("https://img.youtube.com/vi/"+youtube+"/sddefault.jpg");
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    b = BitmapFactory.decodeStream(youtubeurl.openConnection() .getInputStream());
+                    youtubeimages.setImageBitmap(b);
+                    youtubeimages.setScaleType(ImageView.ScaleType.FIT_XY);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                youtubelayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String Youtubeurl=youtube.toString();
+                        System.out.println("youtubeurl"+Youtubeurl);
+                        Intent in=new Intent(SessionDetails.this,Youtubevideo.class);
+                        in.putExtra("Youtubeurl", Youtubeurl);
+                        startActivity(in);
+                    }
+                });
+
+            }
+            JSONObject story = sessiondetails.getJSONObject("story");
+            storyimages = story.getString("image");
+            final String audio = story.getString("audio");
+            if(storyimages== null){
+                imglayout.setVisibility(View.GONE);
+            }
+            else {
+                imglayout.setVisibility(View.VISIBLE);
+            }
+            if (audio == null) {
+                musiclayout.setVisibility(View.GONE);
+            } else {
+                musiclayout.setVisibility(View.VISIBLE);
+                URL newurl ;
+                try {
+                    newurl = new URL(BaseUrl+"/uploads/story/"+storyimages);
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    b = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
+                    audioiamge.setImageBitmap(b);
+                    audioiamge.setScaleType(ImageView.ScaleType.FIT_XY);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                musiclayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String songurl= audio.toString();
+                        System.out.println("checkingggggggggg song"+audio);
+                        Intent song=new Intent(getApplicationContext(),Storylistener.class);
+                        song.putExtra("Song", songurl);
+                        song.putExtra("Images",storyimages);
+                        startActivity(song);
+                    }
+                });
+            }
+            JSONArray resourcearray = sessiondetails.getJSONArray("resource");
+            parent_note.setText(parentnote);
+            doin_plan.setText(doingplan);
+            for (int i = 0; i < resourcearray.length(); i++) {
+                String value = (String) resourcearray.get(i);
+                ArrayList<String> list = new ArrayList<String>();
+                list.add(value);
+                for (int j = 0; j < list.size(); j++) {
+                    URL newurl;
+                    final Bitmap bmp;
+                    final String img ;
+                    try {
+                        newurl = new URL(BaseUrl + "/uploads/resource/" + value);
+                        ImageView imageView2 = new ImageView(SessionDetails.this);
+                        imageView2.setId(i);
+                        imageView2.setPadding(2, 2, 2, 2);
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        bmp = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+                        options.inJustDecodeBounds = true;
+                        imageView2.setImageBitmap(Bitmap.createScaledBitmap(bmp, 250, 150, false));
 
 //                            imageView2.setScaleType(ImageView.ScaleType.FIT_XY);
-                            layout.addView(imageView2);
-                            imageView2.setOnClickListener(new View.OnClickListener() {
+                        layout.addView(imageView2);
+                        imageView2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 System.out.println("=========="+v.getId());
@@ -288,43 +606,19 @@ public class SessionDetails extends ActionBarActivity implements Constant {
 
                             }
                         });
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println("----" + list);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                    System.out.println("----" + list);
                 }
+            }
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-//        doinplan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent in=new Intent(SessionDetails.this,DoinPlanWebview.class);
-//                in.putExtra("URL",webviewurl);
-//                startActivity(in);
-//            }
-//        });
+            pd.cancel();
 
     }
-
-
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
-//    public void storylistenr(View view){
-//        Intent in= new Intent(this,Storylistener.class);
-////        in.putExtra("Images",)
-//        startActivity(in);
-//
-//    }
-
-
+}
 }

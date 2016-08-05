@@ -46,26 +46,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/interest_hdpi"
+                android:id="@+id/parentform"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"/>
 
         </RelativeLayout>
 
-        <!--<ListView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:id="@+id/lv_drawer"-->
-            <!--android:background="#D8D8D8">-->
-
-        <!--</ListView>-->
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/lv_drawer2"
-            android:background="#D8D8D8">
+            android:id="@+id/lv_drawer"
+            android:background="@color/list_item_title"/>
+            <!--android:listSelector="@drawable/list_selector"-->
 
-        </ListView>
+
+
+
+        <!--<ListView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/lv_drawer2"-->
+            <!--android:background="#D8D8D8">-->
+
+        <!--</ListView>-->
 
     </LinearLayout>
 

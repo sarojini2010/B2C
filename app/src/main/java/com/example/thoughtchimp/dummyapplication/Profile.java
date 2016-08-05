@@ -74,67 +74,74 @@ public class Profile  extends AppCompatActivity implements Constant {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences("ChildProfile", 1);
+        editTor = sharedPreferences.edit();
+        final String name = sharedPreferences.getString("childname", null);
+        if (name == null) {
         setContentView(R.layout.profile2);
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        sharedPreferences=getSharedPreferences("ChildProfile",1);
-        editTor=sharedPreferences.edit();
-
-         profilename= (EditText) findViewById(R.id.textView_profile_name);
-         classname= (EditText) findViewById(R.id.class_section);
-         Interest= (EditText) findViewById(R.id.interest);
-        schoolname= (EditText) findViewById(R.id.school);
 
 
-        FloatingActionButton editsave= (FloatingActionButton) findViewById(R.id.fabButton_edit_save);
+        profilename = (EditText) findViewById(R.id.textView_profile_name);
+        classname = (EditText) findViewById(R.id.class_section);
+        Interest = (EditText) findViewById(R.id.interest);
+        schoolname = (EditText) findViewById(R.id.school);
+
+
+        FloatingActionButton editsave = (FloatingActionButton) findViewById(R.id.fabButton_edit_save);
         collapsingToolbar =
-                (CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle("");
 
-        gender= (Spinner) findViewById(R.id.gender_spinner);
-        dateView= (TextView)findViewById(R.id.datetext);
-        String[] gendercategory = { "Male","Female"};
+        gender = (Spinner) findViewById(R.id.gender_spinner);
+        dateView = (TextView) findViewById(R.id.datetext);
+        String[] gendercategory = {"Male", "Female"};
         ArrayAdapter adapter = new ArrayAdapter(
-                this,R.layout.customizespinner ,gendercategory);
+                this, R.layout.customizespinner, gendercategory);
         gender.setAdapter(adapter);
         gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-             item = parent.getItemAtPosition(position).toString();
+                item = parent.getItemAtPosition(position).toString();
 
 //            Toast.makeText(parent.getContext(), "Android Custom Spinner Example Output..." + item, Toast.LENGTH_LONG).show();
-        }
+            }
 
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        }
-    });
+            }
+        });
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
-        SimpleDateFormat simpleformat=new SimpleDateFormat("EEE, dd MMM yyyy ",Locale.US);
+        SimpleDateFormat simpleformat = new SimpleDateFormat("EEE, dd MMM yyyy ", Locale.US);
 //        dateView.setText(DateUtil.getFormattedDate(day,month,year,DateUtil.MONTH_DAY_YEAR));
-
     }
+        else {
+            Intent in = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(in);
+        }
+        }
 
 
     public void onEditSave(View view) {
-        Toast.makeText(this,"something",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "something", Toast.LENGTH_LONG).show();
     }
 
     public void setDate(View view) {
         currentDateView = view.getId();
         Calendar now = Calendar.getInstance();
-        int date=now.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog  mdiDialog =new DatePickerDialog(this,new DatePickerDialog.OnDateSetListener() {
+        int date = now.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog mdiDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String textViewDateStr = DateUtil.getFormattedDate(dayOfMonth,monthOfYear,year,DateUtil.YEAR_MONTH_DATE);
+                String textViewDateStr = DateUtil.getFormattedDate(dayOfMonth, monthOfYear, year, DateUtil.YEAR_MONTH_DATE);
                 //Toast.makeText(getApplicationContext(),year+ " "+monthOfYear+" "+dayOfMonth,Toast.LENGTH_LONG).show();
                 dateView.setText(textViewDateStr);
 
@@ -143,6 +150,7 @@ public class Profile  extends AppCompatActivity implements Constant {
         mdiDialog.show();
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -150,11 +158,12 @@ public class Profile  extends AppCompatActivity implements Constant {
 
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-              adddetails();
+                adddetails();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -162,23 +171,25 @@ public class Profile  extends AppCompatActivity implements Constant {
     }
 
     public void adddetails() {
-        String name=profilename.getText().toString();
+        String name = profilename.getText().toString();
 //        String date=dateView.getText().toString();
 //        String classes=classname.getText().toString();
 //        String school=schoolname.getText().toString();
 //        String intersted=Interest.getText().toString();
 //        String genders=item.toString();
         makePostRequest();
-        Intent in=new Intent(getApplicationContext(),HomeFragment.class);
-        in.putExtra("name",name);
+        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+//        in.putExtra("name",name);
         startActivity(in);
 //        System.out.println("checking"+genders+intersted+date+classes+school+name);
 
 
     }
+
+
     private void makePostRequest() {
 
-
+        String name=profilename.getText().toString();
         HttpClient httpClient = new DefaultHttpClient();
         // replace with your url
         HttpPost httpPost = new HttpPost(Url);
@@ -188,15 +199,15 @@ public class Profile  extends AppCompatActivity implements Constant {
 
         //Post Data
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
-        nameValuePair.add(new BasicNameValuePair("fullname",profilename.getText().toString()));
+        nameValuePair.add(new BasicNameValuePair("fullname",name));
         nameValuePair.add(new BasicNameValuePair("birthdate", dateView.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("gender",item.toString()));
         nameValuePair.add(new BasicNameValuePair("school",schoolname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("class",classname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("interest",Interest.getText().toString()));
-//        editTor.putString("name",profilename.getText().toString());
+        editTor.putString("childname",name);
 //        editTor.putString("birthdate",dateView.getText().toString());
-//        editTor.commit();
+        editTor.commit();
 
         //Encoding POST data
         try {

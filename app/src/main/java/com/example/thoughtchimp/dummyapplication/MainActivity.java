@@ -1,12 +1,14 @@
 package com.example.thoughtchimp.dummyapplication;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v7.app.ActionBarActivity;
@@ -24,6 +26,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -86,21 +89,38 @@ public class MainActivity extends ActionBarActivity {
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
     private ListAdapter listAdapter;
+    private ArrayList<ObjectDrawerItem>list;
+    SharedPreferences sharedPreferences;
+    String childname;
+    ImageView parentdetails;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.navigationlist);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
-//        mlistview = (ListView) findViewById(R.id.lv_drawer);
-        drawerlist2=(ListView) findViewById(R.id.lv_drawer2);
-        String[] name= new String[]{"rohan", "karan", "something"};
-        int[] images=new int[]{R.drawable.arrow,R.drawable.play_xhdpi,R.drawable.back_forword_hdpi};
-        Childdetails child=new Childdetails();
-        child.setName(name);
-        child.setProfilepic(images);
-        childdetailses.add(child);
-        drawerlist2.setAdapter(new Listadapter(this,childdetailses)) ;
+        parentdetails= (ImageView) findViewById(R.id.parentform);
+        mlistview = (ListView) findViewById(R.id.lv_drawer);
+        sharedPreferences=getSharedPreferences("ChildProfile",1);
+        list = new ArrayList<ObjectDrawerItem>();
+        childname=sharedPreferences.getString("childname","");
+        System.out.println("------------childname"+childname);
+        parentdetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(MainActivity.this,ParentProfile.class);
+                startActivity(in);
+            }
+        });
+//        drawerlist2=(ListView) findViewById(R.id.lv_drawer2);
+//        String[] name= new String[]{"rohan", "karan", "something"};
+//        int[] images=new int[]{R.drawable.arrow,R.drawable.play_xhdpi,R.drawable.back_forword_hdpi};
+//        Childdetails child=new Childdetails();
+//        child.setName(name);
+//        child.setProfilepic(images);
+//        childdetailses.add(child);
+//        drawerlist2.setAdapter(new Listadapter(this,childdetailses)) ;
 //       drawerlist2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //           @Override
 //           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -110,71 +130,80 @@ public class MainActivity extends ActionBarActivity {
 //       });
 
 
-//        TextView txtName = (TextView) findViewById(R.id.t);
-//        mNavigationDrawerItemTitles = getResources().getStringArray(R.array.nav_drawer_items);
+
+//      mNavigationDrawerItemTitles = getResources().getStringArray(R.array.nav_drawer_items);
 
 
-//        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[4];
-////        drawerItem[0] = new ObjectDrawerItem(R.drawable.ic_tracking,"Track");
-////        drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_grn,"GRN Invoice Update");
-//        drawerItem[0] = new ObjectDrawerItem(R.drawable.academy, "Fredo Milestone");
-//        drawerItem[1] = new ObjectDrawerItem(R.drawable.academy, "Rate this app");
-//        drawerItem[2] = new ObjectDrawerItem(R.drawable.academy, "Contact");
-//        drawerItem[3] = new ObjectDrawerItem(R.drawable.academy, "Terms & Condition");
+//        ObjectDrawerItem drawerItem ;
+//        drawerItem[0] = new ObjectDrawerItem(R.drawable.academy,"");
+//        drawerItem[1] = new ObjectDrawerItem(R.drawable.academy,"");
+        list.add(new ObjectDrawerItem(R.drawable.academy,childname));
+        list.add( new ObjectDrawerItem(R.drawable.academy, "Fredo Milestone"));
+        list.add(new ObjectDrawerItem(R.drawable.academy, "Rate this app"));
+        list.add(new ObjectDrawerItem(R.drawable.academy, "Contact"));
+        list.add(new ObjectDrawerItem(R.drawable.academy, "Terms & Condition"));
+//        list.add(drawerItem);
 
-//        AdapterDrawerList adapterDrawerList = new AdapterDrawerList(MainActivity.this, R.layout.drawer_listview_row, drawerItem);
-//        mlistview.setAdapter(adapterDrawerList);
+        AdapterDrawerList adapterDrawerList = new AdapterDrawerList(MainActivity.this, R.layout.drawer_listview_row, list);
+        mlistview.setAdapter(adapterDrawerList);
 
-//        SlidingMenuClickListenr ItemClickListener = new SlidingMenuClickListenr();
-//        drawerlist2.setOnItemClickListener(ItemClickListener);
-
+        SlidingMenuClickListenr ItemClickListener = new SlidingMenuClickListenr();
+        mlistview.setOnItemClickListener(ItemClickListener);
+//        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
+//                R.drawable.ic_drawer, //nav menu toggle icon
+//                R.string.app_name, // nav drawer open - description for accessibility
+//                R.string.app_name);
+//        drawerLayout.setDrawerListener(mDrawerToggle);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("");
-//        selectItem(Fredo);
+        selectItem(0);
 
     }
-//    private class SlidingMenuClickListenr implements AdapterView.OnItemClickListener {
-//        @Override
-//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            view.setSelected(true);
-////            selectItem(position);
-//        }
-//    }
-//    private void setFragment(Fragment fragment) {
-//
-//        if (fragmentManager == null)
-//            fragmentManager = getFragmentManager();
-//        if (fragment != null)
-//            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
-//        else
-//            Log.e("MainActivit", "Unable to create fragment");
-//    }
-//    public void selectItem(int position) {
-//        drawerlist2.clearFocus();
-//        drawerlist2.setSelection(position);
-//        drawerlist2.setItemChecked(position, true);
-//        Fragment fragment = null;
-//
-//        switch (position) {
-//
-//            case Fredo:
-//                //fragment = new FragmentPricing();
-//                break;
-//            case Rate:
-//
-//
-//                break;
-//            default:
-//                break;
-//        }
-//        setFragment(fragment);
+    private class SlidingMenuClickListenr implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            view.setSelected(true);
+            selectItem(position);
+        }
+    }
+    private void setFragment(Fragment fragment) {
 
-//        drawerlist2.setItemChecked(position, true);
-//        drawerlist2.setSelection(position);
-//        drawerLayout.closeDrawer(Gravity.LEFT);
-//    }
+        if (fragmentManager == null)
+            fragmentManager =getSupportFragmentManager() ;
+        if (fragment != null)
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+        else
+            Log.e("MainActivity", "Unable to create fragment");
+    }
+    public void selectItem(int position) {
+        mlistview.clearFocus();
+        mlistview.setSelection(position);
+        mlistview.setItemChecked(position, true);
+        Fragment fragment = null;
+        Bundle args = new Bundle();
+
+        switch (position) {
+
+            case 0:
+                fragment=new HomeFragment();
+                args.putString("chilprrofile",childname);
+                fragment.setArguments(args);
+                break;
+            case 1:
+
+
+                break;
+            default:
+                break;
+        }
+        setFragment(fragment);
+
+        mlistview.setItemChecked(position, true);
+        mlistview.setSelection(position);
+        drawerLayout.closeDrawer(Gravity.LEFT);
+    }
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.manu, menu);

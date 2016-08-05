@@ -3,6 +3,8 @@ package com.example.thoughtchimp.dummyapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,7 +37,7 @@ import java.util.Map;
 /**
  * Created by thoughtchimp on 7/27/2016.
  */
-public class HomeFragment extends ActionBarActivity implements  Constant {
+public class HomeFragment extends Fragment implements  Constant {
     TextView SessionText,ReccoText,SessionArcText,Username;
     ProgressBar progress;
     Button btn_score;
@@ -45,32 +47,35 @@ public class HomeFragment extends ActionBarActivity implements  Constant {
     public HomeFragment() {
     }
 
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
+    {
+        View rootView = inflater.inflate(R.layout.activity_main, container, false);
+//        protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
 
-        protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-
-            SessionText= (TextView)findViewById(R.id.session_text);
-            Username= (TextView)findViewById(R.id.username);
-            Bundle extras = getIntent().getExtras();
-//            final String names = extras.getString("name");
-//            Username.setText(names);
-            ReccoText=(TextView)findViewById(R.id.recco_text);
-            SessionArcText= (TextView)findViewById(R.id.archieve_text);
-            progress= (ProgressBar)findViewById(R.id.progressBar);
-            btn_score=(Button)findViewById(R.id.button_score);
-            final RequestQueue queue = Volley.newRequestQueue(this);
-            RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rvAllUsers);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            final AllUsersAdapter allUserAdapter = new AllUsersAdapter(this, userlist);
+            SessionText= (TextView)rootView.findViewById(R.id.session_text);
+            Username= (TextView)rootView.findViewById(R.id.username);
+            Bundle extras = getArguments();
+            final String names = extras.getString("chilprrofile");
+            Username.setText(names);
+            ReccoText=(TextView)rootView.findViewById(R.id.recco_text);
+            SessionArcText= (TextView)rootView.findViewById(R.id.archieve_text);
+            progress= (ProgressBar)rootView.findViewById(R.id.progressBar);
+            btn_score=(Button)rootView.findViewById(R.id.button_score);
+            final RequestQueue queue = Volley.newRequestQueue(getActivity());
+            RecyclerView recyclerView = (RecyclerView)rootView.findViewById(R.id.rvAllUsers);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            final AllUsersAdapter allUserAdapter = new AllUsersAdapter(getActivity(), userlist);
             recyclerView.setAdapter(allUserAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         SessionArcText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(HomeFragment.this,SessionArchive.class);
+                Intent in=new Intent(getActivity(),SessionArchive.class);
                 startActivity(in);
             }
         });
@@ -145,6 +150,6 @@ public class HomeFragment extends ActionBarActivity implements  Constant {
         };
 
         queue.add(stringRequest);
-
+return rootView;
     }
 }
