@@ -10,10 +10,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -66,7 +68,7 @@ public class Profile  extends AppCompatActivity implements Constant {
     private int year, month, day;
             String week;
     String Url=CHILDADD;
-    Activity activity;
+
     public int currentDateView;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editTor;
@@ -74,10 +76,10 @@ public class Profile  extends AppCompatActivity implements Constant {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = getSharedPreferences("ChildProfile", 1);
+        sharedPreferences = getSharedPreferences("ChildProfile2", 1);
         editTor = sharedPreferences.edit();
         final String name = sharedPreferences.getString("childname", null);
-        if (name == null) {
+//        if (name == null) {
         setContentView(R.layout.profile2);
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -122,11 +124,11 @@ public class Profile  extends AppCompatActivity implements Constant {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         SimpleDateFormat simpleformat = new SimpleDateFormat("EEE, dd MMM yyyy ", Locale.US);
 //        dateView.setText(DateUtil.getFormattedDate(day,month,year,DateUtil.MONTH_DAY_YEAR));
-    }
-        else {
-            Intent in = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(in);
-        }
+//    }
+//        else {
+//            Intent in = new Intent(getApplicationContext(), MainActivity.class);
+//            startActivity(in);
+//        }
         }
 
 
@@ -188,7 +190,7 @@ public class Profile  extends AppCompatActivity implements Constant {
 
 
     private void makePostRequest() {
-
+         int count = 1;
         String name=profilename.getText().toString();
         HttpClient httpClient = new DefaultHttpClient();
         // replace with your url
@@ -206,8 +208,13 @@ public class Profile  extends AppCompatActivity implements Constant {
         nameValuePair.add(new BasicNameValuePair("class",classname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("interest",Interest.getText().toString()));
         editTor.putString("childname",name);
-//        editTor.putString("birthdate",dateView.getText().toString());
         editTor.commit();
+        editTor.apply();
+
+//        SavePreferences("childname",name);
+//        storeRecord("childs",name);
+////        editTor.putString("birthdate",dateView.getText().toString());
+//        editTor.commit();
 
         //Encoding POST data
         try {
@@ -229,8 +236,8 @@ public class Profile  extends AppCompatActivity implements Constant {
             }
 
             String text = builder.toString();
-            editTor.putString("result",text);
-            editTor.commit();
+//            editTor.putString("result",text);
+//            editTor.commit();
             // write response to log
             Log.d("Http Post Response:", text.toString());
             // write response to log
@@ -244,6 +251,29 @@ public class Profile  extends AppCompatActivity implements Constant {
         }
 
     }
+    public void SavePreferences(String key, String value) {
+        // TODO Auto-generated method stub
+        SharedPreferences data = getSharedPreferences("Childprofile2",1);
+        SharedPreferences.Editor editor = data.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+
+    }
+    private void storeRecord(String Id, String Name) {
+        final SharedPreferences prefs = getSharedPreferences("Childprofile",1);
+        SharedPreferences.Editor editor = prefs.edit();
+        String data = TextUtils.join(",", new String[]{Id, Name});
+        editor.putString("record_" + Id, data);
+        editor.commit();
+    }
+
+    private String[] getRecord(String Id, boolean usePrefix) {
+        final SharedPreferences prefs =getSharedPreferences("Childprofile",1);
+        String data = (String) prefs.getAll().get((usePrefix ? "record_" + Id : Id));
+        return TextUtils.split(data, ",");
+    }
+
 
 
 

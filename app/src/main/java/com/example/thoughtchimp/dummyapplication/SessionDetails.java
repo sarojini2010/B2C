@@ -68,7 +68,7 @@ public class SessionDetails extends ActionBarActivity implements Constant {
     final String url =SessionDetailIp;
     String Sessiondoneurl=SESSIONDONE_URL;
 
-    String sesionurl,storyimages;
+    String sesionurl,storyimages,youtube;
     TextView parent_note,doin_plan,resource,story;
     RelativeLayout doinplan;
     LinearLayout youtubelayout,musiclayout,imglayout,layout;
@@ -82,7 +82,7 @@ public class SessionDetails extends ActionBarActivity implements Constant {
     JSONObject sessiondetails = null;
     Bitmap b;
     String sessionnumber;
-FragmentManager fragmentManager;
+    FragmentManager fragmentManager;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +96,7 @@ FragmentManager fragmentManager;
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
         parent_note= (TextView) findViewById(R.id.parenttext);
         doinplan= (RelativeLayout) findViewById(R.id.doingplan);
-        youtubelayout= (LinearLayout) findViewById(R.id.youtubelayout);
+        youtubelayout= (LinearLayout) findViewById(R.id.youtubelayout11);
         musiclayout= (LinearLayout) findViewById(R.id.musiclayout);
         imglayout= (LinearLayout) findViewById(R.id.imagelayout);
         audioiamge= (ImageView) findViewById(R.id.audioimagelayout1);
@@ -347,9 +347,7 @@ FragmentManager fragmentManager;
         switch (item.getItemId()) {
             case android.R.id.home:
                 // app icon in action bar clicked; go home
-                Intent intent = new Intent(this, HomeFragment.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                getSupportFragmentManager().popBackStackImmediate();
                 return true;
             case R.id.sessiondone:
                 sesssiondone();
@@ -369,11 +367,8 @@ FragmentManager fragmentManager;
     private void sesssiondone() {
         String childid=CHILDHOMEIP;
         String childId=childid.substring(childid.lastIndexOf("=") + 1);
-        String sessionid=sesionurl.substring(sesionurl.lastIndexOf("=") + 1);
-//        int sessions=Integer.parseInt(sessionid);
-//        int sesin1=sessions-1;
-//        String sessiondetils=String.valueOf(sesin1);
-        System.out.println("------------childddddddd"+childId+sessionid);
+//        String sessionid=sesionurl.substring(sesionurl.lastIndexOf("=") + 1);
+//        System.out.println("------------childddddddd"+childId+sessionid);
         HttpClient httpClient = new DefaultHttpClient();
         // replace with your url
         HttpPost httpPost = new HttpPost(Sessiondoneurl);
@@ -511,7 +506,8 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
                 doinplan.setVisibility(View.VISIBLE);
                 doin_plan.setText(doingplan);
             }
-            final String youtube = sessiondetails.getString("youtube_url");
+              youtube = sessiondetails.getString("youtube_url");
+            System.out.println("---------"+youtube);
             if (youtube == null) {
                 youtubelayout.setVisibility(View.GONE);
             } else {

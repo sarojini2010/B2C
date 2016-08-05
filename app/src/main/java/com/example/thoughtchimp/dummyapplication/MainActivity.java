@@ -18,6 +18,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -102,10 +103,26 @@ public class MainActivity extends ActionBarActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
         parentdetails= (ImageView) findViewById(R.id.parentform);
         mlistview = (ListView) findViewById(R.id.lv_drawer);
-        sharedPreferences=getSharedPreferences("ChildProfile",1);
+        sharedPreferences=getSharedPreferences("ChildProfile2",1);
         list = new ArrayList<ObjectDrawerItem>();
+        int count=0;
         childname=sharedPreferences.getString("childname","");
-        System.out.println("------------childname"+childname);
+        int counter = sharedPreferences.getInt("counter", 0); // Using '0' for the default value
+
+        Map<String, ?> allEntries = sharedPreferences.getAll();
+
+        Map<String, String> m = (Map<String, String>) sharedPreferences.getAll();
+        List<String> list1 = new ArrayList<>(m.values());
+        System.out.println("-------hhjhjhj------"+list1);
+//        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+//            Log.d("map values", allEntries.entrySet().toString());
+//            List<String> list=new ArrayList<>()
+//            Log.d("map valuessssssssssssss", entry.getKey() + ": " + entry.getValue().toString());
+//
+//
+//        }
+
+//        System.out.println("------------childname"+ getRecord("childs",true));
         parentdetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +154,10 @@ public class MainActivity extends ActionBarActivity {
 //        ObjectDrawerItem drawerItem ;
 //        drawerItem[0] = new ObjectDrawerItem(R.drawable.academy,"");
 //        drawerItem[1] = new ObjectDrawerItem(R.drawable.academy,"");
-        list.add(new ObjectDrawerItem(R.drawable.academy,childname));
+
+        for(int i=0;i<allEntries.keySet().size();i++) {
+            list.add(new ObjectDrawerItem(R.drawable.academy, childname));
+        }
         list.add( new ObjectDrawerItem(R.drawable.academy, "Fredo Milestone"));
         list.add(new ObjectDrawerItem(R.drawable.academy, "Rate this app"));
         list.add(new ObjectDrawerItem(R.drawable.academy, "Contact"));
@@ -221,6 +241,11 @@ public class MainActivity extends ActionBarActivity {
                     drawerLayout.openDrawer(Gravity.LEFT);
         }
         return super.onOptionsItemSelected(item);
+    }
+    private String[] getRecord(String Id, boolean usePrefix) {
+        final SharedPreferences prefs =getSharedPreferences("Childprofile",1);
+        String data = (String) prefs.getAll().get((usePrefix ? "record_" + Id : Id));
+        return TextUtils.split(data, ",");
     }
         }
 

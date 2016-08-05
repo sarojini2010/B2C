@@ -135,6 +135,7 @@
                     android:id="@+id/imagelayout"
                     android:layout_marginRight="10dp"
                     android:minHeight="120dp"
+                    android:visibility="gone"
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical"
                    >
@@ -238,7 +239,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="#559922"
-                    android:id="@+id/youtubelayout"
+                    android:id="@+id/youtubelayout11"
                     android:visibility="gone"
                     android:layout_marginRight="10dp"
                     android:orientation="vertical">
