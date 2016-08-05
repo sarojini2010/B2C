@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/orange"
+            android:background="@color/color_blue"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
@@ -26,7 +26,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/back_forword_hdpi"
+                android:background="@drawable/back_forword_xxhdpi"
                 android:id="@+id/btn_backward"
                 android:layout_marginLeft="45dp"/>
             <Button
@@ -34,13 +34,13 @@
                 android:layout_height="55dp"
                 android:id="@+id/btn_stop"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/play_hdpi"/>
-
+                android:background="@drawable/play_xxhdpi"
+                />
             <Button
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/forword_hdpi"
+                android:background="@drawable/forword_xxhdpi"
                 android:id="@+id/btn_forward"
                 android:layout_marginRight="48dp"
                 android:layout_marginEnd="48dp"
