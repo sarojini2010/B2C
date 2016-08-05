@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#001">
+    android:background="@drawable/bg_b2c">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -71,8 +71,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Log in"
+                android:background="@color/orange"
                 android:id="@+id/otplog_btn"
-                android:textColor="@color/gray"/>
+                android:textColor="#fff"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -83,6 +84,7 @@
             android:layout_below="@+id/linear4"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="15dp">
             <TextView
                 android:layout_width="wrap_content"
@@ -97,9 +99,7 @@
                 android:id="@+id/request"
                 android:layout_marginLeft="10dp"
                 android:textSize="16sp"
-                android:textColor="#ffe"
-                />
-
+                android:textColor="#ffe"/>
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
