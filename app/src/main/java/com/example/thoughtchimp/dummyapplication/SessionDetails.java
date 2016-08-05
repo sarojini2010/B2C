@@ -11,6 +11,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
@@ -78,7 +81,8 @@ public class SessionDetails extends ActionBarActivity implements Constant {
     InputStream is=null;
     JSONObject sessiondetails = null;
     Bitmap b;
-
+    String sessionnumber;
+FragmentManager fragmentManager;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,12 +106,11 @@ public class SessionDetails extends ActionBarActivity implements Constant {
         resource= (TextView) findViewById(R.id.parenttext);
         Bundle extras = getIntent().getExtras();
         final String sessionid = extras.getString("Sessionid");
+        sessionnumber =extras.getString("Sequencid");
         String sessionss=sessionid.substring(8);
-
         sesionurl=url+sessionss;
         System.out.println("-----url"+sesionurl);
         layout = (LinearLayout) findViewById(R.id.linear);
-
         String childurl=url.substring(url.lastIndexOf("=") + 1);
         System.out.println("sessionurl--------------"+childurl);
         int sessions=Integer.parseInt(sessionss);
@@ -350,8 +353,12 @@ public class SessionDetails extends ActionBarActivity implements Constant {
                 return true;
             case R.id.sessiondone:
                 sesssiondone();
-                Intent in=new Intent(getApplicationContext(),HomeFragment.class);
-                startActivity(in);
+                android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                HomeFragment llf = new HomeFragment();
+                ft.replace(R.id.frame_container, llf);
+                ft.commit();
+
                 return true;
 
             default:
@@ -363,10 +370,10 @@ public class SessionDetails extends ActionBarActivity implements Constant {
         String childid=CHILDHOMEIP;
         String childId=childid.substring(childid.lastIndexOf("=") + 1);
         String sessionid=sesionurl.substring(sesionurl.lastIndexOf("=") + 1);
-        int sessions=Integer.parseInt(sessionid);
-        int sesin1=sessions-1;
-        String sessiondetils=String.valueOf(sesin1);
-        System.out.println("------------childddddddd"+childId+sessionid+sessiondetils);
+//        int sessions=Integer.parseInt(sessionid);
+//        int sesin1=sessions-1;
+//        String sessiondetils=String.valueOf(sesin1);
+        System.out.println("------------childddddddd"+childId+sessionid);
         HttpClient httpClient = new DefaultHttpClient();
         // replace with your url
         HttpPost httpPost = new HttpPost(Sessiondoneurl);
@@ -376,7 +383,7 @@ public class SessionDetails extends ActionBarActivity implements Constant {
 
         //Post Data
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
-        nameValuePair.add(new BasicNameValuePair("session_id",sessionid));
+        nameValuePair.add(new BasicNameValuePair("session_id",sessionnumber));
         nameValuePair.add(new BasicNameValuePair("child_id", childId));
         nameValuePair.add(new BasicNameValuePair("feedback","true"));
 
@@ -536,13 +543,7 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
             JSONObject story = sessiondetails.getJSONObject("story");
             storyimages = story.getString("image");
             final String audio = story.getString("audio");
-            if(storyimages== null){
-                imglayout.setVisibility(View.GONE);
-            }
-            else {
-                imglayout.setVisibility(View.VISIBLE);
-            }
-            if (audio == null) {
+            if (story == null) {
                 musiclayout.setVisibility(View.GONE);
             } else {
                 musiclayout.setVisibility(View.VISIBLE);
@@ -572,6 +573,11 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
             JSONArray resourcearray = sessiondetails.getJSONArray("resource");
             parent_note.setText(parentnote);
             doin_plan.setText(doingplan);
+            if(resourcearray==null){
+                imglayout.setVisibility(View.GONE);
+            }else{
+                imglayout.setVisibility(View.VISIBLE);
+
             for (int i = 0; i < resourcearray.length(); i++) {
                 String value = (String) resourcearray.get(i);
                 ArrayList<String> list = new ArrayList<String>();
@@ -579,7 +585,7 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
                 for (int j = 0; j < list.size(); j++) {
                     URL newurl;
                     final Bitmap bmp;
-                    final String img ;
+                    final String img;
                     try {
                         newurl = new URL(BaseUrl + "/uploads/resource/" + value);
                         ImageView imageView2 = new ImageView(SessionDetails.this);
@@ -595,7 +601,7 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
                         imageView2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                System.out.println("=========="+v.getId());
+                                System.out.println("==========" + v.getId());
                                 Intent in = new Intent(SessionDetails.this, Imageshow.class);
                                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -606,9 +612,11 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
 
                             }
                         });
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }
                     System.out.println("----" + list);
                 }
             }

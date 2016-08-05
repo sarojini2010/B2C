@@ -84,7 +84,9 @@ public  class  AllUsersAdapter extends RecyclerView.Adapter {
             User user = userList.get(position);
             Intent in=new Intent(mContext,SessionDetails.class);
             Toast.makeText(mContext, tvName.getText(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext,ivProfile.getText(),Toast.LENGTH_LONG).show();
             in.putExtra("Sessionid",tvName.getText());
+            in.putExtra("Sequencid",ivProfile.getText());
             mContext.startActivity(in);
         }
 
