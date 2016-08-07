@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/windowBackground">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#fafafa"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="30px">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Booster Bites"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#000"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="12 Aug 2016"
+                    android:textSize="12dp"
+                    android:textColor="#111"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Booster Bites Afd  asdfsd s sdgsdfgsd gsdgf sdgsdsdfgsdg sd g"
+                    android:textSize="16dp"
+                    android:textColor="#111"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -18,7 +18,7 @@
         android:layout_width="250dp"
         android:layout_height="match_parent"
         android:background="@color/gray"
-        android:layout_gravity="start"
+        android:layout_gravity="left"
         android:id="@+id/drawerlinearlayout"
         android:orientation="vertical">
 
@@ -31,7 +31,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/profile"
+                android:background="@drawable/parent"
                />
             <TextView
                 android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:layout_marginTop="120dp"
                 android:textColor="#ffffff"
                 android:textStyle="italic"
-                android:id="@+id/txtemail"/>
+                android:id="@+id/parentname"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

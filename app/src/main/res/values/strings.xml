@@ -2,6 +2,7 @@
     <string name="app_name">Freadom</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="homefragment">HOMEFRAGMENT</string>
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
     <string name="your_string_here"><u>request again here</u></string>

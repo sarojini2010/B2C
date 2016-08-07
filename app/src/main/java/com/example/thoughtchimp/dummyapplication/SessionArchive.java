@@ -64,6 +64,7 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
                             for(int i=0;i<sesionarray.length();i++) {
                                 JSONObject sessionsid = sesionarray.getJSONObject(i);
                                 String id=sessionsid.getString("id");
+                                String sequence  = sessionsid.getString("sequence");
                                 String title=sessionsid.getString("title");
                                 String parentnote=sessionsid.getString("parent_note");
                                 String milestoneid=sessionsid.getString("milestone_id");
@@ -77,7 +78,7 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
                                 sessiondetails.setSessiondetails(parentnote);
                                 sessionlist.add(sessiondetails);
                                 Collections.reverse(sessionlist);
-                                System.out.println("sssss"+id+""+title+""+parentnote+""+milestoneid+""+sessiondetails+"");
+                                System.out.println("Sessionid "+id+" sequence Number"+sequence+" Title "+title+""+parentnote+""+milestoneid+""+sessiondetails+"");
                                 sessionAdapter.notifyDataSetChanged();
 //                                System.out.println("userrrrrrr"+userlist);
                             }

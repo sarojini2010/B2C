@@ -3,6 +3,7 @@ package com.example.thoughtchimp.dummyapplication;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by thoughtchimp on 7/25/2016.
  */
-public class Storylistener extends AppCompatActivity  {
+public class Storylistener extends AppCompatActivity implements Constant {
     private Button forwardbutton,backwardbutton,start;
     private ImageView image;
     private Handler mHandler = new Handler();
@@ -72,12 +73,19 @@ public class Storylistener extends AppCompatActivity  {
         textcompleted=(TextView) findViewById(R.id.complete_text);
         textduration=(TextView) findViewById(R.id.totalduration);
         progress=(ProgressBar) findViewById(R.id.seekBar);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
 //        mediaPlayer = MediaPlayer.create(this,R.raw.testing);
+//        mediaPlayer=new MediaPlayer();
         Bundle extras = getIntent().getExtras();
         final String imagesid = extras.getString("Images");
+        System.out.println("----------"+imagesid);
         String songurl= extras.getString("Song");
+//        String songs=BaseUrl+"/uploads/story/"+songurl;
+        System.out.println("songgggggg"+BaseUrl+"/uploads/story/"+songurl);
         try{
-            mediaPlayer = MediaPlayer.create(this, Uri.parse("http://192.168.0.103/s2m-b2c/uploads/story/"+songurl));
+            mediaPlayer = MediaPlayer.create(this, Uri.parse(BaseUrl+"/uploads/story/"+songurl));
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//            mediaPlayer.setDataSource(songs);
 
         } catch (IllegalArgumentException e) {
             Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
@@ -89,15 +97,16 @@ public class Storylistener extends AppCompatActivity  {
 //        mediaPlayer.start();
         URL newurl ;
         try {
-            newurl = new URL(ImagesUrl+imagesid);
+            newurl = new URL(BaseUrl+"/uploads/resource/"+imagesid);
             b = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
+            image.setImageBitmap(b);
+            image.setScaleType(ImageView.ScaleType.FIT_XY);
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        image.setImageBitmap(b);
-        image.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
         utils = new Utilities();
@@ -183,13 +192,19 @@ public class Storylistener extends AppCompatActivity  {
             myHandler.postDelayed(this, 100);
         }
     };
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mediaPlayer != null) {
+            mediaPlayer.start();
+        }
 
+    }
 //    @Override
 //    protected void onPause() {
 //        super.onPause();
 //        mediaPlayer.stop();
-//        startTime = mediaPlayer.getCurrentPosition();
-//       progress.setProgress((int) startTime);
+//
 //
 //    }
 }

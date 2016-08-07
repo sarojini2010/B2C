@@ -76,10 +76,10 @@ public class Profile  extends AppCompatActivity implements Constant {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = getSharedPreferences("ChildProfile2", 1);
+        sharedPreferences = getSharedPreferences("ChildProfile3", 1);
         editTor = sharedPreferences.edit();
         final String name = sharedPreferences.getString("childname", null);
-//        if (name == null) {
+        if (name == null) {
         setContentView(R.layout.profile2);
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -124,11 +124,11 @@ public class Profile  extends AppCompatActivity implements Constant {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         SimpleDateFormat simpleformat = new SimpleDateFormat("EEE, dd MMM yyyy ", Locale.US);
 //        dateView.setText(DateUtil.getFormattedDate(day,month,year,DateUtil.MONTH_DAY_YEAR));
-//    }
-//        else {
-//            Intent in = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(in);
-//        }
+    }
+        else {
+            Intent in = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(in);
+        }
         }
 
 

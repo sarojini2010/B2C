@@ -18,8 +18,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/MyMaterialTheme.Base">
+        <activity android:name=".MainProfile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +36,7 @@
                 <!--android:value=".HomeFragment"/></activity>-->
         <activity android:name=".OTPScreen"/>
         <activity android:name=".LoginPage"/>
-        <!--<activity android:name=".MainActivity"/>-->
+        <activity android:name=".MainActivity"/>
         <activity android:name=".ParentProfile">
         <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -50,10 +50,10 @@
 
 
        </activity>
-        <activity android:name=".Storylistener"/>
-            <!--<meta-data-->
-            <!--android:name="android.support.PARENT_ACTIVITY"-->
-            <!--android:value="SessionDetails"/></activity>-->
+        <activity android:name=".Storylistener">
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="SessionDetails"/></activity>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="f21d16951642c2410e83171adabc6f2f029b5783" />

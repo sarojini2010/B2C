@@ -26,7 +26,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/back_forword_xxhdpi"
+                android:background="@mipmap/ic_backward"
                 android:id="@+id/btn_backward"
                 android:layout_marginLeft="45dp"/>
             <Button
@@ -40,7 +40,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/forword_xxhdpi"
+                android:background="@mipmap/ic_forword"
                 android:id="@+id/btn_forward"
                 android:layout_marginRight="48dp"
                 android:layout_marginEnd="48dp"

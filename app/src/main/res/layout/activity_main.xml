@@ -9,11 +9,10 @@
     android:layout_height="match_parent">
     <RelativeLayout
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    >
-    <RelativeLayout
+    android:layout_height="wrap_content">
+      <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="470dp"
          android:id="@+id/relative2"
         android:background="@drawable/layoutborder">
         <RelativeLayout
@@ -102,7 +101,7 @@
                     android:text="45"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"
                     android:background="@drawable/button2"
                     android:layout_marginTop="8.5dp"
                     android:id="@+id/button_score" />
@@ -119,7 +118,6 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="170dp"
-            android:layout_marginBottom="40dp"
             android:id="@+id/relativeLayout"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -135,7 +133,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SESSION ARCHIVE"
+            android:text="MILE ARCHIVE"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="16dp"
             android:textSize="13sp"
@@ -148,9 +146,9 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+      <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/layoutboarder2"
         android:layout_below="@+id/relative2"
 
@@ -159,11 +157,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="100dp">
+            android:layout_marginBottom="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RECCO"
+                android:text="BOOSTER BITES"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
                 android:layout_marginLeft="30dp"
@@ -183,6 +181,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginLeft="45dp"
+                android:layout_marginBottom="15dp"
                 />
 
             <ImageView

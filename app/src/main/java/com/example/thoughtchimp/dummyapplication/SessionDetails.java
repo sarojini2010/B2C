@@ -583,14 +583,14 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
                     final Bitmap bmp;
                     final String img;
                     try {
-                        newurl = new URL(BaseUrl + "/uploads/resource/" + value);
+                        newurl = new URL(BaseUrl+"/uploads/resource/"+value);
                         ImageView imageView2 = new ImageView(SessionDetails.this);
                         imageView2.setId(i);
-                        imageView2.setPadding(2, 2, 2, 2);
+                        imageView2.setPadding(0, 10, 40, 10);
                         BitmapFactory.Options options = new BitmapFactory.Options();
                         bmp = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
                         options.inJustDecodeBounds = true;
-                        imageView2.setImageBitmap(Bitmap.createScaledBitmap(bmp, 250, 150, false));
+                        imageView2.setImageBitmap(Bitmap.createScaledBitmap(bmp, 300, 200, false));
 
 //                            imageView2.setScaleType(ImageView.ScaleType.FIT_XY);
                         layout.addView(imageView2);

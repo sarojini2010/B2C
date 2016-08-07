@@ -1,6 +1,7 @@
 package com.example.thoughtchimp.dummyapplication;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -75,7 +76,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity implements  Constant{
 
     DrawerLayout drawerLayout;
     ListView mlistview,drawerlist2;
@@ -91,19 +92,32 @@ public class MainActivity extends ActionBarActivity {
     private NavDrawerListAdapter adapter;
     private ListAdapter listAdapter;
     private ArrayList<ObjectDrawerItem>list;
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences,sharedPreferences2;
     String childname;
     ImageView parentdetails;
+    TextView parentname;
+    Toolbar toolbar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.navigationlist);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
         parentdetails= (ImageView) findViewById(R.id.parentform);
         mlistview = (ListView) findViewById(R.id.lv_drawer);
-        sharedPreferences=getSharedPreferences("ChildProfile2",1);
+        parentname= (TextView) findViewById(R.id.parentname);
+        final RequestQueue queue = Volley.newRequestQueue(this);
+        sharedPreferences=getSharedPreferences("ChildProfile3",1);
+        sharedPreferences2=getSharedPreferences("Parenprofile",MODE_PRIVATE);
+        String parentnames=sharedPreferences2.getString("ParentName","");
+        parentname.setText(parentnames);
+
+
+
         list = new ArrayList<ObjectDrawerItem>();
         int count=0;
         childname=sharedPreferences.getString("childname","");
@@ -180,6 +194,9 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setTitle("");
         selectItem(0);
 
+
+
+
     }
     private class SlidingMenuClickListenr implements AdapterView.OnItemClickListener {
         @Override
@@ -239,14 +256,12 @@ public class MainActivity extends ActionBarActivity {
                     drawerLayout.closeDrawer(Gravity.LEFT);
                 else
                     drawerLayout.openDrawer(Gravity.LEFT);
+
         }
         return super.onOptionsItemSelected(item);
     }
-    private String[] getRecord(String Id, boolean usePrefix) {
-        final SharedPreferences prefs =getSharedPreferences("Childprofile",1);
-        String data = (String) prefs.getAll().get((usePrefix ? "record_" + Id : Id));
-        return TextUtils.split(data, ",");
-    }
-        }
+
+
+}
 
 

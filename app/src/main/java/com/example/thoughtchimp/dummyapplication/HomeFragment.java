@@ -59,8 +59,8 @@ public class HomeFragment extends Fragment implements  Constant {
             SessionText= (TextView)rootView.findViewById(R.id.session_text);
             Username= (TextView)rootView.findViewById(R.id.username);
             Bundle extras = getArguments();
-            final String names = extras.getString("chilprrofile");
-            Username.setText(names);
+//            final String names = extras.getString("chilprrofile");
+//            Username.setText(names);
             ReccoText=(TextView)rootView.findViewById(R.id.recco_text);
             SessionArcText= (TextView)rootView.findViewById(R.id.archieve_text);
             progress= (ProgressBar)rootView.findViewById(R.id.progressBar);
@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment implements  Constant {
                                 JSONObject id=jsonArray.getJSONObject(i);
                                 User user=new User();
                                 title1=id.getString("id");
-                                 sequenceid=id.getString("sequence");
+                                sequenceid=id.getString("sequence");
                                 //                String title2=title1.substring(7);
                                 //                System.out.println("PPPPPPPPPPP"+title2);
                                 //                String title3=title1;
@@ -113,8 +113,8 @@ public class HomeFragment extends Fragment implements  Constant {
                             ReccoText.setText(Recco);
                             progress.setMax(Integer.valueOf(Session_archieve));
                             progress.setProgress(sesion);
-                            btn_score.setText(String.valueOf(score));
-                            SessionText.setText(+sesion +" Sessions Completed");
+                            btn_score.setText(String.valueOf(score)+'k');
+                            SessionText.setText(+sesion +" Miles Completed");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
