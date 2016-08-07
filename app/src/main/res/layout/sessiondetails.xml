@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/counter_text_color"
     tools:context=".SessionDetails">
@@ -28,9 +28,10 @@
                         android:layout_height="wrap_content"
                         android:minHeight="120dp"
                         android:layout_marginLeft="10dp"
-                        android:id="@+id/parent"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
+                        android:id="@+id/parent"
+
                         android:background="@color/color_stroke"
                         >
                         <ImageView
@@ -74,30 +75,29 @@
                             android:layout_height="40dp"
                             android:text="PARENT NOTE"
                             android:layout_marginLeft="185dp"
-                            android:layout_marginTop="5dp"
                             android:layout_alignParentEnd="true"
                             android:src="@mipmap/screendesign"
-                            android:id="@+id/imageView" />
+                            android:id="@+id/imageView"
+                            android:layout_alignParentTop="true" />
                     </RelativeLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginBottom="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="120dp"
                         android:layout_marginLeft="10dp"
-                        android:visibility="gone"
                         android:background="@color/list_item_title"
                         android:layout_marginRight="10dp"
+                        android:padding="15dp"
                         android:id="@+id/doingplan">
                         <ImageView
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="15dp"
                             android:src="@mipmap/doing_plan"
                             android:id="@+id/imageView4" />
                         <TextView
@@ -110,7 +110,6 @@
                             android:layout_toRightOf="@+id/imageView4"
                             android:layout_toEndOf="@+id/imageView4"
                             android:layout_marginLeft="15dp"
-                            android:layout_marginTop="15dp"
                             android:layout_marginStart="20dp"
                             android:textColor="@color/colorPrimary" />
                         <TextView
@@ -133,9 +132,10 @@
                     android:layout_marginLeft="10dp"
                     android:background="#eebb00"
                     android:id="@+id/imagelayout"
+                    android:visibility="gone"
                     android:layout_marginRight="10dp"
                     android:minHeight="120dp"
-                    android:visibility="gone"
+                    android:padding="15dp"
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical"
                    >
@@ -145,8 +145,6 @@
                         <ImageView
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="15dp"
                             android:src="@mipmap/resours"
                             android:id="@+id/imageView5" />
                         <TextView
@@ -158,7 +156,6 @@
                             android:layout_toRightOf="@+id/imageView5"
                             android:layout_toEndOf="@+id/imageView5"
                             android:layout_marginLeft="15dp"
-                            android:layout_marginTop="15dp"
                             android:layout_marginStart="20dp"
                             android:textStyle="bold"
                             android:textColor="@color/color_stroke" />
@@ -193,16 +190,13 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:layout_below="@+id/textView5"
-                        android:layout_marginLeft="15dp"
                         android:minHeight="110dp">
-
                         <LinearLayout
                             android:id="@+id/linear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_gravity="center"
-                            android:paddingLeft="20dp">
+                            android:layout_gravity="center">
                             <!--<ImageView-->
                             <!--android:layout_width="100dp"-->
                             <!--android:layout_height="wrap_content"-->
@@ -238,9 +232,10 @@
                     android:layout_height="180dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="#559922"
+                    android:background="@color/color_green"
                     android:id="@+id/youtubelayout11"
                     android:visibility="gone"
+                    android:padding="15dp"
                     android:layout_marginRight="10dp"
                     android:orientation="vertical">
                     <LinearLayout
@@ -249,8 +244,6 @@
                         <ImageView
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="15dp"
                             android:src="@mipmap/story_time"
                             android:id="@+id/imageView7" />
                         <TextView
@@ -262,7 +255,6 @@
                             android:layout_toRightOf="@+id/imageView7"
                             android:layout_toEndOf="@+id/imageView7"
                             android:layout_marginLeft="15dp"
-                            android:layout_marginTop="15dp"
                             android:layout_marginStart="20dp"
                             android:textStyle="bold"
                             android:textColor="@color/color_stroke" />
@@ -279,8 +271,9 @@
                     android:layout_height="150dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="#0099cc"
+                    android:background="@color/color_blue"
                     android:visibility="gone"
+                    android:padding="15dp"
                     android:onClick="storylistenr"
                     android:id="@+id/musiclayout"
                     android:layout_marginRight="10dp"
@@ -291,8 +284,6 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
                         android:src="@mipmap/story_time"
                         android:id="@+id/imageView6" />
                     <TextView
@@ -304,7 +295,6 @@
                         android:layout_toRightOf="@+id/imageView6"
                         android:layout_toEndOf="@+id/imageView6"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
                         android:layout_marginStart="20dp"
                         android:textStyle="bold"
                         android:textColor="@color/color_stroke" />

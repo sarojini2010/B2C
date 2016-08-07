@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -19,7 +20,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -590,7 +593,19 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
                         BitmapFactory.Options options = new BitmapFactory.Options();
                         bmp = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
                         options.inJustDecodeBounds = true;
-                        imageView2.setImageBitmap(Bitmap.createScaledBitmap(bmp, 300, 200, false));
+//                        Get size code
+                        Display display = getWindowManager().getDefaultDisplay();
+                        DisplayMetrics outMetrics = new DisplayMetrics();
+                        display.getMetrics(outMetrics);
+
+                        float density  = getResources().getDisplayMetrics().density;
+
+                        double dpWidth  = (double) ((outMetrics.widthPixels)-50-110)/2.5;
+                        int dpHeight = (int)(dpWidth/1.5);
+                        System.out.println("width-> " + dpWidth + "height->" + dpHeight);
+
+
+                        imageView2.setImageBitmap(Bitmap.createScaledBitmap(bmp, (int) dpWidth,dpHeight, false));
 
 //                            imageView2.setScaleType(ImageView.ScaleType.FIT_XY);
                         layout.addView(imageView2);

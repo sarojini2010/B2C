@@ -92,7 +92,7 @@
             app:layout_anchorGravity="bottom|right|end"
             android:src="@drawable/cameraprofile"
             android:layout_margin="@dimen/fab_margin"
-            app:backgroundTint="@color/color_stroke"
+            app:backgroundTint="@color/orange"
             android:onClick="onEditSave"
             android:clickable="true"/>
 
