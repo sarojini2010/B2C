@@ -198,10 +198,7 @@ public class SessionDetails extends AppCompatActivity implements Constant {
                 });
                 // Showing Alert Message
                 alertDialog.show();
-                // this is set the view from XML inside AlertDialog
-//              alertDialog.setButton("Ok", DialogInterface.OnClickListener);
-//                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-                // if button is clicked, close the custom dialog
+
 //                sesssiondone();
 //                android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
 //                FragmentTransaction ft = fm.beginTransaction();
