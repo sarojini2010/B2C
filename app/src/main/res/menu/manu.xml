@@ -1,18 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:icon="@android:drawable/btn_plus"
-        android:title="adddetails"
-        />
     <!--<item-->
-        <!--android:id="@+id/fredo"-->
+        <!--android:id="@+id/action_settings"-->
         <!--android:orderInCategory="100"-->
         <!--android:showAsAction="always"-->
         <!--android:icon="@android:drawable/btn_plus"-->
-        <!--android:title="fredo"-->
+        <!--android:title="adddetails"-->
         <!--/>-->
+    <item
+        android:id="@+id/fredo"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@android:drawable/btn_plus"
+        android:title="fredo"
+        />
 
 </menu>

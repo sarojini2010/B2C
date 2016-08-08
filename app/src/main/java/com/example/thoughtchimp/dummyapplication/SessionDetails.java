@@ -257,7 +257,7 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
         pd.setMessage("Please wait.");
         pd.show();
         super.onPreExecute();
-        super.onPreExecute();
+
     }
 
     @Override
