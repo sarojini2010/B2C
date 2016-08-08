@@ -30,6 +30,7 @@
         <activity android:name=".ActivationCode"/>
         <activity android:name=".DoinPlanWebview"/>
         <activity android:name=".SessionDetails"/>
+        <activity android:name=".Profile"/>
             <!--<meta-data-->
                 <!--android:name="android.support.PARENT_ACTIVITY"-->
                 <!--android:value="."/></activity>-->

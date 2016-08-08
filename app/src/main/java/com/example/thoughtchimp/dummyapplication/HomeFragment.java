@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -44,6 +45,8 @@ public class HomeFragment extends Fragment implements  Constant {
     private ArrayList<User> userlist=new ArrayList<>();
     final String url =CHILDHOMEIP;
     static String title1,sequenceid;
+    ImageView childprofile;
+
     public HomeFragment() {
     }
 
@@ -58,6 +61,7 @@ public class HomeFragment extends Fragment implements  Constant {
 
             SessionText= (TextView)rootView.findViewById(R.id.session_text);
             Username= (TextView)rootView.findViewById(R.id.username);
+
             Bundle extras = getArguments();
             final String names = extras.getString("chilprrofile");
             Username.setText(names);
@@ -65,7 +69,8 @@ public class HomeFragment extends Fragment implements  Constant {
             SessionArcText= (TextView)rootView.findViewById(R.id.archieve_text);
             progress= (ProgressBar)rootView.findViewById(R.id.progressBar);
             btn_score=(Button)rootView.findViewById(R.id.button_score);
-            final RequestQueue queue = Volley.newRequestQueue(getActivity());
+            childprofile= (ImageView) rootView.findViewById(R.id.childimages);
+             final RequestQueue queue = Volley.newRequestQueue(getActivity());
             RecyclerView recyclerView = (RecyclerView)rootView.findViewById(R.id.rvAllUsers);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             final AllUsersAdapter allUserAdapter = new AllUsersAdapter(getActivity(), userlist);
@@ -79,6 +84,13 @@ public class HomeFragment extends Fragment implements  Constant {
                 startActivity(in);
             }
         });
+//        childprofile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent in =new Intent(getActivity(),Profile.class);
+//                startActivity(in);
+//            }
+//        });
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

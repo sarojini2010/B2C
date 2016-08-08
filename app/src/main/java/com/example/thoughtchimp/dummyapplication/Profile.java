@@ -149,6 +149,7 @@ public class Profile  extends AppCompatActivity implements Constant {
             @Override
             public void onClick(View v) {
                 Intent in=new Intent(Profile.this,MainProfile.class);
+                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(in);
             }
         });
