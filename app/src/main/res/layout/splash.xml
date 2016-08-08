@@ -2,10 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splashbackground2">
-    <ImageView android:src="@drawable/forgif02"
-        android:scaleType="fitXY"
-        android:layout_centerInParent="true"
+    android:background="@drawable/bg_b2c">
+
+
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/imageView8"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/logo"
+        android:layout_height="65dp"
+        android:layout_marginLeft="-55dp"
+        android:layout_marginTop="78dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView9"
+        android:layout_below="@+id/imageView8"
+        android:src="@drawable/parent_splash"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="118dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView10"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="96dp" />
 </RelativeLayout>

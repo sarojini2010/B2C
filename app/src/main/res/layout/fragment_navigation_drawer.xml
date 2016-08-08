@@ -7,31 +7,31 @@
     <LinearLayout
         android:id="@+id/nav_header_container"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="170dp"
        android:orientation="vertical"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="wrap_content"
             android:id="@+id/innerll"
             android:orientation="vertical">
-
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:background="@drawable/parent"
+                android:layout_height="170dp"
+                android:background="@drawable/profile"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="Name"
-                android:layout_marginTop="120dp"
+                android:text="Radhika Shukla"
+                android:textSize="16dp"
+                android:layout_marginTop="140dp"
                 android:textColor="#ffffff"
-                android:textStyle="italic"
+                android:textStyle="normal"
                 android:id="@+id/parentnames"/>
-            <ImageView
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/interest_hdpi"
