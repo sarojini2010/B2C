@@ -7,8 +7,6 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="49dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp">
         <RelativeLayout
@@ -17,8 +15,8 @@
             android:layout_marginBottom="4dp">
             <TextView
                 android:id="@+id/sesion_id"
-                android:layout_width="31dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:background="@drawable/circulartextview"
                 android:text="12"
                 android:layout_marginLeft="20dp"
@@ -51,10 +49,10 @@
                 android:textSize="11sp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="45dp"
                 android:textColor="#d8bbe6"
                 android:layout_marginTop="19dp"
-                android:text="error somethingggggggggggggggggg wrong wrong wrong dpdp"
+                android:text="Loading Story for you"
                 android:layout_alignParentTop="true"
                 android:layout_alignLeft="@+id/session_number"
                 android:layout_alignStart="@+id/session_number" />
@@ -63,12 +61,12 @@
                 android:layout_height="20dp"
                 android:id="@+id/imageView"
                 android:layout_marginTop="14dp"
+                android:layout_marginRight="20dp"
                 android:layout_alignTop="@+id/session_number"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/arrow_hdpi"
                 android:layout_centerInParent="true" />
-
-         </RelativeLayout>
+        </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

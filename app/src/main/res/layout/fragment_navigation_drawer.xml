@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+
+    <LinearLayout
+        android:id="@+id/nav_header_container"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+       android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:id="@+id/innerll"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@drawable/parent"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Name"
+                android:layout_marginTop="120dp"
+                android:textColor="#ffffff"
+                android:textStyle="italic"
+                android:id="@+id/parentnames"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/interest_hdpi"
+                android:id="@+id/parentforms"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"/>
+
+        </RelativeLayout>
+
+        <!--<ImageView-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="70dp"-->
+            <!--android:src="@drawable/parent"-->
+            <!--android:layout_marginLeft="150dp"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:layout_centerInParent="true" />-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:text="Name"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textStyle="italic"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:id="@+id/parentname"/>-->
+
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/drawerList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nav_header_container"
+        android:layout_marginTop="15dp" />
+
+
+</RelativeLayout>

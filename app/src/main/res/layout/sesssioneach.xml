@@ -7,18 +7,16 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="49dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="1dp">
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="49dp"
             android:layout_marginBottom="1dp">
             <TextView
                 android:id="@+id/sesion_id"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:background="@drawable/circulartextview"
                 android:text="12"
                 android:layout_marginLeft="20dp"
@@ -48,13 +46,13 @@
                 android:id="@+id/undo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="undo"
-                android:textSize="13sp"
+                android:text="UNDO"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginTop="15dp"
                 android:textColor="#fbfafd"
-                android:layout_marginLeft="290dp"
-                />
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/imageView"
+                android:layout_toStartOf="@+id/imageView" />
             <TextView
                 android:id="@+id/session_description"
                 android:layout_width="wrap_content"
@@ -74,6 +72,7 @@
                 android:layout_height="20dp"
                 android:id="@+id/imageView"
                 android:layout_marginTop="14dp"
+                android:layout_marginRight="25dp"
                 android:layout_alignTop="@+id/session_number"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
