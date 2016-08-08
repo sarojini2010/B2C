@@ -163,24 +163,18 @@ public class SessionDetails extends AppCompatActivity implements Constant {
                 getSupportFragmentManager().popBackStackImmediate();
                 return true;
             case R.id.sessiondone:
-//                final Dialog dialog = new Dialog(context);
-//                dialog.setContentView(R.layout.mile1customdialog);
-//                dialog.setTitle("Title...");
-
-                // set the custom dialog components - text, image and button
-//                TextView text = (TextView) dialog.findViewById(R.id.text);
-//
-//                ImageView image = (ImageView) dialog.findViewById(R.id.image);
-//                image.setImageResource(R.drawable.play_hdpi);
-
+               AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("Login");
+                // this is set the view from XML inside AlertDialog
+                alert.setView(R.layout.mile1customdialog);
 //                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
                 // if button is clicked, close the custom dialog
-                sesssiondone();
-                android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                HomeFragment llf = new HomeFragment();
-                ft.replace(R.id.frame_container, llf);
-                ft.commit();
+//                sesssiondone();
+//                android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+//                FragmentTransaction ft = fm.beginTransaction();
+//                HomeFragment llf = new HomeFragment();
+//                ft.replace(R.id.frame_container, llf);
+//                ft.commit();
 
                 return true;
 
@@ -263,7 +257,7 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
         pd.setMessage("Please wait.");
         pd.show();
         super.onPreExecute();
-        super.onPreExecute();
+
     }
 
     @Override
