@@ -5,6 +5,8 @@ package com.example.thoughtchimp.dummyapplication;
  */
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ChildDatabase;
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.NavigationDrawerAdapter;
 
 import java.util.ArrayList;
@@ -35,6 +38,10 @@ public class FragmentDrawer extends Fragment {
     private View containerView;
     private static String[] titles = null;
     static int[] navIcons;
+    ChildDatabase mydb;
+    String Names;
+    SharedPreferences sharedPreferences;
+
 
 
     private FragmentDrawerListener drawerListener;
@@ -64,10 +71,20 @@ public class FragmentDrawer extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // drawer labels
-//        Bundle extras = this.getArguments();
-//        final String sessionid = extras.getString("Childname");
+//        String name=null;
+//        Cursor AllFriends = mydb.getData(name);
+//
+//        AllFriends.moveToFirst();
+//
+//        while (!AllFriends.isAfterLast()) {
+//
+//            Names= AllFriends.getString(1);
+//            AllFriends.moveToNext();
+//            System.out.println("childnamehome"+Names);
+//
+//        }
+        sharedPreferences=getActivity().getSharedPreferences("ChildProfile3",1);
+//        titles=String[]{Names};
         titles = getActivity().getResources().getStringArray(R.array.nav_drawer_items);
         navIcons=getActivity().getResources().getIntArray(R.array.nav_drawer_icons1);
     }

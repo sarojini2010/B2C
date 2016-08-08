@@ -210,18 +210,12 @@ public class Profile  extends AppCompatActivity implements Constant {
 //        String intersted=Interest.getText().toString();
 //        String genders=item.toString();
         makePostRequest();
+        Intent in=new Intent(Profile.this,MainProfile.class);
 
-        String contents=null;
-        Cursor resultSet = myDb.getData(contents);
-        if (resultSet.getCount()!=0){
-            resultSet.moveToPosition(0);
-            Intent in=new Intent(Profile.this,MainProfile.class);
-            Bundle bnd=new Bundle();
-            bnd.putString("Childname", resultSet.getString(1));
-            System.out.println("childnameeeeeeeeeee"+resultSet.getString(1));
 
 //        in.putExtra("name",name);
-        startActivity(in);}
+        startActivity(in);
+
 //        System.out.println("checking"+genders+intersted+date+classes+school+name);
 
 
@@ -246,10 +240,10 @@ public class Profile  extends AppCompatActivity implements Constant {
         nameValuePair.add(new BasicNameValuePair("school",schoolname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("class",classname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("interest",Interest.getText().toString()));
-        myDb.insertchilddata(name);
-//        editTor.putString("childname",name);
-//        editTor.commit();
-//        editTor.apply();
+//        myDb.insertchilddata(name);
+        editTor.putString("childname",name);
+        editTor.commit();
+        editTor.apply();
 
 //        SavePreferences("childname",name);
 //        storeRecord("childs",name);
