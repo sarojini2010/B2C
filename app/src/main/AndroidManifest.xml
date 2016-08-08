@@ -35,7 +35,7 @@
                 <!--android:value="."/></activity>-->
         <activity android:name=".OTPScreen"/>
         <activity android:name=".LoginPage"/>
-        <activity android:name=".MainProfile"/>
+        <!--<activity android:name=".MainProfile"/>-->
         <activity android:name=".ParentProfile">
         <meta-data
         android:name="android.support.PARENT_ACTIVITY"
