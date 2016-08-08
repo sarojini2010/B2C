@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -139,14 +140,26 @@ public class SessionDetails extends AppCompatActivity implements Constant {
         backbutton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                HomeFragment llf = new HomeFragment();
-                ft.replace(R.id.frame_container, llf);
-                ft.commit();
+            onBackPressed();
+//
+//                Fragment fragment = null;
+//                fragment = new HomeFragment();
+//
+//                if (fragment != null) {
+//                    FragmentManager fragmentManager = getSupportFragmentManager();
+//                    fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+//                }
             }
         });
         new Sessiondetail().execute();
+    }
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            this.finish();
+        } else {
+            getFragmentManager().popBackStack();
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -163,10 +176,30 @@ public class SessionDetails extends AppCompatActivity implements Constant {
                 getSupportFragmentManager().popBackStackImmediate();
                 return true;
             case R.id.sessiondone:
-               AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.setTitle("Login");
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(SessionDetails.this);
+
+
+                // Setting Dialog Title
+                alertDialog.setTitle("Alert Dialog");
+//                alertDialog.setContentView(R.layout.mile1customdialog);
+
+                // Setting Dialog Message
+                alertDialog.setMessage("Welcome ");
+
+                // Setting Icon to Dialog
+                alertDialog.setIcon(R.drawable.play_hdpi);
+
+                // Setting OK Button
+                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                // Showing Alert Message
+                alertDialog.show();
                 // this is set the view from XML inside AlertDialog
-                alert.setView(R.layout.mile1customdialog);
+//              alertDialog.setButton("Ok", DialogInterface.OnClickListener);
 //                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
                 // if button is clicked, close the custom dialog
 //                sesssiondone();
@@ -237,11 +270,7 @@ public class SessionDetails extends AppCompatActivity implements Constant {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
+
 //    public void storylistenr(View view){
 //        Intent in= new Intent(this,Storylistener.class);
 ////        in.putExtra("Images",)
@@ -362,26 +391,31 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
                 musiclayout.setVisibility(View.GONE);
             } else {
                 musiclayout.setVisibility(View.VISIBLE);
-                URL newurl ;
-                try {
-                    newurl = new URL(BaseUrl+"/uploads/story/"+storyimages);
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    b = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
-                    audioiamge.setImageBitmap(b);
-                    audioiamge.setScaleType(ImageView.ScaleType.FIT_XY);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
 
                 musiclayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String songurl= audio.toString();
-                        System.out.println("checkingggggggggg song"+audio);
-                        Intent song=new Intent(getApplicationContext(),Storylistener.class);
-                        song.putExtra("Song", songurl);
-                        song.putExtra("Images",storyimages);
-                        startActivity(song);
+                        URL newurl ;
+                        try {
+                            newurl = new URL(BaseUrl+"/uploads/story/"+storyimages);
+                            BitmapFactory.Options options = new BitmapFactory.Options();
+                            b = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
+                            audioiamge.setImageBitmap(b);
+                            audioiamge.setScaleType(ImageView.ScaleType.FIT_XY);
+                            String songurl= audio.toString();
+                            System.out.println("checkingggggggggg song"+audio);
+                            Intent song=new Intent(getApplicationContext(),Storylistener.class);
+                            song.putExtra("Song", songurl);
+                            song.putExtra("Images",storyimages);
+                            startActivity(song);
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+
                     }
                 });
             }
