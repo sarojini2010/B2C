@@ -25,6 +25,7 @@ import com.example.thoughtchimp.com.example.thoughtchimp.adapter.NavigationDrawe
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class FragmentDrawer extends Fragment {
@@ -38,9 +39,9 @@ public class FragmentDrawer extends Fragment {
     private View containerView;
     private static String[] titles = null;
     static int[] navIcons;
-    ChildDatabase mydb;
-    String Names;
-    SharedPreferences sharedPreferences;
+//    ChildDatabase mydb;
+//    String Names;
+static SharedPreferences sharedPreferences;
 
 
 
@@ -55,16 +56,21 @@ public class FragmentDrawer extends Fragment {
     }
 
     public static List<NavDrawerItemes> getData() {
+        Map<String, String> m = (Map<String, String>) sharedPreferences.getAll();
+        List<String> list1 = new ArrayList<>(m.values());
+
+        String childname=sharedPreferences.getString("childname","");
         List<NavDrawerItemes> data = new ArrayList<>();
 
 
         // preparing navigation drawer items
-        for (int i = 0; i < titles.length; i++) {
-            NavDrawerItemes navItem = new NavDrawerItemes();
-            navItem.setTitle(titles[i]);
-            navItem.setIcon(navIcons[i]);
-            data.add(navItem);
+        for(int i=0;i<list1.size();i++) {
+        data.add(new NavDrawerItemes(R.drawable.profile, childname));
         }
+        data.add( new NavDrawerItemes(R.drawable.academy, "Fredo Milestone"));
+        data.add(new NavDrawerItemes(R.drawable.academy, "Rate this app"));
+        data.add(new NavDrawerItemes(R.drawable.academy, "Contact"));
+        data.add(new NavDrawerItemes(R.drawable.academy, "Terms & Condition"));
         return data;
     }
 
@@ -84,8 +90,13 @@ public class FragmentDrawer extends Fragment {
 //
 //        }
         sharedPreferences=getActivity().getSharedPreferences("ChildProfile3",1);
-//        titles=String[]{Names};
-        titles = getActivity().getResources().getStringArray(R.array.nav_drawer_items);
+
+        Map<String, String> m = (Map<String, String>) sharedPreferences.getAll();
+        List<String> list1 = new ArrayList<>(m.values());
+
+        String childname=sharedPreferences.getString("childname","");
+        titles=new String[]{childname};
+//        titles = getActivity().getResources().getStringArray(R.array.nav_drawer_items);
         navIcons=getActivity().getResources().getIntArray(R.array.nav_drawer_icons1);
     }
 

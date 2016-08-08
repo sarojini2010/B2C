@@ -59,8 +59,8 @@ public class HomeFragment extends Fragment implements  Constant {
             SessionText= (TextView)rootView.findViewById(R.id.session_text);
             Username= (TextView)rootView.findViewById(R.id.username);
             Bundle extras = getArguments();
-//            final String names = extras.getString("chilprrofile");
-//            Username.setText(names);
+            final String names = extras.getString("chilprrofile");
+            Username.setText(names);
             ReccoText=(TextView)rootView.findViewById(R.id.recco_text);
             SessionArcText= (TextView)rootView.findViewById(R.id.archieve_text);
             progress= (ProgressBar)rootView.findViewById(R.id.progressBar);

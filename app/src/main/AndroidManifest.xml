@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/MyMaterialTheme.Base">
-        <activity android:name=".Profile">
+        <activity android:name=".MainProfile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,11 +29,10 @@
         <activity android:name=".SessionArchive"/>
         <activity android:name=".ActivationCode"/>
         <activity android:name=".DoinPlanWebview"/>
-
         <activity android:name=".SessionDetails"/>
             <!--<meta-data-->
                 <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value=".HomeFragment"/></activity>-->
+                <!--android:value="."/></activity>-->
         <activity android:name=".OTPScreen"/>
         <activity android:name=".LoginPage"/>
         <activity android:name=".MainProfile"/>

@@ -13,6 +13,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -57,7 +58,9 @@ public class Storylistener extends AppCompatActivity implements Constant {
     private TextView textcompleted,textduration;
     DrawerLayout drawerLayout;
     ListView mlistview;
+    Toolbar mtoolbar;
     Bitmap b;
+    ImageView backbutton2;
     String ImagesUrl="http://192.168.0.103/s2m-b2c/uploads/resource/";
     String storyurl="http://192.168.0.103/s2m-b2c/uploads/story/10_1468496103.mp3";
 
@@ -73,7 +76,10 @@ public class Storylistener extends AppCompatActivity implements Constant {
         textcompleted=(TextView) findViewById(R.id.complete_text);
         textduration=(TextView) findViewById(R.id.totalduration);
         progress=(ProgressBar) findViewById(R.id.seekBar);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        backbutton2= (ImageView) findViewById(R.id.audiobackbtn);
+        mtoolbar = (Toolbar) findViewById(R.id.audiotoolbar);
+        setSupportActionBar(mtoolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 //        mediaPlayer = MediaPlayer.create(this,R.raw.testing);
 //        mediaPlayer=new MediaPlayer();
         Bundle extras = getIntent().getExtras();
@@ -82,6 +88,7 @@ public class Storylistener extends AppCompatActivity implements Constant {
         String songurl= extras.getString("Song");
 //        String songs=BaseUrl+"/uploads/story/"+songurl;
         System.out.println("songgggggg"+BaseUrl+"/uploads/story/"+songurl);
+
         try{
             mediaPlayer = MediaPlayer.create(this, Uri.parse(BaseUrl+"/uploads/story/"+songurl));
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -135,6 +142,15 @@ public class Storylistener extends AppCompatActivity implements Constant {
                   }}
           }
       });
+        backbutton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(Storylistener.this,SessionDetails.class);
+//                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
+            }
+        });
+
 
         textcompleted.setText(""+utils.milliSecondsToTimer((long) startTime));
         textduration.setText(""+utils.milliSecondsToTimer((long) finalTime));

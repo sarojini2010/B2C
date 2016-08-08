@@ -4,9 +4,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/audiotoolbar"
         android:id="@+id/relative1">
+
         <!-- Set background instead of src -->
     </RelativeLayout>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
@@ -95,4 +99,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/relativeLayout2" />
+    <include
+        android:id="@+id/audiotoolbar"
+        layout="@layout/audiotoolbar" />
 </RelativeLayout>
