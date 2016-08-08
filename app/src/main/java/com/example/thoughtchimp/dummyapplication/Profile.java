@@ -30,6 +30,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,7 +80,7 @@ public class Profile  extends AppCompatActivity implements Constant {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editTor;
     ChildDatabase myDb;
-
+    ImageView backbutton,addchild;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +100,10 @@ public class Profile  extends AppCompatActivity implements Constant {
         classname = (EditText) findViewById(R.id.class_section);
         Interest = (EditText) findViewById(R.id.interest);
         schoolname = (EditText) findViewById(R.id.school);
+            backbutton= (ImageView) findViewById(R.id.backbtn);
+            addchild= (ImageView) findViewById(R.id.addchilddetails);
+
+
 
             mtoolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(mtoolbar);
@@ -139,6 +144,21 @@ public class Profile  extends AppCompatActivity implements Constant {
             Intent in = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(in);
         }
+
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(Profile.this,MainProfile.class);
+                startActivity(in);
+            }
+        });
+
+        addchild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adddetails();
+            }
+        });
         }
 
 
@@ -171,16 +191,16 @@ public class Profile  extends AppCompatActivity implements Constant {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                adddetails();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_settings:
+//                adddetails();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     public void adddetails() {
         String name = profilename.getText().toString();
@@ -190,17 +210,12 @@ public class Profile  extends AppCompatActivity implements Constant {
 //        String intersted=Interest.getText().toString();
 //        String genders=item.toString();
         makePostRequest();
+        Intent in=new Intent(Profile.this,MainProfile.class);
 
-        String contents=null;
-        Cursor resultSet = myDb.getData(contents);
-        if (resultSet.getCount()!=0){
-            resultSet.moveToPosition(0);
-            Intent in=new Intent(Profile.this,MainProfile.class);
-            Bundle bnd=new Bundle();
-            bnd.putString("Childname", resultSet.getString(1));
 
 //        in.putExtra("name",name);
-        startActivity(in);}
+        startActivity(in);
+
 //        System.out.println("checking"+genders+intersted+date+classes+school+name);
 
 
@@ -225,7 +240,7 @@ public class Profile  extends AppCompatActivity implements Constant {
         nameValuePair.add(new BasicNameValuePair("school",schoolname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("class",classname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("interest",Interest.getText().toString()));
-        myDb.insertchilddata(name);
+//        myDb.insertchilddata(name);
         editTor.putString("childname",name);
         editTor.commit();
         editTor.apply();
