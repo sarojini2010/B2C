@@ -1,27 +1,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relative1">
+        <!-- Set background instead of src -->
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_blue"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/relativeLayout2">
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/relative1">
-            <!-- Set background instead of src -->
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/color_blue"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/relativeLayout2">
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="30dp"
-                android:id="@+id/relative2">
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/relative2">
             <Button
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -47,13 +47,13 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/relative2"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="15dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/relative2"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp">
             <ProgressBar
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -62,39 +62,37 @@
                 android:progress="13"
                 android:max="50" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="2:15"
                 android:textColor="@color/color_stroke"
                 android:textSize="10dp"
                 android:id="@+id/complete_text"
-                android:layout_marginLeft="11dp"
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/seekBar"/>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="4:15"
                 android:id="@+id/totalduration"
                 android:textColor="@color/color_stroke"
                 android:textSize="10dp"
-                android:layout_marginLeft="282dp"
+                android:gravity="right"
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/seekBar"/>
-                </RelativeLayout>
-                </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/audioiamge"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/singingboy"
-            android:layout_alignTop="@+id/relative1"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_above="@+id/relativeLayout2" />
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/audioiamge"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/singingboy"
+        android:layout_alignTop="@+id/relative1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/relativeLayout2" />
 </RelativeLayout>
-

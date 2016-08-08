@@ -8,13 +8,16 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +33,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ChildDatabase;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -68,10 +73,12 @@ public class Profile  extends AppCompatActivity implements Constant {
     private int year, month, day;
             String week;
     String Url=CHILDADD;
+    Toolbar mtoolbar;
 
     public int currentDateView;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editTor;
+    ChildDatabase myDb;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +86,7 @@ public class Profile  extends AppCompatActivity implements Constant {
         sharedPreferences = getSharedPreferences("ChildProfile3", 1);
         editTor = sharedPreferences.edit();
         final String name = sharedPreferences.getString("childname", null);
+        myDb=new ChildDatabase(this);
         if (name == null) {
         setContentView(R.layout.profile2);
         if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -92,7 +100,9 @@ public class Profile  extends AppCompatActivity implements Constant {
         Interest = (EditText) findViewById(R.id.interest);
         schoolname = (EditText) findViewById(R.id.school);
 
-
+            mtoolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(mtoolbar);
+//            getSupportActionBar().setDisplayShowHomeEnabled(true);
         FloatingActionButton editsave = (FloatingActionButton) findViewById(R.id.fabButton_edit_save);
         collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
@@ -180,9 +190,17 @@ public class Profile  extends AppCompatActivity implements Constant {
 //        String intersted=Interest.getText().toString();
 //        String genders=item.toString();
         makePostRequest();
-        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+
+        String contents=null;
+        Cursor resultSet = myDb.getData(contents);
+        if (resultSet.getCount()!=0){
+            resultSet.moveToPosition(0);
+            Intent in=new Intent(Profile.this,MainProfile.class);
+            Bundle bnd=new Bundle();
+            bnd.putString("Childname", resultSet.getString(1));
+
 //        in.putExtra("name",name);
-        startActivity(in);
+        startActivity(in);}
 //        System.out.println("checking"+genders+intersted+date+classes+school+name);
 
 
@@ -207,6 +225,7 @@ public class Profile  extends AppCompatActivity implements Constant {
         nameValuePair.add(new BasicNameValuePair("school",schoolname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("class",classname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("interest",Interest.getText().toString()));
+        myDb.insertchilddata(name);
         editTor.putString("childname",name);
         editTor.commit();
         editTor.apply();

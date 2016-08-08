@@ -36,6 +36,7 @@
         <item name="android:indeterminateOnly">false</item>
         <!--<item name="android:progressDrawable">@drawable/customseekbar</item>-->
         <item name="android:minHeight">5dip</item>
+        <item name="android:color">@color/orange</item>
         <item name="android:maxHeight">5dip</item>
     </style>
     <style name="spinner_style">
