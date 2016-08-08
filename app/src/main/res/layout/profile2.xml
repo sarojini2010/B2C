@@ -43,7 +43,7 @@
                         android:layout_marginTop="?attr/actionBarSize"
 
                        >
-                        <!--android:padding ="40dp"-->
+                        <!--android:padding="40dp"-->
                         <!--android:layout_marginTop="?attr/actionBarSize"-->
                         <!--android:orientation="vertical"-->
                         <!--&gt;-->
@@ -74,7 +74,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="9dp">
                 <LinearLayout
                     android:id="@+id/layout_own_profile_content"
                     android:layout_width="match_parent"
