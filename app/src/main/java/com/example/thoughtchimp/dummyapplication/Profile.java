@@ -80,7 +80,7 @@ public class Profile  extends AppCompatActivity implements Constant {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editTor;
     ChildDatabase myDb;
-    ImageView backbutton,addchild;
+    ImageView childbackbutton,addchild;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +100,7 @@ public class Profile  extends AppCompatActivity implements Constant {
         classname = (EditText) findViewById(R.id.class_section);
         Interest = (EditText) findViewById(R.id.interest);
         schoolname = (EditText) findViewById(R.id.school);
-            backbutton= (ImageView) findViewById(R.id.backbtn);
+            childbackbutton= (ImageView) findViewById(R.id.childbackbtn);
             addchild= (ImageView) findViewById(R.id.addchilddetails);
 
 
@@ -141,11 +141,11 @@ public class Profile  extends AppCompatActivity implements Constant {
 //        dateView.setText(DateUtil.getFormattedDate(day,month,year,DateUtil.MONTH_DAY_YEAR));
     }
         else {
-            Intent in = new Intent(getApplicationContext(), MainActivity.class);
+            Intent in = new Intent(getApplicationContext(), MainProfile.class);
             startActivity(in);
         }
 
-        backbutton.setOnClickListener(new View.OnClickListener() {
+        childbackbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in=new Intent(Profile.this,MainProfile.class);

@@ -27,6 +27,7 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
     ImageView parentform;
     SharedPreferences sharedPreferences2;
     TextView parentame;
+    String childname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,9 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
 //        sharedPreferences2=getSharedPreferences("Parenprofile",MODE_PRIVATE);
 //        String parentnames=sharedPreferences2.getString("ParentName","");
         parentame.setText("Mrs.Lionel Messi");
+
+        sharedPreferences2=getSharedPreferences("ChildProfile3",1);
+        childname = sharedPreferences2.getString("childname", "");
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -95,10 +99,13 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
     }
     private void displayView(int position) {
         Fragment fragment = null;
+        Bundle args = new Bundle();
         String title = getString(R.string.app_name);
         switch (position) {
             case 0:
                 fragment = new HomeFragment();
+                args.putString("chilprrofile",childname);
+                fragment.setArguments(args);
                 title = getString(R.string.homefragment);
                 break;
             case 1:

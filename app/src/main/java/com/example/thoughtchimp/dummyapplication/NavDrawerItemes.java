@@ -17,8 +17,8 @@ public class NavDrawerItemes {
 
     }
 
-    public NavDrawerItemes(boolean showNotify, String title) {
-        this.showNotify = showNotify;
+    public NavDrawerItemes(int icon, String title) {
+        this.icon = icon;
         this.title = title;
     }
 

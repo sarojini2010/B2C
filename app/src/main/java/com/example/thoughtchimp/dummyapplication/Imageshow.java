@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 /**
@@ -21,16 +23,25 @@ import android.widget.ImageView;
  */
 public class Imageshow extends ActionBarActivity {
     ImageView view;
+    Button deletebutton;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.largeimage);
+
         view = (ImageView) findViewById(R.id.expanded_image);
+        deletebutton= (Button) findViewById(R.id.crossbutton);
 //        Intent in=getIntent();
 //        Bundle extras = getIntent().getExtras();
 //        byte[] bytes = getIntent().getByteArrayExtra("display1");
         byte[] byteArray = getIntent().getByteArrayExtra("display1");
         Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         view.setImageBitmap(bmp);
+        deletebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
