@@ -176,7 +176,8 @@ public class SessionDetails extends AppCompatActivity implements Constant {
                 getSupportFragmentManager().popBackStackImmediate();
                 return true;
             case R.id.sessiondone:
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(SessionDetails.this);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(SessionDetails.this,R.style.AppCompatAlertDialogStyle);
+//                alertDialog.
 
 
                 // Setting Dialog Title
@@ -388,8 +389,18 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
                 musiclayout.setVisibility(View.GONE);
             } else {
                 musiclayout.setVisibility(View.VISIBLE);
-
-
+                URL newurl ;
+                try {
+                    newurl = new URL(BaseUrl + "/uploads/story/" + storyimages);
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    b = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+                    audioiamge.setImageBitmap(b);
+                    audioiamge.setScaleType(ImageView.ScaleType.FIT_XY);
+                }catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 musiclayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -39,6 +40,7 @@ import java.util.Map;
 public class SessionArchive  extends AppCompatActivity implements Constant {
     private ArrayList<Session> sessionlist=new ArrayList<>();
     String url = SessionArchieveIp;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -50,6 +52,10 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final SessionAdapter sessionAdapter = new SessionAdapter(this, sessionlist);
         recyclerView.setAdapter(sessionAdapter);
+//        sessiontoolbar = (Toolbar) findViewById(R.id.sessiontoolbar);
+//        setSupportActionBar(sessiontoolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
