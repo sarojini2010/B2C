@@ -53,7 +53,7 @@ public class LoginPage extends Activity implements Constant{
     String URL=LOGINIP;
     String phonenum;
     String text;
-    String childid;
+    static String childid;
     ChildDatabase childDatabase;
     ParentDatabase parentDatabase;
     SharedPreferences.Editor editor,editor1;

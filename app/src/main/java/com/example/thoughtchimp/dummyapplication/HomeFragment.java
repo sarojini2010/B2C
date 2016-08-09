@@ -82,14 +82,14 @@ public class HomeFragment extends Fragment implements  Constant {
         System.out.println("childdatabase"+childDatabase.getData("102"));
 
 
-        Cursor childetails = childDatabase.getChilid();
+        Cursor childetails = childDatabase.getData(LoginPage.childid);
 
         System.out.println("===========childidetils"+childetails);
         if (childetails.moveToFirst()) {
 
-            String data = childetails.getString(Integer.parseInt(childetails.getString(0)));
-            System.out.println("childata"+data);
-        }       // do what ever you want here
+            chilidid = childetails.getString(Integer.parseInt(childetails.getString(0)));
+            System.out.println("---child"+chilidid);
+        } // do what ever you want here
 
 
 
