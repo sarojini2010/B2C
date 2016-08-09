@@ -2,7 +2,10 @@ package com.example.thoughtchimp.dummyapplication;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,58 +18,86 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Created by thoughtchimp on 8/6/2016.
  */
-public class MainProfile  extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+public class MainProfile  extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener,Constant {
 
     private static String TAG = MainActivity.class.getSimpleName();
 
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
-    ImageView parentform;
-    SharedPreferences sharedPreferences2;
+    ImageView parentform,parentimages;
+    SharedPreferences sharedPreferences2,sharedPreferences;
     TextView parentame;
     String childname;
+    String childimages;
+    Bitmap b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        ParentProfile.makePostRequest();
-        setContentView(R.layout.activitymain2);
-        parentform= (ImageView) findViewById(R.id.parentforms);
-        parentame= (TextView) findViewById(R.id.parentnames);
-//        sharedPreferences2=getSharedPreferences("Parenprofile",MODE_PRIVATE);
-//        String parentnames=sharedPreferences2.getString("ParentName","");
-        parentame.setText("Tom Hanks");
 
-        sharedPreferences2=getSharedPreferences("ChildProfile3",1);
-        childname = sharedPreferences2.getString("childname", "");
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        drawerFragment = (FragmentDrawer)
-                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
-        drawerFragment.setDrawerListener(this);
-        parentform.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in=new Intent(MainProfile.this,ParentProfile.class);
-                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(in);
+            setContentView(R.layout.activitymain2);
+            if (android.os.Build.VERSION.SDK_INT > 9) {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
             }
-        });
+            parentform = (ImageView) findViewById(R.id.parentforms);
+            parentame = (TextView) findViewById(R.id.parentnames);
+            parentimages = (ImageView) findViewById(R.id.parentimage);
 
-        // display the first navigation drawer view on app launch
-        displayView(0);
+            sharedPreferences = getSharedPreferences("Parenprofile", MODE_PRIVATE);
+            String profileimage = sharedPreferences.getString("Profileimage", "");
+            String parentname=sharedPreferences.getString("ParentName","");
+//        String parentname=s
+            parentame.setText(parentname);
+            URL newurl;
+            try {
+                newurl = new URL(BaseUrl + "//uploads/profile/parent/" + profileimage);
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                b = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+                parentimages.setImageBitmap(b);
+                parentimages.setScaleType(ImageView.ScaleType.FIT_XY);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            sharedPreferences2 = getSharedPreferences("ChildProfile3", 1);
+            childname = sharedPreferences2.getString("childname", "");
+
+            mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+            setSupportActionBar(mToolbar);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+            drawerFragment = (FragmentDrawer)
+                    getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+            drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+            drawerFragment.setDrawerListener(this);
+            parentform.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent in = new Intent(MainProfile.this, ParentProfile.class);
+                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(in);
+                }
+            });
+
+            // display the first navigation drawer view on app launch
+            displayView(0);
+
     }
 
-
-    @Override
+        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.menus, menu);
@@ -109,11 +140,18 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
                 title = getString(R.string.homefragment);
                 break;
             case 1:
-//                fragment = new FriendsFragment();
-//                title = getString(R.string.title_friends);
+                fragment = new FredoMilestone();
                 break;
             case 2:
-//                fragment = new MessagesFragment();
+               // fragment = new C();
+//                title = getString(R.string.title_messages);
+                break;
+            case 3:
+                fragment = new ContactFragment();
+//                title = getString(R.string.title_messages);
+                break;
+            case 4:
+                fragment = new TermsConditionFrgament();
 //                title = getString(R.string.title_messages);
                 break;
             default:

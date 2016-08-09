@@ -39,7 +39,9 @@ public class FragmentDrawer extends Fragment {
     private View containerView;
     private static String[] titles = null;
     static int[] navIcons;
-//    ChildDatabase mydb;
+//    SharedPreferences sharedPreferences3;
+
+    //    ChildDatabase mydb;
 //    String Names;
 static SharedPreferences sharedPreferences;
 
@@ -60,8 +62,9 @@ static SharedPreferences sharedPreferences;
         List<String> list1 = new ArrayList<>(m.values());
 
         String childname=sharedPreferences.getString("childname","");
+        String images=sharedPreferences.getString("childimages","");
         List<NavDrawerItemes> data = new ArrayList<>();
-
+        System.out.println("=======childname"+list1);
 
         // preparing navigation drawer items
         for(int i=0;i<list1.size();i++) {

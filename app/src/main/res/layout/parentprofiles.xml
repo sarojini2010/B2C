@@ -61,7 +61,9 @@
 
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
-
+        <include
+            android:id="@+id/parenttoolbar"
+            layout="@layout/parenttool" />
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/nested"
             android:layout_width="match_parent"

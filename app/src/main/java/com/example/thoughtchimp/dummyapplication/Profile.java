@@ -46,6 +46,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.cookie.DateUtils;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -64,9 +67,10 @@ import java.util.Locale;
  */
 public class Profile  extends AppCompatActivity implements Constant {
     private CollapsingToolbarLayout collapsingToolbar;
-    EditText profilename,classname,Interest,schoolname;
+    EditText profilename,classname,Interest,schoolname,grades;
     Context context;
     TextView dateView;
+    String text;
     Spinner gender,setdate1;
     String item;
     private DatePicker datePicker;
@@ -88,7 +92,7 @@ public class Profile  extends AppCompatActivity implements Constant {
         editTor = sharedPreferences.edit();
         final String name = sharedPreferences.getString("childname", null);
         myDb=new ChildDatabase(this);
-        if (name == null) {
+//        if (name == null) {
         setContentView(R.layout.profile2);
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -99,6 +103,7 @@ public class Profile  extends AppCompatActivity implements Constant {
         profilename = (EditText) findViewById(R.id.textView_profile_name);
         classname = (EditText) findViewById(R.id.class_section);
         Interest = (EditText) findViewById(R.id.interest);
+        grades = (EditText) findViewById(R.id.grade);
         schoolname = (EditText) findViewById(R.id.school);
             childbackbutton= (ImageView) findViewById(R.id.childbackbtn);
             addchild= (ImageView) findViewById(R.id.addchilddetails);
@@ -139,11 +144,11 @@ public class Profile  extends AppCompatActivity implements Constant {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         SimpleDateFormat simpleformat = new SimpleDateFormat("EEE, dd MMM yyyy ", Locale.US);
 //        dateView.setText(DateUtil.getFormattedDate(day,month,year,DateUtil.MONTH_DAY_YEAR));
-    }
-        else {
-            Intent in = new Intent(getApplicationContext(), MainProfile.class);
-            startActivity(in);
-        }
+//    }
+//        else {
+//            Intent in = new Intent(getApplicationContext(), MainProfile.class);
+//            startActivity(in);
+//        }
 
         childbackbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,13 +189,13 @@ public class Profile  extends AppCompatActivity implements Constant {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.manu, menu);
-
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.manu, menu);
+//
+//        return true;
+//    }
 
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
@@ -234,13 +239,14 @@ public class Profile  extends AppCompatActivity implements Constant {
         httpPost.addHeader("access-token","V49wH0yUXBQZuPMfshEqWgxbY_4");
 
         //Post Data
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(7);
         nameValuePair.add(new BasicNameValuePair("fullname",name));
         nameValuePair.add(new BasicNameValuePair("birthdate", dateView.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("gender",item.toString()));
         nameValuePair.add(new BasicNameValuePair("school",schoolname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("class",classname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("interest",Interest.getText().toString()));
+        nameValuePair.add(new BasicNameValuePair("grade",grades.getText().toString()));
 //        myDb.insertchilddata(name);
         editTor.putString("childname",name);
         editTor.commit();
@@ -270,7 +276,7 @@ public class Profile  extends AppCompatActivity implements Constant {
                 builder.append(str);
             }
 
-            String text = builder.toString();
+             text= builder.toString();
 //            editTor.putString("result",text);
 //            editTor.commit();
             // write response to log
@@ -282,6 +288,26 @@ public class Profile  extends AppCompatActivity implements Constant {
             e.printStackTrace();
         } catch (IOException e) {
             // Log exception
+            e.printStackTrace();
+        }
+        try {
+            JSONObject object=new JSONObject(text);
+            JSONArray childimage=object.getJSONArray("childs");
+            for(int i=0;i<childimage.length();i++){
+                JSONObject names=childimage.getJSONObject(i);
+                String childnames=names.getString("fullname");
+                String images=names.getString("child_image");
+                System.out.println("--------chhhhRofilephoto"+images+childnames);
+                editTor.putString("childimages",images);
+                editTor.putString("childnames",childnames);
+                editTor.commit();
+            }
+
+
+//            editTor.putString("ParentName",names);
+//            editTor.putString("Profileimage",childimage);
+//            editTor.commit();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 

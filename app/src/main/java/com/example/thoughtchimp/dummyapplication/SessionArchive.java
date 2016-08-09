@@ -54,7 +54,7 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
         recyclerView.setAdapter(sessionAdapter);
 //        sessiontoolbar = (Toolbar) findViewById(R.id.sessiontoolbar);
 //        setSupportActionBar(sessiontoolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

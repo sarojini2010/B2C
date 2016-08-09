@@ -2,6 +2,9 @@ package com.example.thoughtchimp.dummyapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -30,6 +33,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -44,9 +50,10 @@ public class HomeFragment extends Fragment implements  Constant {
     Button btn_score;
     private ArrayList<User> userlist=new ArrayList<>();
     final String url =CHILDHOMEIP;
-    static String title1,sequenceid;
+    static String title1,sequenceid,childimages;
     ImageView childprofile;
-
+    Bitmap b;
+    SharedPreferences sharedPreferences2;
     public HomeFragment() {
     }
 
@@ -65,6 +72,7 @@ public class HomeFragment extends Fragment implements  Constant {
             Bundle extras = getArguments();
             final String names = extras.getString("chilprrofile");
             Username.setText(names);
+            sharedPreferences2 = getActivity().getSharedPreferences("ChildProfile3", 1);
             ReccoText=(TextView)rootView.findViewById(R.id.recco_text);
             SessionArcText= (TextView)rootView.findViewById(R.id.archieve_text);
             progress= (ProgressBar)rootView.findViewById(R.id.progressBar);
@@ -76,6 +84,19 @@ public class HomeFragment extends Fragment implements  Constant {
             final AllUsersAdapter allUserAdapter = new AllUsersAdapter(getActivity(), userlist);
             recyclerView.setAdapter(allUserAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
+//                childimages=sharedPreferences2.getString("childimages","");
+//        URL newurls;
+//        try {
+//            newurls = new URL(BaseUrl + "//uploads/profile/child/" + childimages);
+//            BitmapFactory.Options options = new BitmapFactory.Options();
+//            b= BitmapFactory.decodeStream(newurls.openConnection().getInputStream());
+//            childprofile.setImageBitmap(b);
+//            childprofile.setScaleType(ImageView.ScaleType.FIT_XY);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         SessionArcText.setOnClickListener(new View.OnClickListener() {
             @Override

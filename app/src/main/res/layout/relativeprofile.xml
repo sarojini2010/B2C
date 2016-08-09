@@ -335,6 +335,61 @@
         </LinearLayout>
 
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="25dp"
+        android:id="@+id/gradelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/interest_hdpi"
+            android:scaleType="centerInside"
+            android:layout_marginTop="8dp"
+            android:id="@+id/gradeimages"
+            android:layout_alignTop="@+id/grades"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+
+        <LinearLayout
+            android:id="@+id/grades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_toRightOf="@+id/gradeimages"
+            android:layout_toEndOf="@+id/gradeimages">
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Cricket,Football"-->
+            <!--android:textSize="14sp"-->
+            <!--android:id="@+id/textView_profile_anniversary"-->
+            <!--android:textColor="@color/counter_text_color"/>-->
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="grade"
+                android:textSize="12sp"
+                android:background="@null"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/counter_text_bg"
+                android:id="@+id/grade"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/counter_text_bg"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
 </LinearLayout>

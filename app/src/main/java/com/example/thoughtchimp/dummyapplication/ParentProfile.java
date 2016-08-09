@@ -8,10 +8,13 @@ import android.os.StrictMode;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
@@ -22,6 +25,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,8 +44,11 @@ public class ParentProfile extends ActionBarActivity implements Constant{
     static TextView parentname;
     static TextView emailid;
     static TextView phone;
+    Toolbar toolbar;
+    static String text;
     SharedPreferences sharedPreferences;
     static SharedPreferences.Editor edit;
+    ImageView parentback,addparent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +60,25 @@ public class ParentProfile extends ActionBarActivity implements Constant{
         parentname= (TextView) findViewById(R.id.textView_parent_name);
         emailid=(TextView) findViewById(R.id.textView_parent_email);
         phone=(TextView) findViewById(R.id.parentphonenum);
+        toolbar= (Toolbar) findViewById(R.id.parenttoolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        parentback= (ImageView) findViewById(R.id.parentback);
+        addparent= (ImageView) findViewById(R.id.addparent);
+        parentback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(ParentProfile.this,MainProfile.class);
+                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
+            }
+        });
+        addparent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adddetails();
+            }
+        });
         sharedPreferences=getSharedPreferences("Parenprofile",MODE_PRIVATE);
         edit=sharedPreferences.edit();
 //        makePostRequest();
@@ -60,24 +87,24 @@ public class ParentProfile extends ActionBarActivity implements Constant{
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.parentmenu, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.parentadd:
-                adddetails();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.parentmenu, menu);
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.parentadd:
+//                adddetails();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
     public void adddetails() {
         String name = parentname.getText().toString();
 //        String date=dateView.getText().toString();
@@ -86,7 +113,7 @@ public class ParentProfile extends ActionBarActivity implements Constant{
 //        String intersted=Interest.getText().toString();
 //        String genders=item.toString();
         makePostRequest();
-        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+        Intent in = new Intent(getApplicationContext(), MainProfile.class);
         in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(in);
 
@@ -109,9 +136,7 @@ public class ParentProfile extends ActionBarActivity implements Constant{
         nameValuePair.add(new BasicNameValuePair("fullname",name));
         nameValuePair.add(new BasicNameValuePair("emailid",email));
         nameValuePair.add(new BasicNameValuePair("profile_image",phones));
-        edit.putString("ParentName",name);
-        edit.putString("Profileimage","");
-        edit.commit();
+
 
 
 //        SavePreferences("childname",name);
@@ -138,11 +163,13 @@ public class ParentProfile extends ActionBarActivity implements Constant{
                 builder.append(str);
             }
 
-            String text = builder.toString();
+                text= builder.toString();
 //            editTor.putString("result",text);
 //            editTor.commit();
             // write response to log
             Log.d("Http Post Response:", text.toString());
+
+
             // write response to log
 
         } catch (ClientProtocolException e) {
@@ -152,7 +179,17 @@ public class ParentProfile extends ActionBarActivity implements Constant{
             // Log exception
             e.printStackTrace();
         }
-
+        try {
+            JSONObject object=new JSONObject(text);
+            String profileimage=object.getString("profile_image");
+            String names=object.getString("fullname");
+            System.out.println("--------pRofilephoto"+profileimage);
+            edit.putString("ParentName",names);
+            edit.putString("Profileimage",profileimage);
+            edit.commit();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
