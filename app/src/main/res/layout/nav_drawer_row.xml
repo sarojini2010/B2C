@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:clickable="true">
+    android:clickable="true"
+    >
     <ImageView
         android:id="@+id/childimagesprofile"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@drawable/academy" />
+        android:src="@drawable/profile"
+        android:scaleType="fitXY"/>
 
 
     <TextView
@@ -16,10 +18,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="30dp"
-        android:paddingTop="10dp"
+        android:paddingTop="20dp"
         android:paddingBottom="10dp"
         android:textSize="15dp"
-        android:text="Images"
+        android:text="Child name"
         android:textStyle="bold" />
 
 

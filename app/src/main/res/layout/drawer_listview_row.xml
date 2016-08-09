@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:layout_marginTop="10dp"
     android:orientation="horizontal"
-    android:weightSum="3">
+    android:weightSum="3"
+    >
 
 
     <ImageView
@@ -22,7 +23,7 @@
         android:textSize="14dp"
         android:layout_marginTop="10dp"
         android:text="New Text"
-        android:textColor="#111"
+        android:textColor="#000"
         android:id="@+id/txtlistviewrowitem" />
 
 

@@ -31,14 +31,26 @@
                 android:textColor="#ffffff"
                 android:textStyle="normal"
                 android:id="@+id/parentnames"/>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/interest_hdpi"
-                android:id="@+id/parentforms"
-                android:layout_alignParentEnd="true"
+            <LinearLayout
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/circle"
+                android:layout_alignRight="@+id/parentnames"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:layout_alignEnd="@+id/parentnames">
+                <ImageButton
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="3dp"
+                    android:backgroundTint="@color/orange"
+                    android:background="@drawable/ic_settings_white_24dp"
+                    android:id="@+id/parentforms"
+                    android:layout_alignParentEnd="true"
+                    />
+            </LinearLayout>
+
 
         </RelativeLayout>
 

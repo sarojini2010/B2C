@@ -19,11 +19,12 @@
         android:id="@+id/childbackbtn"
         android:layout_gravity="start"
         android:background="@mipmap/back"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:id="@+id/addchilddetails"
-            android:background="@android:drawable/btn_plus"/>
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="end"
+        android:layout_marginRight="20dp"
+        android:id="@+id/addchilddetails"
+        android:background="@drawable/done_btn"/>
     <!--</LinearLayout>-->
     </android.support.v7.widget.Toolbar>
