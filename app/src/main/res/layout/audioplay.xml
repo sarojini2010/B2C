@@ -7,7 +7,10 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/audioimagelayout1"/>
+        android:id="@+id/audioimagelayout1"
+        android:src="@drawable/profile"
+        android:scaleType="centerCrop"
+        />
 
     <Button
         android:layout_width="40dp"

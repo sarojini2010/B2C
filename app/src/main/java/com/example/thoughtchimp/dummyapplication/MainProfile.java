@@ -38,7 +38,7 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
         parentame= (TextView) findViewById(R.id.parentnames);
 //        sharedPreferences2=getSharedPreferences("Parenprofile",MODE_PRIVATE);
 //        String parentnames=sharedPreferences2.getString("ParentName","");
-        parentame.setText("Mrs.Lionel Messi");
+        parentame.setText("Tom Hanks");
 
         sharedPreferences2=getSharedPreferences("ChildProfile3",1);
         childname = sharedPreferences2.getString("childname", "");

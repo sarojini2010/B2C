@@ -7,4 +7,11 @@
         android:icon="@mipmap/bell_hdpi"
         android:title="fabSelection"
         />
+    <item
+        android:id="@+id/nav_item1"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@mipmap/booster_noti"
+        android:title="fabSelection"
+        />
 </menu>

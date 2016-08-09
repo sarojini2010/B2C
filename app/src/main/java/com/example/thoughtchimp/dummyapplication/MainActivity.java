@@ -45,6 +45,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -97,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements  Constant{
     ImageView parentdetails;
     TextView parentname;
     Toolbar toolbar;
-
 
 
     @Override
@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements  Constant{
     }
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.manu, menu);
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
 //        return super.onCreateOptionsMenu(menu);
 //    }
 

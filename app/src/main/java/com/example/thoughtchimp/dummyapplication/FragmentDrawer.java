@@ -67,10 +67,10 @@ static SharedPreferences sharedPreferences;
         for(int i=0;i<list1.size();i++) {
         data.add(new NavDrawerItemes(R.drawable.profile, childname));
         }
-        data.add( new NavDrawerItemes(R.drawable.academy, "Fredo Milestone"));
-        data.add(new NavDrawerItemes(R.drawable.academy, "Rate this app"));
-        data.add(new NavDrawerItemes(R.drawable.academy, "Contact"));
-        data.add(new NavDrawerItemes(R.drawable.academy, "Terms & Condition"));
+        data.add( new NavDrawerItemes(R.drawable.freado_milestone, "Fredo Miles"));
+        data.add(new NavDrawerItemes(R.drawable.star, "Rate this app"));
+        data.add(new NavDrawerItemes(R.drawable.contact, "Contact"));
+        data.add(new NavDrawerItemes(R.drawable.tnc, "Terms & Condition"));
         return data;
     }
 
