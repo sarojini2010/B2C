@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ChildDatabase;
+import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ParentDatabase;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -52,7 +53,9 @@ public class LoginPage extends Activity implements Constant{
     String URL=LOGINIP;
     String phonenum;
     String text;
+    String childid;
     ChildDatabase childDatabase;
+    ParentDatabase parentDatabase;
     SharedPreferences.Editor editor,editor1;
     Button login;
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,7 @@ public class LoginPage extends Activity implements Constant{
         phonenumber= (EditText) findViewById(R.id.phone_edit);
         login=(Button) findViewById(R.id.login_btn);
         childDatabase=new ChildDatabase(this);
+        parentDatabase=new ParentDatabase(this);
         final String number=sharedPreferences.getString("Phonenumber",null);
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -126,17 +130,29 @@ public class LoginPage extends Activity implements Constant{
             JSONObject object=new JSONObject(text);
             JSONObject parent=object.getJSONObject("parent");
             String fullname=parent.getString("fullname");
+            String parentid=parent.getString("id");
+            String emaild=parent.getString("email");
+            String mobilenumber=parent.getString("mobile");
             String profileimage=parent.getString("profile_image");
             System.out.println("===================childdetails"+fullname+profileimage);
+            parentDatabase.insertparentdata(parentid,fullname,emaild,mobilenumber,profileimage);
             JSONArray childimage=object.getJSONArray("childs");
 
             for(int i=0;i<childimage.length();i++) {
                 JSONObject names=childimage.getJSONObject(i);
-                String id=names.getString("id");
+                childid=names.getString("id");
                 String childname=names.getString("fullname");
                 String profilechildimage=names.getString("child_image");
-                System.out.println("---------childprofile"+childname+profilechildimage+id);
-                childDatabase.insertchilddata(id,childname,profilechildimage,"");
+                System.out.println("---------childprofile"+childname+profilechildimage+childid);
+                if((childDatabase.getData(childid))!=null){
+                    System.out.println("databsessssssss1");
+                childDatabase.insertchilddata(childid,childname,"",profilechildimage);
+                }else{
+                    System.out.println("databsessssssss2");
+                    childDatabase.updatechilddata(childname,childid,"",profilechildimage);
+                }
+
+                System.out.println("----------------"+childDatabase.getData("100"));
 
             }
 

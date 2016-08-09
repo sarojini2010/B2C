@@ -43,6 +43,7 @@ public class ParentDatabase extends SQLiteOpenHelper {
         contentValues.put("parentemail", parentemail);
         contentValues.put("parentmobilenumer", parentmobilenumer);
         contentValues.put("parentimages", parentimages);
+        System.out.println("parentdatabase"+contentValues);
         db.insert("parentdata", null, contentValues);
         return true;
     }

@@ -3,6 +3,7 @@ package com.example.thoughtchimp.dummyapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ChildDatabase;
+import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ParentDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,6 +57,9 @@ public class HomeFragment extends Fragment implements  Constant {
     static String title1,sequenceid,childimages;
     ImageView childprofile;
     Bitmap b;
+    String chilidid;
+    ChildDatabase childDatabase;
+    ParentDatabase parentDatabase;
     SharedPreferences sharedPreferences2;
     public HomeFragment() {
     }
@@ -69,9 +75,33 @@ public class HomeFragment extends Fragment implements  Constant {
 
             sharedPreferences2 = getActivity().getSharedPreferences("ChildProfile3", 1);
             String id=sharedPreferences2.getString("chilid","");
-        System.out.println("===========childid"+id);
+        childDatabase=new ChildDatabase(getActivity());
+        parentDatabase=new ParentDatabase(getActivity());
+        System.out.println("childdatabasedetails"+childDatabase.getDatabaseName());
+        System.out.println("childdatabasedetails"+parentDatabase.getDatabaseName());
+        System.out.println("childdatabase"+childDatabase.getData("102"));
 
-            Urls=BaseUrl+"/Api/child_home?child_id="+id;
+
+        Cursor childetails = childDatabase.getChilid();
+
+        System.out.println("===========childidetils"+childetails);
+        if (childetails.moveToFirst()) {
+
+            String data = childetails.getString(Integer.parseInt(childetails.getString(0)));
+            System.out.println("childata"+data);
+        }       // do what ever you want here
+
+
+
+//        while (!childetails.isAfterLast()) {
+//
+//            chilidid= childetails.getString(1);
+//            childetails.moveToNext();
+//            System.out.println("childid"+chilidid);
+//
+//        }
+
+            Urls=BaseUrl+"/Api/child_home?child_id="+chilidid;
             SessionText= (TextView)rootView.findViewById(R.id.session_text);
             Username= (TextView)rootView.findViewById(R.id.username);
 

@@ -42,25 +42,38 @@ public class ChildDatabase extends SQLiteOpenHelper {
         contentValues.put("childid",childid);
         contentValues.put("childgrade",childgrade);
         contentValues.put("childimage",childimage);
+        System.out.println("childdatabasenamess"+contentValues);
         db.insert("childdata", null, contentValues);
         return true;
     }
 
-    public Cursor getData(String name) {
+    public Cursor getData(String childid) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from childdata where childname ='" + name + "'", null);
+        Cursor res = db.rawQuery("select * from childdata where childid ='" + childid + "'", null);
+        if (res.moveToFirst()) {
+
+            String data = res.getString(Integer.parseInt(res.getString(0)));
+            System.out.println("---child"+data);
+        }
+        return res;
+    }
+    public Cursor getChilid() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String childid="102";
+        String query="select * from childdata where childid ='" + childid + "'";
+        Cursor res = db.rawQuery(query,null);
         return res;
     }
 
-    public boolean updatechilddata(Integer id, String childname,String Childid,String childgrade,String childimage ) {
+
+    public boolean updatechilddata(String childname,String childid,String childgrade,String childimage ) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("childname", childname);
-        contentValues.put("Childid", Childid);
         contentValues.put("childgrade", childgrade);
         contentValues.put("childimage", childimage);
 
-        db.update("childdata", contentValues, "id = ? ", new String[]{Integer.toString(id)});
+        db.update("childdata", contentValues, "childid = ? ", new String[]{childid});
         return true;
     }
 
