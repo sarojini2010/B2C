@@ -41,8 +41,8 @@ public class FragmentDrawer extends Fragment {
     static int[] navIcons;
 //    SharedPreferences sharedPreferences3;
 
-    //    ChildDatabase mydb;
-//    String Names;
+        static ChildDatabase mydb;
+    static String Names;
 static SharedPreferences sharedPreferences;
 
 
@@ -50,6 +50,7 @@ static SharedPreferences sharedPreferences;
     private FragmentDrawerListener drawerListener;
 
     public FragmentDrawer() {
+        mydb=new ChildDatabase(getActivity());
 
     }
 
@@ -65,15 +66,25 @@ static SharedPreferences sharedPreferences;
         String images=sharedPreferences.getString("childimages","");
         List<NavDrawerItemes> data = new ArrayList<>();
         System.out.println("=======childname"+list1);
-
+//        Cursor AllFriends = mydb.getData("name");
+//        AllFriends.moveToFirst();
+//
+//        while (!AllFriends.isAfterLast()) {
+//
+//            Names= AllFriends.getString(1);
+//            AllFriends.moveToNext();
+//            System.out.println("childnamehomeeee"+Names);
+//
+//        }
         // preparing navigation drawer items
-        for(int i=0;i<list1.size();i++) {
-        data.add(new NavDrawerItemes(R.drawable.profile, childname));
-        }
-        data.add( new NavDrawerItemes(R.drawable.freado_milestone, "Fredo Miles"));
-        data.add(new NavDrawerItemes(R.drawable.star, "Rate this app"));
-        data.add(new NavDrawerItemes(R.drawable.contact, "Contact"));
-        data.add(new NavDrawerItemes(R.drawable.tnc, "Terms & Condition"));
+        String edit="edit";
+
+        data.add(new NavDrawerItemes(R.drawable.profile, childname,""));
+
+        data.add( new NavDrawerItemes(R.drawable.freado_milestone, "Fredo Miles",""));
+        data.add(new NavDrawerItemes(R.drawable.star, "Rate this app",""));
+        data.add(new NavDrawerItemes(R.drawable.contact, "Contact",""));
+        data.add(new NavDrawerItemes(R.drawable.tnc, "Terms & Condition",""));
         return data;
     }
 
@@ -81,17 +92,7 @@ static SharedPreferences sharedPreferences;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        String name=null;
-//        Cursor AllFriends = mydb.getData(name);
-//
-//        AllFriends.moveToFirst();
-//
-//        while (!AllFriends.isAfterLast()) {
-//
-//            Names= AllFriends.getString(1);
-//            AllFriends.moveToNext();
-//            System.out.println("childnamehome"+Names);
-//
-//        }
+
         sharedPreferences=getActivity().getSharedPreferences("ChildProfile3",1);
 
         Map<String, String> m = (Map<String, String>) sharedPreferences.getAll();

@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ParentDatabase;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -49,6 +51,7 @@ public class ParentProfile extends ActionBarActivity implements Constant{
     SharedPreferences sharedPreferences;
     static SharedPreferences.Editor edit;
     ImageView parentback,addparent;
+    static ParentDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,7 @@ public class ParentProfile extends ActionBarActivity implements Constant{
         phone=(TextView) findViewById(R.id.parentphonenum);
         toolbar= (Toolbar) findViewById(R.id.parenttoolbar);
         setSupportActionBar(toolbar);
+        db=new ParentDatabase(this);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         parentback= (ImageView) findViewById(R.id.parentback);
         addparent= (ImageView) findViewById(R.id.addparent);
@@ -183,7 +187,10 @@ public class ParentProfile extends ActionBarActivity implements Constant{
             JSONObject object=new JSONObject(text);
             String profileimage=object.getString("profile_image");
             String names=object.getString("fullname");
+//            String emailid=object.getString("");
+//            db.insertparentdata(names);
             System.out.println("--------pRofilephoto"+profileimage);
+
             edit.putString("ParentName",names);
             edit.putString("Profileimage",profileimage);
             edit.commit();

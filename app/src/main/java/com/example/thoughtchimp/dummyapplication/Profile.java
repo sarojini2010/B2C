@@ -36,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ChildDatabase;
+import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ParentDatabase;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -71,6 +72,7 @@ public class Profile  extends AppCompatActivity implements Constant {
     Context context;
     TextView dateView;
     String text;
+    String id;
     Spinner gender,setdate1;
     String item;
     private DatePicker datePicker;
@@ -78,7 +80,10 @@ public class Profile  extends AppCompatActivity implements Constant {
     private int year, month, day;
             String week;
     String Url=CHILDADD;
+    String childupdateurl=Updatechild;
     Toolbar mtoolbar;
+
+    ParentDatabase parentDatabase;
 
     public int currentDateView;
     SharedPreferences sharedPreferences;
@@ -92,6 +97,7 @@ public class Profile  extends AppCompatActivity implements Constant {
         editTor = sharedPreferences.edit();
         final String name = sharedPreferences.getString("childname", null);
         myDb=new ChildDatabase(this);
+        parentDatabase=new ParentDatabase(this);
 //        if (name == null) {
         setContentView(R.layout.profile2);
         if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -103,7 +109,7 @@ public class Profile  extends AppCompatActivity implements Constant {
         profilename = (EditText) findViewById(R.id.textView_profile_name);
         classname = (EditText) findViewById(R.id.class_section);
         Interest = (EditText) findViewById(R.id.interest);
-        grades = (EditText) findViewById(R.id.grade);
+//        grades = (EditText) findViewById(R.id.grade);
         schoolname = (EditText) findViewById(R.id.school);
             childbackbutton= (ImageView) findViewById(R.id.childbackbtn);
             addchild= (ImageView) findViewById(R.id.addchilddetails);
@@ -216,6 +222,7 @@ public class Profile  extends AppCompatActivity implements Constant {
 //        String intersted=Interest.getText().toString();
 //        String genders=item.toString();
         makePostRequest();
+        updaterequest();
         Intent in=new Intent(Profile.this,MainProfile.class);
 
 
@@ -224,6 +231,56 @@ public class Profile  extends AppCompatActivity implements Constant {
 
 //        System.out.println("checking"+genders+intersted+date+classes+school+name);
 
+
+    }
+
+    private void updaterequest() {
+        HttpClient httpClient = new DefaultHttpClient();
+        // replace with your url
+        HttpPost httpPost = new HttpPost(childupdateurl);
+        httpPost.addHeader("X-API-KEY","123456");
+        httpPost.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
+        httpPost.addHeader("access-token","6InFDMC1mYyvJ0QoxiL8dEUSj_2");
+
+        //Post Data
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+        nameValuePair.add(new BasicNameValuePair("id",id));
+        nameValuePair.add(new BasicNameValuePair("fullname",profilename.getText().toString()));
+        nameValuePair.add(new BasicNameValuePair("birthdate", dateView.getText().toString()));
+
+
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+        } catch (UnsupportedEncodingException e) {
+            // log exception
+            e.printStackTrace();
+        }
+
+        //making POST request.
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            StringBuilder builder = new StringBuilder();
+            String str = "";
+
+            while ((str = rd.readLine()) != null) {
+                builder.append(str);
+            }
+
+            text= builder.toString();
+//            editTor.putString("result",text);
+//            editTor.commit();
+            // write response to log
+            Log.d("Http Post Response:", text.toString());
+            // write response to log
+
+        } catch (ClientProtocolException e) {
+            // Log exception
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Log exception
+            e.printStackTrace();
+        }
 
     }
 
@@ -239,18 +296,19 @@ public class Profile  extends AppCompatActivity implements Constant {
         httpPost.addHeader("access-token","V49wH0yUXBQZuPMfshEqWgxbY_4");
 
         //Post Data
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(7);
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
         nameValuePair.add(new BasicNameValuePair("fullname",name));
         nameValuePair.add(new BasicNameValuePair("birthdate", dateView.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("gender",item.toString()));
         nameValuePair.add(new BasicNameValuePair("school",schoolname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("class",classname.getText().toString()));
         nameValuePair.add(new BasicNameValuePair("interest",Interest.getText().toString()));
-        nameValuePair.add(new BasicNameValuePair("grade",grades.getText().toString()));
+//        nameValuePair.add(new BasicNameValuePair("grade",grades.getText().toString()));
 //        myDb.insertchilddata(name);
         editTor.putString("childname",name);
         editTor.commit();
         editTor.apply();
+
 
 //        SavePreferences("childname",name);
 //        storeRecord("childs",name);
@@ -280,7 +338,7 @@ public class Profile  extends AppCompatActivity implements Constant {
 //            editTor.putString("result",text);
 //            editTor.commit();
             // write response to log
-            Log.d("Http Post Response:", text.toString());
+            Log.d("Http makeResponse:", text.toString());
             // write response to log
 
         } catch (ClientProtocolException e) {
@@ -292,15 +350,28 @@ public class Profile  extends AppCompatActivity implements Constant {
         }
         try {
             JSONObject object=new JSONObject(text);
+//            JSONObject parentname=object.getJSONObject("parent");
+//            String parents=parentname.getString("fullname");
+//            String profileimage=parentname.getString("profile_image");
+//            System.out.println("parentnameeeeeee"+parents+profileimage);
+//            parentDatabase.insertparentdata(parents);
+//            editTor.putString("parentname",parents);
+//            editTor.putString("profileimages",profileimage);
             JSONArray childimage=object.getJSONArray("childs");
+
             for(int i=0;i<childimage.length();i++){
                 JSONObject names=childimage.getJSONObject(i);
                 String childnames=names.getString("fullname");
+                 id=names.getString("id");
                 String images=names.getString("child_image");
+//                myDb.insertchilddata(childnames);
                 System.out.println("--------chhhhRofilephoto"+images+childnames);
+
                 editTor.putString("childimages",images);
+                editTor.putString("chilid",id);
                 editTor.putString("childnames",childnames);
                 editTor.commit();
+
             }
 
 

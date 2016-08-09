@@ -2,6 +2,7 @@ package com.example.thoughtchimp.dummyapplication;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -18,9 +19,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ParentDatabase;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.jar.Attributes;
 
 /**
  * Created by thoughtchimp on 8/6/2016.
@@ -37,6 +41,8 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
     String childname;
     String childimages;
     Bitmap b;
+    String Name;
+    ParentDatabase parentdata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +58,19 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
             parentform = (ImageView) findViewById(R.id.parentforms);
             parentame = (TextView) findViewById(R.id.parentnames);
             parentimages = (ImageView) findViewById(R.id.parentimage);
+            parentdata= new ParentDatabase(MainProfile.this);
+                Cursor Allparent = parentdata.getData("name");
+                Allparent.moveToFirst();
+                while (!Allparent.isAfterLast()) {
+                    Name = Allparent.getString(1);
+//                    String images = Allparent.getString(2);
+                    Allparent.moveToNext();
+                    System.out.println("===============parentname"+Name);
+                }
 
-            sharedPreferences = getSharedPreferences("Parenprofile", MODE_PRIVATE);
-            String profileimage = sharedPreferences.getString("Profileimage", "");
-            String parentname=sharedPreferences.getString("ParentName","");
-//        String parentname=s
+            sharedPreferences2 = getSharedPreferences("ChildProfile3", MODE_PRIVATE);
+            String profileimage = sharedPreferences2.getString("parentname", "");
+            String parentname=sharedPreferences2.getString("profileimages","");
             parentame.setText(parentname);
             URL newurl;
             try {

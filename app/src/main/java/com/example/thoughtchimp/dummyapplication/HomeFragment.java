@@ -49,7 +49,8 @@ public class HomeFragment extends Fragment implements  Constant {
     ProgressBar progress;
     Button btn_score;
     private ArrayList<User> userlist=new ArrayList<>();
-    final String url =CHILDHOMEIP;
+    final String url =BaseUrl;
+    String Urls;
     static String title1,sequenceid,childimages;
     ImageView childprofile;
     Bitmap b;
@@ -61,18 +62,23 @@ public class HomeFragment extends Fragment implements  Constant {
                              Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.activity_main, container, false);
+
 //        protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
 
+            sharedPreferences2 = getActivity().getSharedPreferences("ChildProfile3", 1);
+            String id=sharedPreferences2.getString("chilid","");
+        System.out.println("===========childid"+id);
 
+            Urls=BaseUrl+"/Api/child_home?child_id="+id;
             SessionText= (TextView)rootView.findViewById(R.id.session_text);
             Username= (TextView)rootView.findViewById(R.id.username);
 
             Bundle extras = getArguments();
             final String names = extras.getString("chilprrofile");
             Username.setText(names);
-            sharedPreferences2 = getActivity().getSharedPreferences("ChildProfile3", 1);
+
             ReccoText=(TextView)rootView.findViewById(R.id.recco_text);
             SessionArcText= (TextView)rootView.findViewById(R.id.archieve_text);
             progress= (ProgressBar)rootView.findViewById(R.id.progressBar);
@@ -113,7 +119,7 @@ public class HomeFragment extends Fragment implements  Constant {
 //            }
 //        });
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

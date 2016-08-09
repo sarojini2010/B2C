@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ChildDatabase;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -28,6 +29,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,11 +47,13 @@ import java.util.Map;
  * Created by thoughtchimp on 8/2/2016.
  */
 public class LoginPage extends Activity implements Constant{
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences,sharedPreferences1;
     EditText phonenumber;
     String URL=LOGINIP;
     String phonenum;
-    SharedPreferences.Editor editor;
+    String text;
+    ChildDatabase childDatabase;
+    SharedPreferences.Editor editor,editor1;
     Button login;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +63,11 @@ public class LoginPage extends Activity implements Constant{
             StrictMode.setThreadPolicy(policy);
         }
         sharedPreferences=getSharedPreferences(USER_SESSION_ID, MODE_PRIVATE);
+        sharedPreferences1=getSharedPreferences("Childprofile3", MODE_PRIVATE);
+
         phonenumber= (EditText) findViewById(R.id.phone_edit);
         login=(Button) findViewById(R.id.login_btn);
+        childDatabase=new ChildDatabase(this);
         final String number=sharedPreferences.getString("Phonenumber",null);
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +111,7 @@ public class LoginPage extends Activity implements Constant{
                 builder.append(str);
             }
 
-            String text = builder.toString();
+            text= builder.toString();
             // write response to log
             Log.w("Http Post Response:", text.toString());
 
@@ -113,6 +122,26 @@ public class LoginPage extends Activity implements Constant{
             // Log exception
             e.printStackTrace();
         }
+        try {
+            JSONObject object=new JSONObject(text);
+            JSONObject parent=object.getJSONObject("parent");
+            String fullname=parent.getString("fullname");
+            String profileimage=parent.getString("profile_image");
+            System.out.println("===================childdetails"+fullname+profileimage);
+            JSONArray childimage=object.getJSONArray("childs");
 
+            for(int i=0;i<childimage.length();i++) {
+                JSONObject names=childimage.getJSONObject(i);
+                String id=names.getString("id");
+                String childname=names.getString("fullname");
+                String profilechildimage=names.getString("child_image");
+                System.out.println("---------childprofile"+childname+profilechildimage+id);
+                childDatabase.insertchilddata(id,childname,profilechildimage,"");
+
+            }
+
+    } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
-}
+    }

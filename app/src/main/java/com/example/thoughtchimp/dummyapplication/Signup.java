@@ -52,14 +52,14 @@ public class Signup  extends Activity implements Constant {
         final String emailids= sharedPreferences.getString("Email", null);
         String namess= sharedPreferences.getString("Name", null);
         String Ph= sharedPreferences.getString("Phonenumber", null);
-//        if(emailids==null && namess==null && Ph==null) {
+        if(emailids==null && namess==null && Ph==null) {
             setContentView(R.layout.signup);
 
             name = (EditText) findViewById(R.id.name_edit);
             email = (EditText) findViewById(R.id.email_edit);
             phonenumber = (EditText) findViewById(R.id.phonenumber_edit);
             signup = (Button) findViewById(R.id.signup_btn);
-            loginpage= (TextView) findViewById(R.id.logindetails);
+            loginpage = (TextView) findViewById(R.id.logindetails);
 
 
             editor = sharedPreferences.edit();
@@ -69,7 +69,7 @@ public class Signup  extends Activity implements Constant {
                 public void onClick(View v) {
 
                     names = name.getText().toString();
-                    emailid= email.getText().toString();
+                    emailid = email.getText().toString();
                     phone = phonenumber.getText().toString();
 
                     editor.putString("Name", names);
@@ -78,14 +78,13 @@ public class Signup  extends Activity implements Constant {
                     editor.commit();
 
                     if ((emailValidator(emailid)) && validateNumber(phone)) {
-                    if (names != null && emailid != null && phone != null) {
-                        makePostRequest();
-                        Intent in = new Intent(Signup.this, OTPScreen.class);
-                        startActivity(in);
-                        Toast.makeText(getApplicationContext(),"Login Sucess",Toast.LENGTH_LONG).show();
-                    }
-                    }
-                    else {
+                        if (names != null && emailid != null && phone != null) {
+                            makePostRequest();
+                            Intent in = new Intent(Signup.this, OTPScreen.class);
+                            startActivity(in);
+                            Toast.makeText(getApplicationContext(), "Login Sucess", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
                         Toast.makeText(Signup.this, "please input valid email addrees and password", Toast.LENGTH_SHORT).show();
                     }
 
@@ -93,17 +92,18 @@ public class Signup  extends Activity implements Constant {
                 }
             });
 //        }
-        loginpage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(Signup.this, LoginPage.class);
-                startActivity(in);
-            }
-        });
-//        else {
-//            Intent in = new Intent(Signup.this, LoginPage.class);
-//            startActivity(in);
-//        }
+            loginpage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent in = new Intent(Signup.this, LoginPage.class);
+                    startActivity(in);
+                }
+            });
+        }
+        else {
+            Intent in = new Intent(Signup.this, MainProfile.class);
+            startActivity(in);
+        }
 
     }
 

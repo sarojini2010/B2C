@@ -7,19 +7,24 @@ public class NavDrawerItemes {
     private boolean showNotify;
     private String title;
     private int icon;
+    String id;
 
+    public String getId() {
+        return id;
+    }
 
-
-
-
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public NavDrawerItemes() {
 
     }
 
-    public NavDrawerItemes(int icon, String title) {
+    public NavDrawerItemes(int icon, String title,String id) {
         this.icon = icon;
         this.title = title;
+        this.id=id;
     }
 
     public boolean isShowNotify() {

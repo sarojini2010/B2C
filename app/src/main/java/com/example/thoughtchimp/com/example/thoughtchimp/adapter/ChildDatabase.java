@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class ChildDatabase extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "CHILD.db";
+    public static final String DATABASE_NAME = "CHILDData.db";
     public static final String CONTACTS_TABLE_NAME = "childdata";
     public static final String CONTACTS_COLUMN_ID = "id";
     public static final String CONTACTS_COLUMN_name = "childname";
@@ -24,7 +24,7 @@ public class ChildDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table childdata "
-                + "(id integer primary key, childname text)");
+                + "(id integer primary key, childid text, childname text, childgrade text, childimage text)");
 
     }
 
@@ -35,11 +35,13 @@ public class ChildDatabase extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertchilddata(String childname) {
+    public boolean insertchilddata(String childid,String childname,String childgrade,String childimage) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("childname", childname);
-
+        contentValues.put("childid",childid);
+        contentValues.put("childgrade",childgrade);
+        contentValues.put("childimage",childimage);
         db.insert("childdata", null, contentValues);
         return true;
     }
@@ -50,10 +52,13 @@ public class ChildDatabase extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean updatechilddata(Integer id, String childname) {
+    public boolean updatechilddata(Integer id, String childname,String Childid,String childgrade,String childimage ) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("childname", childname);
+        contentValues.put("Childid", Childid);
+        contentValues.put("childgrade", childgrade);
+        contentValues.put("childimage", childimage);
 
         db.update("childdata", contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
