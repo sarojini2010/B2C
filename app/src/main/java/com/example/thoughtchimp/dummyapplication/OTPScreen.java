@@ -58,7 +58,7 @@ public class OTPScreen extends Activity implements Constant {
                                    meessage = object.getString("message");
                                     System.out.println("------2"+meessage);
 
-                                    Intent in=new Intent(OTPScreen.this,Profile.class);
+                                    Intent in=new Intent(OTPScreen.this,MainProfile.class);
                                     startActivity(in);
                                     Toast.makeText(getApplicationContext(),"Login Succesfull",Toast.LENGTH_LONG).show();
                                 } catch (JSONException e) {
