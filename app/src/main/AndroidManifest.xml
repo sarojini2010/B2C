@@ -46,10 +46,19 @@
                 <!--android:name="android.support.PARENT_ACTIVITY"-->
                 <!--android:value="SessionDetails"/></activity>-->
         <activity android:name=".Imageshow">
-
-
-
-       </activity>
+        </activity>
+        <activity android:name=".TermsConditionFrgament">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainProfile"/></activity>
+        <activity android:name=".FredoMilestone">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainProfile"/></activity>
+        <activity android:name=".ContactFragment">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainProfile"/></activity>
         <activity android:name=".Storylistener">
             <meta-data
             android:name="android.support.PARENT_ACTIVITY"

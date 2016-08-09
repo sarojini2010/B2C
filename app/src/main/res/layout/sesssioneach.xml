@@ -8,13 +8,13 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="49dp"
-        android:layout_below="@+id/sessionundotoolbar"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="49dp"
+            android:layout_below="@+id/sessionundotoolbar"
             android:layout_marginBottom="1dp">
             <TextView
                 android:id="@+id/sesion_id"
@@ -83,10 +83,10 @@
                 android:layout_centerInParent="true" />
 
         </RelativeLayout>
+        <include
+            android:id="@+id/sessionundotoolbar"
+            layout="@layout/sessionundotoolbar" />
 
     </RelativeLayout>
-    <include
-        android:id="@+id/sessionundotoolbar"
-        layout="@layout/sessionundotoolbar" />
 
 </LinearLayout>

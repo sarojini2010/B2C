@@ -16,12 +16,12 @@ import java.util.ArrayList;
  */
 public class SessionAdapter extends RecyclerView.Adapter {
     private Context mContext;
-    ArrayList<Session> sessiondetails;
+    ArrayList<Session> sessiondetailes;
 
 
-    public SessionAdapter(Context mContext, ArrayList<Session> sessiondetails) {
+    public SessionAdapter(Context mContext, ArrayList<Session> sessiondetailes) {
         this.mContext = mContext;
-        this.sessiondetails = sessiondetails;
+        this.sessiondetailes = sessiondetailes;
     }
 
     @Override
@@ -36,24 +36,24 @@ public class SessionAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         UserViewHolder holder1 = (UserViewHolder) holder;
 
-        holder1.sesionid.setText(sessiondetails.get(position).sessionid);
-        holder1.seriesnumber.setText(sessiondetails.get(position).sessionnumber);
-        holder1.sessiondetails.setText(sessiondetails.get(position).sessiondetails);
-        holder1.iamge.setImageResource(sessiondetails.get(position).imageResource);
+        holder1.sesionid.setText(sessiondetailes.get(position).sessionid);
+        holder1.seriesnumber.setText(sessiondetailes.get(position).sessionnumber);
+        holder1.sessiondetails.setText(sessiondetailes.get(position).sessiondetails);
+        holder1.iamge.setImageResource(sessiondetailes.get(position).imageResource);
 
-        holder1.undo.setText(sessiondetails.get(position).undosessionid);
+        holder1.undo.setText(sessiondetailes.get(position).undosessionid);
 
 
     }
 
     @Override
     public int getItemCount() {
-        return sessiondetails.size();
+        return sessiondetailes.size();
     }
 
 
 
-    public class UserViewHolder extends RecyclerView.ViewHolder {
+    public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView sesionid;
         private TextView seriesnumber;
         private TextView sessiondetails;
@@ -74,5 +74,12 @@ public class SessionAdapter extends RecyclerView.Adapter {
         }
 
 
+        @Override
+        public void onClick(View v) {
+            int position = getLayoutPosition();
+            Session user =sessiondetailes.get(position);
+            Intent in=new Intent(mContext,SessionDetails.class);
+            in.putExtra("Sseeionid",sesionid.getText());
+        }
     }
 }

@@ -140,19 +140,23 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
                 title = getString(R.string.homefragment);
                 break;
             case 1:
-                fragment = new FredoMilestone();
+                Intent in3 = new Intent(getApplicationContext(),
+                        FredoMilestone.class);
+                startActivity(in3);//
                 break;
             case 2:
                // fragment = new C();
 //                title = getString(R.string.title_messages);
                 break;
             case 3:
-                fragment = new ContactFragment();
-//                title = getString(R.string.title_messages);
+                Intent in2 = new Intent(getApplicationContext(),
+                        ContactFragment.class);
+                startActivity(in2);//                title = getString(R.string.title_messages);
                 break;
             case 4:
-                fragment = new TermsConditionFrgament();
-//                title = getString(R.string.title_messages);
+                Intent in = new Intent(getApplicationContext(),
+                        TermsConditionFrgament.class);
+                startActivity(in);//                title = getString(R.string.title_messages);
                 break;
             default:
                 break;
