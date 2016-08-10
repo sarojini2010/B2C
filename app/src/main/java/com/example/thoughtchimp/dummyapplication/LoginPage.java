@@ -1,5 +1,4 @@
 package com.example.thoughtchimp.dummyapplication;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -21,7 +19,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ChildDatabase;
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ParentDatabase;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
@@ -34,7 +31,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,7 +40,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 /**
  * Created by thoughtchimp on 8/2/2016.
  */
@@ -70,36 +65,28 @@ public class LoginPage extends Activity implements Constant{
             StrictMode.setThreadPolicy(policy);
         }
 //        System.out.println("loginurl"+URL);
-
         sharedPreferences=getSharedPreferences(USER_SESSION_ID, MODE_PRIVATE);
         sharedPreferences1=getSharedPreferences("Childprofile3", MODE_PRIVATE);
         Bundle bnd=getIntent().getExtras();
         phone =bnd.getString("phonenumber");
-
-
         otpnumber= (EditText) findViewById(R.id.name_edits);
         login=(Button) findViewById(R.id.otplog_btn);
         childDatabase=new ChildDatabase(this);
         parentDatabase=new ParentDatabase(this);
         final String number=sharedPreferences.getString("Phonenumber",null);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 otpnum=otpnumber.getText().toString();
 //                if(status==200)
                 makePostRequest();
                 System.out.println("url"+URL);
                 Intent in=new Intent(getApplicationContext(),MainProfile.class);
-
                 startActivity(in);
             }
         });
     }
-
     private void makePostRequest() {
-
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(URL);
         httpPost.addHeader("X-API-KEY","123456");
@@ -107,15 +94,12 @@ public class LoginPage extends Activity implements Constant{
         nameValuePair.add(new BasicNameValuePair("mobile", phone));
         nameValuePair.add(new BasicNameValuePair("otp", otpnum));
         nameValuePair.add(new BasicNameValuePair("device_token","fdsfgsdgfd"));
-
-
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
         } catch (UnsupportedEncodingException e) {
             // log exception
             e.printStackTrace();
         }
-
         //making POST request.
         try {
             HttpResponse response = httpClient.execute(httpPost);
@@ -124,16 +108,13 @@ public class LoginPage extends Activity implements Constant{
             String str = "";
             int status=response.getStatusLine().getStatusCode();
             System.out.println("statusssssss"+status);
-
             while ((str = rd.readLine()) != null) {
                 builder.append(str);
             }
-
             text= builder.toString();
             System.out.println();
             // write response to log
             Log.w("Http Post Response:", text.toString());
-
         } catch (ClientProtocolException e) {
             // Log exception
             e.printStackTrace();
@@ -141,8 +122,6 @@ public class LoginPage extends Activity implements Constant{
             // Log exception
             e.printStackTrace();
         }
-
-
         try {
             JSONObject object=new JSONObject(text);
             JSONObject parent=object.getJSONObject("parent");
@@ -168,21 +147,17 @@ public class LoginPage extends Activity implements Constant{
                 editor.putString("childnameprofile",childname);
                 editor.commit();
                 System.out.println("---------childprofile"+childname+profilechildimage+childid);
-
 //                if((childDatabase.getData(childid))!=null){
-                    System.out.println("databsessssssss1");
+                System.out.println("databsessssssss1");
                 childDatabase.insertchilddata(childid,childname,milestone_id,profilechildimage);
 //                }else{
 //                    System.out.println("databsessssssss2");
 //                    childDatabase.updatechilddata(childname,childid,"",profilechildimage);
 //                }
-
                 System.out.println("----------------"+childDatabase.getData("100"));
-
             }
-
-    } catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-    }
+}
