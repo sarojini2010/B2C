@@ -62,7 +62,7 @@ static SharedPreferences sharedPreferences;
         Map<String, String> m = (Map<String, String>) sharedPreferences.getAll();
         List<String> list1 = new ArrayList<>(m.values());
 
-        String childname=sharedPreferences.getString("childname","");
+        String childname=sharedPreferences.getString("childnameprofile","");
         String images=sharedPreferences.getString("childimages","");
         List<NavDrawerItemes> data = new ArrayList<>();
         System.out.println("=======childname"+list1);

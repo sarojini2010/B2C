@@ -39,8 +39,8 @@ public class ChildDatabase extends SQLiteOpenHelper {
     public boolean insertchilddata(String childid,String childname,String childgrade,String childimage) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("childname", childname);
         contentValues.put("childid",childid);
+        contentValues.put("childname", childname);
         contentValues.put("childgrade",childgrade);
         contentValues.put("childimage",childimage);
         System.out.println("childdatabasenamess"+contentValues);
@@ -50,7 +50,8 @@ public class ChildDatabase extends SQLiteOpenHelper {
 
     public Cursor getData(String childid) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from childdata where childid ='" + childid + "'", null);
+        String limit="limit 1";
+        Cursor res = db.rawQuery("select * from childdata where childid ='" + childid + "'"+limit, null);
         if (res.moveToFirst()) {
 
             String data = res.getString(Integer.parseInt(res.getString(0)));
@@ -78,6 +79,15 @@ public class ChildDatabase extends SQLiteOpenHelper {
         return true;
     }
 
+
+    public void removeAll()
+    {
+        // db.delete(String tableName, String whereClause, String[] whereArgs);
+        // If whereClause is null, it will delete all rows.
+        SQLiteDatabase db = this.getWritableDatabase(); // helper is object extends SQLiteOpenHelper
+        db.delete("childdata", null, null);
+
+    }
     public Integer deletechilddata(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("childdata",

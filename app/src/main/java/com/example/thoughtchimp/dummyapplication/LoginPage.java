@@ -52,9 +52,10 @@ public class LoginPage extends Activity implements Constant{
     SharedPreferences sharedPreferences,sharedPreferences1;
     EditText otpnumber;
     String URL=LOGINIP;
-    static String phonenum;
+    static String otpnum;
     String text;
-    static String childid;
+    static String firstchild;
+    String childid;
     ChildDatabase childDatabase;
     ParentDatabase parentDatabase;
     SharedPreferences.Editor editor,editor1;
@@ -86,7 +87,7 @@ public class LoginPage extends Activity implements Constant{
             @Override
             public void onClick(View v) {
 
-                phonenum=otpnumber.getText().toString();
+                otpnum=otpnumber.getText().toString();
 //                if(status==200)
                 makePostRequest();
                 System.out.println("url"+URL);
@@ -104,7 +105,7 @@ public class LoginPage extends Activity implements Constant{
         httpPost.addHeader("X-API-KEY","123456");
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
         nameValuePair.add(new BasicNameValuePair("mobile", phone));
-        nameValuePair.add(new BasicNameValuePair("otp", phonenum));
+        nameValuePair.add(new BasicNameValuePair("otp", otpnum));
         nameValuePair.add(new BasicNameValuePair("device_token","fdsfgsdgfd"));
 
 
@@ -153,20 +154,28 @@ public class LoginPage extends Activity implements Constant{
             System.out.println("===================childdetails"+fullname+profileimage);
             parentDatabase.insertparentdata(parentid,fullname,emaild,mobilenumber,profileimage);
             JSONArray childimage=object.getJSONArray("childs");
-
+            childDatabase.removeAll();
             for(int i=0;i<childimage.length();i++) {
                 JSONObject names=childimage.getJSONObject(i);
-                childid=names.getString("id");
+                if(i==0) {
+                    firstchild = names.getString("id");
+                }
+                childid = names.getString("id");
                 String childname=names.getString("fullname");
                 String profilechildimage=names.getString("child_image");
+                String milestone_id=names.getString("milestone_id");
+                editor = sharedPreferences1.edit();
+                editor.putString("childnameprofile",childname);
+                editor.commit();
                 System.out.println("---------childprofile"+childname+profilechildimage+childid);
-                if((childDatabase.getData(childid))!=null){
+
+//                if((childDatabase.getData(childid))!=null){
                     System.out.println("databsessssssss1");
-                childDatabase.insertchilddata(childid,childname,"",profilechildimage);
-                }else{
-                    System.out.println("databsessssssss2");
-                    childDatabase.updatechilddata(childname,childid,"",profilechildimage);
-                }
+                childDatabase.insertchilddata(childid,childname,milestone_id,profilechildimage);
+//                }else{
+//                    System.out.println("databsessssssss2");
+//                    childDatabase.updatechilddata(childname,childid,"",profilechildimage);
+//                }
 
                 System.out.println("----------------"+childDatabase.getData("100"));
 
