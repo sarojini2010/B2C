@@ -51,7 +51,7 @@ import java.util.Map;
 public class LoginPage extends Activity implements Constant{
     SharedPreferences sharedPreferences,sharedPreferences1;
     EditText otpnumber;
-    String URL=OTPsend;
+    String URL=LOGINIP;
     static String phonenum;
     String text;
     static String childid;
@@ -59,6 +59,7 @@ public class LoginPage extends Activity implements Constant{
     ParentDatabase parentDatabase;
     SharedPreferences.Editor editor,editor1;
     Button login;
+    String phone;
     String LoginUrl;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,19 +72,24 @@ public class LoginPage extends Activity implements Constant{
 
         sharedPreferences=getSharedPreferences(USER_SESSION_ID, MODE_PRIVATE);
         sharedPreferences1=getSharedPreferences("Childprofile3", MODE_PRIVATE);
+        Bundle bnd=getIntent().getExtras();
+        phone =bnd.getString("phonenumber");
 
-        otpnumber= (EditText) findViewById(R.id.name_edit);
-        login=(Button) findViewById(R.id.login_btn);
+
+        otpnumber= (EditText) findViewById(R.id.name_edits);
+        login=(Button) findViewById(R.id.otplog_btn);
         childDatabase=new ChildDatabase(this);
         parentDatabase=new ParentDatabase(this);
         final String number=sharedPreferences.getString("Phonenumber",null);
-        phonenum=otpnumber.getText().toString();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                phonenum=otpnumber.getText().toString();
+//                if(status==200)
                 makePostRequest();
+                System.out.println("url"+URL);
                 Intent in=new Intent(getApplicationContext(),MainProfile.class);
 
                 startActivity(in);
@@ -97,9 +103,9 @@ public class LoginPage extends Activity implements Constant{
         HttpPost httpPost = new HttpPost(URL);
         httpPost.addHeader("X-API-KEY","123456");
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
-        nameValuePair.add(new BasicNameValuePair("mobile", phonenum));
-        nameValuePair.add(new BasicNameValuePair("otp", ""));
-        nameValuePair.add(new BasicNameValuePair("device_token","Tokenid"));
+        nameValuePair.add(new BasicNameValuePair("mobile", phone));
+        nameValuePair.add(new BasicNameValuePair("otp", phonenum));
+        nameValuePair.add(new BasicNameValuePair("device_token","fdsfgsdgfd"));
 
 
         try {

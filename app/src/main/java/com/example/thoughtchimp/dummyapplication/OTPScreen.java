@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,10 +25,21 @@ import com.android.volley.toolbox.Volley;
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ChildDatabase;
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ParentDatabase;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,27 +60,83 @@ public class OTPScreen extends Activity implements Constant {
     EditText phonenumber;
     String phone;
     int status;
+    InputStream is=null;
+    String body="";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         final Button Otplogin = (Button) findViewById(R.id.login_btn);
-        phonenumber= (EditText) findViewById(R.id.phone_edit);
-        requestagain= (TextView) findViewById(R.id.request);
-        childDatabase=new ChildDatabase(this);
-        parentDatabase=new ParentDatabase(this);
+        phonenumber = (EditText) findViewById(R.id.phone_edit);
+        requestagain = (TextView) findViewById(R.id.request);
+        childDatabase = new ChildDatabase(this);
+        parentDatabase = new ParentDatabase(this);
 
-        System.out.println("phonenumber"+phone);
+        System.out.println("phonenumber" + phone);
 
 
         Otplogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                System.out.println("------checking1"+meessage);
-                phone=phonenumber.getText().toString();
-                Urlotp=Url+phone;
-                System.out.println("otp login"+Urlotp);
+                phone = phonenumber.getText().toString();
+                Urlotp = Url + phone;
+                System.out.println("otp login" + Urlotp);
                 final RequestQueue queue = Volley.newRequestQueue(OTPScreen.this);
+
+//                try {
+//                    DefaultHttpClient httpClient = new DefaultHttpClient();
+//                    HttpGet httpget = new HttpGet(Urlotp);
+//                    httpget.addHeader("X-API-KEY", "123456");
+//
+//
+//                    HttpResponse httpResponse = httpClient.execute(httpget);
+//                    final int statusCode = httpResponse.getStatusLine().getStatusCode();
+//
+//                    if (statusCode != HttpStatus.SC_OK) {
+//                        Log.w(getClass().getSimpleName(),
+//                                "Error " + statusCode + " for URL " + Urlotp);
+//
+//                    }
+//                    HttpEntity httpEntity = httpResponse.getEntity();
+//                    is = httpEntity.getContent();
+//
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                } catch (ClientProtocolException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                try {
+//                    BufferedReader reader = new BufferedReader(new InputStreamReader(
+//                            is, "iso-8859-1"), 8);
+//                    StringBuilder sb = new StringBuilder();
+//                    String line = null;
+//                    while ((line = reader.readLine()) != null) {
+//                        sb.append(line + "n");
+//                    }
+//                    is.close();
+//                    body = sb.toString();
+//                } catch (Exception e) {
+//                    Log.e("Buffer Error", "Error converting result " + e.toString());
+//                    System.out.println("response"+body);
+//                }
+//
+//
+//            }
+//
+//        });
+//    }
+
+
+
+
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, Urlotp,
                         new Response.Listener<String>() {
                             @Override
@@ -114,6 +183,7 @@ public class OTPScreen extends Activity implements Constant {
 //                                    }
 
                                     Intent in = new Intent(OTPScreen.this, LoginPage.class);
+                                     in.putExtra("phonenumber",phone);
                                     startActivity(in);
                                     Toast.makeText(getApplicationContext(), "Login Succesfull", Toast.LENGTH_LONG).show();
 //                                }
@@ -158,12 +228,12 @@ public class OTPScreen extends Activity implements Constant {
 
             }
         });
-//        requestagain.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent in=new Intent(getApplicationContext(),LoginPage.class);
-//                startActivity(in);
-//            }
-//        });
+////        requestagain.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                Intent in=new Intent(getApplicationContext(),LoginPage.class);
+////                startActivity(in);
+////            }
+////        });
     }
 }

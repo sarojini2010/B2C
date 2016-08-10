@@ -52,7 +52,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:hint="Enter Code Here"
-                android:id="@+id/name_edit"
+                android:id="@+id/name_edits"
                 android:background="@null"
                 android:inputType="number"
                 android:textColor="#FFFFFF"

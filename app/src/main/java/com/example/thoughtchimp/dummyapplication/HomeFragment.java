@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment implements  Constant {
     static String title1,sequenceid,childimages;
     ImageView childprofile;
     Bitmap b;
-    String chilidid;
+    String childid;
     ChildDatabase childDatabase;
     ParentDatabase parentDatabase;
     SharedPreferences sharedPreferences2;
@@ -89,8 +89,8 @@ public class HomeFragment extends Fragment implements  Constant {
         System.out.println("===========childidetils"+childetails);
         if (childetails.moveToFirst()) {
 
-            chilidid = childetails.getString(Integer.parseInt(childetails.getString(0)));
-            System.out.println("---child"+chilidid);
+            childid = childetails.getString(Integer.parseInt(childetails.getString(0)));
+            System.out.println("---child"+childid);
         } // do what ever you want here
 
 
@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment implements  Constant {
 //
 //        }
 
-            Urls=BaseUrl+"/Api/child_home?child_id="+chilidid;
+            Urls=BaseUrl1+"child_home?child_id="+childid;
             SessionText= (TextView)rootView.findViewById(R.id.session_text);
             Username= (TextView)rootView.findViewById(R.id.username);
 
