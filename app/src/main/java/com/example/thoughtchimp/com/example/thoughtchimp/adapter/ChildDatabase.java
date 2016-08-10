@@ -60,9 +60,9 @@ public class ChildDatabase extends SQLiteOpenHelper {
         return res;
     }
     public Cursor getChilid() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String childid="102";
-        String query="select * from childdata where childid ='" + childid + "'";
+        String tablename="childdata";
+        SQLiteDatabase db = ChildDatabase.this.getReadableDatabase();
+        String query="SELECT * FROM "+tablename;
         Cursor res = db.rawQuery(query,null);
         return res;
     }
@@ -78,7 +78,10 @@ public class ChildDatabase extends SQLiteOpenHelper {
         db.update("childdata", contentValues, "childid = ? ", new String[]{childid});
         return true;
     }
-
+//public void getAll(){
+//    SQLiteDatabase db = this.getWritableDatabase(); // helper is object extends SQLiteOpenHelper
+//    db.delete("childdata", null, null);
+//}
 
     public void removeAll()
     {

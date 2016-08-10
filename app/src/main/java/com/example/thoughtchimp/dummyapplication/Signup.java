@@ -52,7 +52,7 @@ public class Signup  extends Activity implements Constant {
         final String emailids= sharedPreferences.getString("Email", null);
         String namess= sharedPreferences.getString("Name", null);
         String Ph= sharedPreferences.getString("Phonenumber", null);
-        if(emailids==null && namess==null && Ph==null) {
+//        if(emailids==null && namess==null && Ph==null) {
             setContentView(R.layout.signup);
 
             name = (EditText) findViewById(R.id.name_edit);
@@ -99,11 +99,11 @@ public class Signup  extends Activity implements Constant {
                     startActivity(in);
                 }
             });
-        }
-        else {
-            Intent in = new Intent(Signup.this, MainProfile.class);
-            startActivity(in);
-        }
+//        }
+//        else {
+//            Intent in = new Intent(Signup.this, MainProfile.class);
+//            startActivity(in);
+//        }
 
     }
 

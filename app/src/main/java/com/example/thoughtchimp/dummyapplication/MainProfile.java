@@ -43,6 +43,7 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
     Bitmap b;
     String Name;
     ParentDatabase parentdata;
+    String childids=FragmentDrawer.childid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,30 +112,30 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
 
     }
 
-        @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menus, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-
-
-        return super.onOptionsItemSelected(item);
-    }
-
+//        @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+////        getMenuInflater().inflate(R.menu.menus, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+////        if (id == R.id.action_settings) {
+////            return true;
+////        }
+//
+//
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+//
 
 
 
@@ -145,36 +146,42 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
     private void displayView(int position) {
         Fragment fragment = null;
         Bundle args = new Bundle();
+        int i1=0;
+        position=i1;
         String title = getString(R.string.app_name);
-        switch (position) {
-            case 0:
-                fragment = new HomeFragment();
-                args.putString("chilprrofile",childname);
-                fragment.setArguments(args);
-                title = getString(R.string.homefragment);
-                break;
-            case 1:
-                Intent in3 = new Intent(getApplicationContext(),
-                        FredoMilestone.class);
-                startActivity(in3);//
-                break;
-            case 2:
-               // fragment = new C();
-//                title = getString(R.string.title_messages);
-                break;
-            case 3:
-                Intent in2 = new Intent(getApplicationContext(),
-                        ContactFragment.class);
-                startActivity(in2);//                title = getString(R.string.title_messages);
-                break;
-            case 4:
-                Intent in = new Intent(getApplicationContext(),
-                        TermsConditionFrgament.class);
-                startActivity(in);//                title = getString(R.string.title_messages);
-                break;
-            default:
-                break;
-        }
+//        switch (position) {
+//                case 0:
+//        for(int i=position;i<FragmentDrawer.arrayList.size();i++) {
+//            fragment = new HomeFragment();
+            args.putString("chilprrofile", FragmentDrawer.arrayList.get(position).childname);
+            args.putString("childid", FragmentDrawer.arrayList.get(position).childid);
+            fragment.setArguments(args);
+            title = getString(R.string.homefragment);
+//                    break;
+//        }
+//
+//            case 1:
+//                Intent in3 = new Intent(getApplicationContext(),
+//                        FredoMilestone.class);
+//                startActivity(in3);//
+//                break;
+//            case 2:
+//               // fragment = new C();
+////                title = getString(R.string.title_messages);
+//                break;
+//            case 3:
+//                Intent in2 = new Intent(getApplicationContext(),
+//                        ContactFragment.class);
+//                startActivity(in2);//                title = getString(R.string.title_messages);
+//                break;
+//            case 4:
+//                Intent in = new Intent(getApplicationContext(),
+//                        TermsConditionFrgament.class);
+//                startActivity(in);//                title = getString(R.string.title_messages);
+//                break;
+//            default:
+//                break;
+//        }
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();

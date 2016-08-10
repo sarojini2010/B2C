@@ -26,6 +26,7 @@ import com.example.thoughtchimp.com.example.thoughtchimp.adapter.NavigationDrawe
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class FragmentDrawer extends Fragment {
@@ -40,9 +41,13 @@ public class FragmentDrawer extends Fragment {
     private static String[] titles = null;
     static int[] navIcons;
 //    SharedPreferences sharedPreferences3;
-
-        static ChildDatabase mydb;
+    static ArrayList<String> name=null;
+    static ChildDatabase mydb;
     static String Names;
+    static String childnames;
+    int index=1;
+    static String childid;
+    static ArrayList<Childprofile> arrayList;
 static SharedPreferences sharedPreferences;
 
 
@@ -50,7 +55,7 @@ static SharedPreferences sharedPreferences;
     private FragmentDrawerListener drawerListener;
 
     public FragmentDrawer() {
-        mydb=new ChildDatabase(getActivity());
+
 
     }
 
@@ -62,11 +67,26 @@ static SharedPreferences sharedPreferences;
         Map<String, String> m = (Map<String, String>) sharedPreferences.getAll();
         List<String> list1 = new ArrayList<>(m.values());
 
-        String childname=sharedPreferences.getString("childnameprofile","");
+        String childname= String.valueOf(sharedPreferences.getStringSet("tasks_set", (Set<String>) name));
         String images=sharedPreferences.getString("childimages","");
         List<NavDrawerItemes> data = new ArrayList<>();
-        System.out.println("=======childname"+list1);
-//        Cursor childetails = mydb.getData(LoginPage.childid);
+        System.out.println("=======childname"+childname);
+        Cursor childetails = mydb.getChilid();
+
+        System.out.println("===========childidetils"+childetails);
+//        if (childetails.moveToFirst()) {
+//
+//        }childetails.moveToNext();
+        if(childetails.moveToFirst()) {
+            do {
+                Childprofile childetail = new Childprofile();
+                childid= childetail.setChildid(childetails.getString(1));
+                childnames = childetail.setChildname(childetails.getString(2));
+                String childimages = childetail.setProfileimage(childetails.getString(4));
+                arrayList.add(childetail);
+                System.out.println("arraylisttt" + arrayList);
+            } while (childetails.moveToNext());
+        }
 //        childetails.moveToFirst();
 //
 //        while (!AllFriends.isAfterLast()) {
@@ -78,13 +98,14 @@ static SharedPreferences sharedPreferences;
 //        }
         // preparing navigation drawer items
         String edit="edit";
+        for(int i=0;i<arrayList.size();i++) {
 
-        data.add(new NavDrawerItemes(R.drawable.profile, childname,""));
-
-        data.add( new NavDrawerItemes(R.drawable.freado_milestone, "Fredo Miles",""));
-        data.add(new NavDrawerItemes(R.drawable.star, "Rate this app",""));
-        data.add(new NavDrawerItemes(R.drawable.contact, "Contact",""));
-        data.add(new NavDrawerItemes(R.drawable.tnc, "Terms & Condition",""));
+            data.add(new NavDrawerItemes(R.drawable.profile,arrayList.get(i).childname, ""));
+        }
+//        data.add( new NavDrawerItemes(R.drawable.freado_milestone, "Fredo Miles",""));
+//        data.add(new NavDrawerItemes(R.drawable.star, "Rate this app",""));
+//        data.add(new NavDrawerItemes(R.drawable.contact, "Contact",""));
+//        data.add(new NavDrawerItemes(R.drawable.tnc, "Terms & Condition",""));
         return data;
     }
 
@@ -93,11 +114,11 @@ static SharedPreferences sharedPreferences;
         super.onCreate(savedInstanceState);
 //        String name=null;
 
-        sharedPreferences=getActivity().getSharedPreferences("ChildProfile3",1);
-
+        sharedPreferences=getActivity().getSharedPreferences("Childprofile3", 1);
+        mydb=new ChildDatabase(getActivity());
         Map<String, String> m = (Map<String, String>) sharedPreferences.getAll();
         List<String> list1 = new ArrayList<>(m.values());
-
+        arrayList=new ArrayList<Childprofile>();
         String childname=sharedPreferences.getString("childname","");
         titles=new String[]{childname};
 //        titles = getActivity().getResources().getStringArray(R.array.nav_drawer_items);
@@ -117,6 +138,7 @@ static SharedPreferences sharedPreferences;
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
+
                 drawerListener.onDrawerItemSelected(view, position);
                 mDrawerLayout.closeDrawer(containerView);
             }

@@ -82,7 +82,8 @@ public class HomeFragment extends Fragment implements  Constant {
         System.out.println("childdatabasedetails"+childDatabase.getDatabaseName());
         System.out.println("childdatabasedetails"+parentDatabase.getDatabaseName());
         System.out.println("childdatabase"+childDatabase.getData("102"));
-
+        Bundle bnd=getArguments();
+        String childids=bnd.getString("childid");
 
         Cursor childetails = childDatabase.getData(LoginPage.firstchild);
 
@@ -91,18 +92,8 @@ public class HomeFragment extends Fragment implements  Constant {
 
             childid = childetails.getString(1);
             System.out.println("---child"+childid);
-        } // do what ever you want here
-
-
-
-//        while (!childetails.isAfterLast()) {
-//
-//            chilidid= childetails.getString(1);
-//            childetails.moveToNext();
-//            System.out.println("childid"+chilidid);
-//
-//        }
-
+        }
+            childid=childids;
             Urls=BaseUrl1+"child_home?child_id="+childid;
             SessionText= (TextView)rootView.findViewById(R.id.session_text);
             Username= (TextView)rootView.findViewById(R.id.username);

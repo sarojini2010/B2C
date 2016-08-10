@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
@@ -42,8 +43,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by thoughtchimp on 8/2/2016.
@@ -55,12 +58,13 @@ public class LoginPage extends Activity implements Constant{
     static String otpnum;
     String text;
     static String firstchild;
-    String childid;
+    static String childid;
     ChildDatabase childDatabase;
     ParentDatabase parentDatabase;
     SharedPreferences.Editor editor,editor1;
     Button login;
     String phone;
+    ArrayList<String> childdetails;
     String LoginUrl;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +92,7 @@ public class LoginPage extends Activity implements Constant{
             public void onClick(View v) {
 
                 otpnum=otpnumber.getText().toString();
-//                if(status==200)
+
                 makePostRequest();
                 System.out.println("url"+URL);
                 Intent in=new Intent(getApplicationContext(),MainProfile.class);
@@ -155,6 +159,7 @@ public class LoginPage extends Activity implements Constant{
             parentDatabase.insertparentdata(parentid,fullname,emaild,mobilenumber,profileimage);
             JSONArray childimage=object.getJSONArray("childs");
             childDatabase.removeAll();
+            parentDatabase.removeAll();
             for(int i=0;i<childimage.length();i++) {
                 JSONObject names=childimage.getJSONObject(i);
                 if(i==0) {
@@ -165,8 +170,11 @@ public class LoginPage extends Activity implements Constant{
                 String profilechildimage=names.getString("child_image");
                 String milestone_id=names.getString("milestone_id");
                 editor = sharedPreferences1.edit();
-                editor.putString("childnameprofile",childname);
+                editor.putString("childnameprofile", childname);
                 editor.commit();
+                System.out.println("child sharedprefernce"+sharedPreferences1.getString("childnameprofile",null));
+//                editor.putString("childnameprofile",childname);
+//                editor.commit();
                 System.out.println("---------childprofile"+childname+profilechildimage+childid);
 
 //                if((childDatabase.getData(childid))!=null){

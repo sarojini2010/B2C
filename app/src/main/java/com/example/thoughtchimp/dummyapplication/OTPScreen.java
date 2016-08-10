@@ -147,7 +147,7 @@ public class OTPScreen extends Activity implements Constant {
 //                                    JSONObject object = new JSONObject(response);
 //                                   meessage = object.getString("message");
                                 System.out.println("------2" + meessage);
-                                if (status == 200) {
+//                                if (status == 200) {
 //                                    try {
 //                                        JSONObject objects = new JSONObject(response);
 //                                        JSONObject parent = objects.getJSONObject("parent");
@@ -176,7 +176,7 @@ public class OTPScreen extends Activity implements Constant {
 //
 //                                            System.out.println("----------------" + childDatabase.getData("100"));
 
-                                        }
+
 
 //                                    } catch (JSONException e) {
 //                                        e.printStackTrace();
@@ -187,9 +187,13 @@ public class OTPScreen extends Activity implements Constant {
                                     startActivity(in);
                                     Toast.makeText(getApplicationContext(), "Login Succesfull", Toast.LENGTH_LONG).show();
 //                                }
+//                                else {
+//                                    Toast.makeText(getApplicationContext(),"check your internet",Toast.LENGTH_LONG).show();
+//                                }
 
 //                                }
                             }
+
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {

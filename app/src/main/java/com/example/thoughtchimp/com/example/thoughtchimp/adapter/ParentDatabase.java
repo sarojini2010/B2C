@@ -53,7 +53,14 @@ public class ParentDatabase extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select * from parentdata where parentname ='" + name + "'", null);
         return res;
     }
+    public void removeAll()
+    {
+        // db.delete(String tableName, String whereClause, String[] whereArgs);
+        // If whereClause is null, it will delete all rows.
+        SQLiteDatabase db = this.getWritableDatabase(); // helper is object extends SQLiteOpenHelper
+        db.delete("parentdata", null, null);
 
+    }
     public boolean updateparentdata(Integer id, String parentid,String parentname,String parentemail,String parentmobilenumer,String parentimages) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

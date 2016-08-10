@@ -26,8 +26,8 @@ public class FredoMilestone extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fredomilestone);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setDisplayShowTitleEnabled(false);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
+//        getActionBar().setDisplayShowTitleEnabled(false);
 //        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.title_addgoal));
 //
 //        actionBar = getActivity().getActionBar();
