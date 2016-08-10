@@ -224,7 +224,7 @@ public class SessionDetails extends AppCompatActivity implements Constant {
         HttpPost httpPost = new HttpPost(Sessiondoneurl);
         httpPost.addHeader("X-API-KEY","123456");
         httpPost.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
-        httpPost.addHeader("access-token","6InFDMC1mYyvJ0QoxiL8dEUSj_2");
+        httpPost.addHeader("access-token",accesstoken);
 
         //Post Data
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);

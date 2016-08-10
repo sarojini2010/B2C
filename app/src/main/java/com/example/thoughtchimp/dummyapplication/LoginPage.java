@@ -24,6 +24,7 @@ import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ParentDatabase;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -49,38 +50,42 @@ import java.util.Map;
  */
 public class LoginPage extends Activity implements Constant{
     SharedPreferences sharedPreferences,sharedPreferences1;
-    EditText phonenumber;
-    String URL=LOGINIP;
-    String phonenum;
+    EditText otpnumber;
+    String URL=OTPsend;
+    static String phonenum;
     String text;
     static String childid;
     ChildDatabase childDatabase;
     ParentDatabase parentDatabase;
     SharedPreferences.Editor editor,editor1;
     Button login;
+    String LoginUrl;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.otpcode);
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+//        System.out.println("loginurl"+URL);
+
         sharedPreferences=getSharedPreferences(USER_SESSION_ID, MODE_PRIVATE);
         sharedPreferences1=getSharedPreferences("Childprofile3", MODE_PRIVATE);
 
-        phonenumber= (EditText) findViewById(R.id.phone_edit);
+        otpnumber= (EditText) findViewById(R.id.name_edit);
         login=(Button) findViewById(R.id.login_btn);
         childDatabase=new ChildDatabase(this);
         parentDatabase=new ParentDatabase(this);
         final String number=sharedPreferences.getString("Phonenumber",null);
+        phonenum=otpnumber.getText().toString();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                phonenum=phonenumber.getText().toString();
                 makePostRequest();
-                Intent in=new Intent(getApplicationContext(),OTPScreen.class);
+                Intent in=new Intent(getApplicationContext(),MainProfile.class);
+
                 startActivity(in);
             }
         });
@@ -93,7 +98,7 @@ public class LoginPage extends Activity implements Constant{
         httpPost.addHeader("X-API-KEY","123456");
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
         nameValuePair.add(new BasicNameValuePair("mobile", phonenum));
-        nameValuePair.add(new BasicNameValuePair("otp", "12345"));
+        nameValuePair.add(new BasicNameValuePair("otp", ""));
         nameValuePair.add(new BasicNameValuePair("device_token","Tokenid"));
 
 
@@ -110,12 +115,15 @@ public class LoginPage extends Activity implements Constant{
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             StringBuilder builder = new StringBuilder();
             String str = "";
+            int status=response.getStatusLine().getStatusCode();
+            System.out.println("statusssssss"+status);
 
             while ((str = rd.readLine()) != null) {
                 builder.append(str);
             }
 
             text= builder.toString();
+            System.out.println();
             // write response to log
             Log.w("Http Post Response:", text.toString());
 
@@ -126,6 +134,8 @@ public class LoginPage extends Activity implements Constant{
             // Log exception
             e.printStackTrace();
         }
+
+
         try {
             JSONObject object=new JSONObject(text);
             JSONObject parent=object.getJSONObject("parent");

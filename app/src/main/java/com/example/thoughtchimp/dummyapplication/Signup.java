@@ -95,7 +95,7 @@ public class Signup  extends Activity implements Constant {
             loginpage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent in = new Intent(Signup.this, LoginPage.class);
+                    Intent in = new Intent(Signup.this, OTPScreen.class);
                     startActivity(in);
                 }
             });

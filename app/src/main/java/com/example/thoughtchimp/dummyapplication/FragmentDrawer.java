@@ -66,8 +66,8 @@ static SharedPreferences sharedPreferences;
         String images=sharedPreferences.getString("childimages","");
         List<NavDrawerItemes> data = new ArrayList<>();
         System.out.println("=======childname"+list1);
-//        Cursor AllFriends = mydb.getData("name");
-//        AllFriends.moveToFirst();
+//        Cursor childetails = mydb.getData(LoginPage.childid);
+//        childetails.moveToFirst();
 //
 //        while (!AllFriends.isAfterLast()) {
 //

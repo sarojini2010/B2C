@@ -26,6 +26,7 @@ public class ChildDatabase extends SQLiteOpenHelper {
         db.execSQL("create table childdata "
                 + "(id integer primary key, childid text, childname text, childgrade text, childimage text)");
 
+
     }
 
     @Override

@@ -1,24 +1,35 @@
 package com.example.thoughtchimp.dummyapplication;
 
+import com.android.volley.AuthFailureError;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by admin on 21/12/15.
  */
 public interface Constant
 {
-
-    String CHILDHOMEIP="http://192.168.0.100/s2m-b2c/Api/child_home?child_id=9";
-    String SessionDetailIp="http://192.168.0.100/s2m-b2c/Api/session_details?session_id=";
-    String SessionArchieveIp="http://192.168.0.100/s2m-b2c/Api/archive?child_id=9";
-    String ACTIVATIONIP="http://192.168.0.100/s2m-b2c/Api/activation_details";
-    String SESSIONDONE_URL="http://192.168.0.100/s2m-b2c/Api/session_done";
+    String BaseUrl1="http://192.168.0.100/s2m-b2c/Api";
+    String CHILDHOMEIP=BaseUrl1+"/child_home?child_id=9";
+    String SessionDetailIp=BaseUrl1+"/session_details?session_id=";
+    String SessionArchieveIp=BaseUrl1+"archive?child_id=9";
+    String ACTIVATIONIP=BaseUrl1+"activation_details";
+    String SESSIONDONE_URL=BaseUrl1+"/session_done";
     String USER_SESSION_ID = "usersessionid";
-    String SIGNUPIP="http://192.168.0.100/s2m-b2c/Api/signup";
-    String PARENTIP="http://192.168.0.100/s2m-b2c/Api/update_parent_profile";
+    String SIGNUPIP=BaseUrl1+"signup";
+    String PARENTIP=BaseUrl1+"update_parent_profile";
     String USER_NAME="name";
-    String OTPsend="http://192.168.0.100/s2m-b2c/api/send_otp?mobile=8802779728";
-    String LOGINIP="http://192.168.0.100/s2m-b2c/Api/login";
-    String CHILDADD="http://192.168.0.100/s2m-b2c/Api/create_child";
+    String OTPsend=BaseUrl1+"/send_otp?mobile=";
+    String LOGINIP=BaseUrl1+"login";
+    String CHILDADD=BaseUrl1+"create_child";
     String BaseUrl="http://192.168.0.100/s2m-b2c";
-    String Updatechild="http://192.168.0.108/s2m-b2c/Api/update_child_profile";
+    String Updatechild=BaseUrl1+"update_child_profile";
+    String accesstoken="6InFDMC1mYyvJ0QoxiL8dEUSj_2";
+
+
+
 
 }
+
+

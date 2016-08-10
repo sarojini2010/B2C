@@ -105,7 +105,7 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
                 Map<String,String> httpget =   new HashMap<>();
                 httpget.put("X-API-KEY","123456");
                 httpget.put("Authorization","Basic YWRtaW46MTIzNA==");
-                httpget.put("access-token","6InFDMC1mYyvJ0QoxiL8dEUSj_2");
+                httpget.put("access-token",accesstoken);
                 //..add other headers
                 return httpget;
             }
