@@ -78,7 +78,7 @@ public class Profile  extends AppCompatActivity implements Constant {
     private DatePicker datePicker;
     private Calendar calendar;
     private int year, month, day;
-            String week;
+    String week;
     String Url=CHILDADD;
     String childupdateurl=Updatechild;
     Toolbar mtoolbar;
@@ -111,13 +111,13 @@ public class Profile  extends AppCompatActivity implements Constant {
         Interest = (EditText) findViewById(R.id.interest);
 //        grades = (EditText) findViewById(R.id.grade);
         schoolname = (EditText) findViewById(R.id.school);
-            childbackbutton= (ImageView) findViewById(R.id.childbackbtn);
-            addchild= (ImageView) findViewById(R.id.addchilddetails);
+        childbackbutton= (ImageView) findViewById(R.id.childbackbtn);
+        addchild= (ImageView) findViewById(R.id.addchilddetails);
 
 
 
-            mtoolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(mtoolbar);
+        mtoolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mtoolbar);
 //            getSupportActionBar().setDisplayShowHomeEnabled(true);
         FloatingActionButton editsave = (FloatingActionButton) findViewById(R.id.fabButton_edit_save);
         collapsingToolbar =
@@ -171,7 +171,7 @@ public class Profile  extends AppCompatActivity implements Constant {
                 adddetails();
             }
         });
-        }
+    }
 
 
     public void onEditSave(View view) {
@@ -286,7 +286,7 @@ public class Profile  extends AppCompatActivity implements Constant {
 
 
     private void makePostRequest() {
-         int count = 1;
+        int count = 1;
         String name=profilename.getText().toString();
         HttpClient httpClient = new DefaultHttpClient();
         // replace with your url
@@ -334,7 +334,7 @@ public class Profile  extends AppCompatActivity implements Constant {
                 builder.append(str);
             }
 
-             text= builder.toString();
+            text= builder.toString();
 //            editTor.putString("result",text);
 //            editTor.commit();
             // write response to log
@@ -362,7 +362,7 @@ public class Profile  extends AppCompatActivity implements Constant {
             for(int i=0;i<childimage.length();i++){
                 JSONObject names=childimage.getJSONObject(i);
                 String childnames=names.getString("fullname");
-                 id=names.getString("id");
+                id=names.getString("id");
                 String images=names.getString("child_image");
 //                myDb.insertchilddata(childnames);
                 System.out.println("--------chhhhRofilephoto"+images+childnames);
