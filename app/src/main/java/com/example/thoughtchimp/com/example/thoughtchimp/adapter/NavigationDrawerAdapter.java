@@ -36,7 +36,6 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         notifyItemRemoved(position);
     }
 
-    @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.nav_drawer_row, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
@@ -46,9 +45,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         NavDrawerItemes current = data.get(position);
-
         holder.title.setText(current.getTitle());
-//        holder.profileimage.setImageResource(current.getIcons());
+//        holder.profileimage.setImageResource(current.getIcon());
 
     }
 
@@ -60,16 +58,11 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         ImageView profileimage;
-        ImageButton editimages;
-
 
         public MyViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
             profileimage= (ImageView) itemView.findViewById(R.id.childimagesprofile);
-//            editimages= (ImageButton) itemView.findViewById(R.id.childeditprofile);
-
         }
     }
-
 }

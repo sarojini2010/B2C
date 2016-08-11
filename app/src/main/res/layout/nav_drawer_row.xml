@@ -26,12 +26,12 @@
         android:text="Child name"
         android:focusable="false"
         android:textStyle="bold" />
-    <ImageButton
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:visibility="visible"
-        android:id="@+id/childeditprofile"
-        android:src="@drawable/academy"/>
+    <!--<ImageButton-->
+        <!--android:layout_width="20dp"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:visibility="visible"-->
+        <!--android:id="@+id/childeditprofile"-->
+        <!--android:src="@drawable/academy"/>-->
 
 
 </LinearLayout>

@@ -6,14 +6,14 @@ package com.example.thoughtchimp.dummyapplication;
 public class NavDrawerItemes {
     private boolean showNotify;
     private String title;
-    int icons;
+    int icon;
 
-    public int getIcons() {
-        return icons;
+    public int getIcon() {
+        return icon;
     }
 
-    public void setIcons(int icons) {
-        this.icons = icons;
+    public void setIcons(int icon) {
+        this.icon = icon;
     }
 
 
@@ -63,12 +63,12 @@ public class NavDrawerItemes {
 
     }
 
-    public NavDrawerItemes(int icons, String title,String id,int viewnumber,String method,String images) {
+    public NavDrawerItemes(int icon, String title,String id,int viewnumber,String method,String images) {
 
         this.title = title;
         this.id=id;
         this.image=images;
-        this.icons=icons;
+        this.icon=icon;
         this.viewnumber=viewnumber;
         this.method=method;
     }

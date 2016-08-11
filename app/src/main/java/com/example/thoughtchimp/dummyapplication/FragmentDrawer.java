@@ -129,7 +129,7 @@ static SharedPreferences sharedPreferences;
 //        String rate=""+R.drawable.star;
 //        String contact=""+R.drawable.contact;
 //        String terms=""+R.drawable.tnc;
-        data.add( new NavDrawerItemes(R.drawable.freado_milestone, "Fredo Miles","",i+1,"fredo",""));
+        data.add(new NavDrawerItemes(R.drawable.freado_milestone, "Fredo Miles","",i+1,"fredo",""));
         data.add(new NavDrawerItemes(R.drawable.star, "Rate this app","",i+2,"rate",""));
         data.add(new NavDrawerItemes(R.drawable.contact, "Contact","",i+3,"contact",""));
         data.add(new NavDrawerItemes(R.drawable.tnc, "Terms & Condition","",i+4,"terms",""));
