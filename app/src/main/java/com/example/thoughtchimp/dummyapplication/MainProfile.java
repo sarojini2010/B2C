@@ -69,7 +69,8 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
     static int childid;
     NavDrawerItemes navDrawerItemes;
     static ArrayList<Childprofile> arrayList;
-    static SharedPreferences sharedPreferences;
+    static SharedPreferences sharedPreferences,activechildprefernce;
+    SharedPreferences.Editor activechildeditor;
 
 
     @Override
@@ -94,6 +95,7 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
         }
 
         sharedPreferences2 = getSharedPreferences("ChildProfile3", MODE_PRIVATE);
+        activechildprefernce=getSharedPreferences("Activechild",MODE_PRIVATE);
         String profileimage = sharedPreferences2.getString("parentname", "");
         String parentname=sharedPreferences2.getString("profileimages","");
         parentame.setText(parentname);
@@ -179,6 +181,9 @@ public class MainProfile  extends AppCompatActivity implements FragmentDrawer.Fr
                 args.putString("childimages", String.valueOf(FragmentDrawer.data.get(position).getImage()));
                 args.putString("childname",FragmentDrawer.data.get(position).getTitle());
                 fragment.setArguments(args);
+            activechildeditor=activechildprefernce.edit();
+            activechildeditor.putString("activechild",String.valueOf(FragmentDrawer.data.get(position).getId()));
+            activechildeditor.commit();
 
         }else if(type=="fredo"){
 

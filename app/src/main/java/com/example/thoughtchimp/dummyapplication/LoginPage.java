@@ -53,7 +53,7 @@ import java.util.Set;
  * Created by thoughtchimp on 8/2/2016.
  */
 public class LoginPage extends Activity implements Constant{
-    SharedPreferences sharedPreferences,sharedPreferences1;
+    SharedPreferences sharedPreferences,sharedPreferences1,activechildprefernce;
     EditText otpnumber;
     String URL=LOGINIP;
     static String otpnum;
@@ -62,7 +62,7 @@ public class LoginPage extends Activity implements Constant{
     static String childid;
     ChildDatabase childDatabase;
     ParentDatabase parentDatabase;
-    SharedPreferences.Editor editor,editor1;
+    SharedPreferences.Editor editor,activechildeditor;
     Button login;
     String phone;
     int status;
@@ -81,6 +81,7 @@ public class LoginPage extends Activity implements Constant{
 
         sharedPreferences=getSharedPreferences(USER_SESSION_ID, MODE_PRIVATE);
         sharedPreferences1=getSharedPreferences("Childprofile3", MODE_PRIVATE);
+        activechildprefernce=getSharedPreferences("Activechild",MODE_PRIVATE);
         Bundle bnd=getIntent().getExtras();
         phone =bnd.getString("phonenumber");
 
@@ -171,7 +172,11 @@ public class LoginPage extends Activity implements Constant{
                 JSONObject names=childimage.getJSONObject(i);
                 if(i==0) {
                     firstchild = names.getString("id");
-
+                    System.out.println("activechild"+firstchild);
+                    activechildeditor=activechildprefernce.edit();
+                    activechildeditor.putString("activechild",firstchild);
+                    activechildeditor.commit();
+                    System.out.println("activechild"+firstchild);
                 }
                 childid = names.getString("id");
                 String childname=names.getString("fullname");

@@ -78,6 +78,7 @@ public class Storylistener extends AppCompatActivity implements Constant {
         progress=(ProgressBar) findViewById(R.id.seekBar);
         backbutton2= (ImageView) findViewById(R.id.audiobackbtn);
         mtoolbar = (Toolbar) findViewById(R.id.audiotoolbar);
+        final Button btnpause= (Button) findViewById(R.id.btn_stop);
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 //        mediaPlayer = MediaPlayer.create(this,R.raw.testing);
@@ -134,11 +135,14 @@ public class Storylistener extends AppCompatActivity implements Constant {
               if(mediaPlayer.isPlaying()){
                   if(mediaPlayer!=null){
                       mediaPlayer.pause();
+                      btnpause.setBackgroundResource(R.drawable.ic_pause);
+
                   }
               }
               else {
                   if(mediaPlayer!=null){
                       mediaPlayer.start();
+                      btnpause.setBackgroundResource(R.drawable.play_xhdpi);
                   }}
           }
       });

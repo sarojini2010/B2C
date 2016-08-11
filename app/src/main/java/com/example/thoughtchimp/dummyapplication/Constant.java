@@ -1,5 +1,7 @@
 package com.example.thoughtchimp.dummyapplication;
 
+import android.content.SharedPreferences;
+
 import com.android.volley.AuthFailureError;
 
 import java.util.HashMap;
@@ -13,7 +15,7 @@ public interface Constant
     String BaseUrl1="http://192.168.0.100/s2m-b2c/Api/";
     String CHILDHOMEIP=BaseUrl1+"child_home?child_id=9";
     String SessionDetailIp=BaseUrl1+"session_details?session_id=";
-    String SessionArchieveIp=BaseUrl1+"archive?child_id=9";
+    String SessionArchieveIp=BaseUrl1+"archive?child_id=";
     String ACTIVATIONIP=BaseUrl1+"activation_details";
     String SESSIONDONE_URL=BaseUrl1+"session_done";
     String USER_SESSION_ID = "usersessionid";
@@ -26,7 +28,7 @@ public interface Constant
     String BaseUrl="http://192.168.0.100/s2m-b2c";
     String Updatechild=BaseUrl1+"update_child_profile";
     String accesstoken=LoginPage.access_token;
-
+    SharedPreferences activechildidprefernce = null;
 
 
 

@@ -138,7 +138,6 @@
                     android:layout_marginLeft="10dp"
                     android:background="#eebb00"
                     android:id="@+id/imagelayout"
-                    android:visibility="gone"
                     android:layout_marginRight="10dp"
                     android:minHeight="120dp"
                     android:padding="15dp"

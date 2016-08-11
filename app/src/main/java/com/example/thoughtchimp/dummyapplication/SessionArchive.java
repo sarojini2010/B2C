@@ -1,5 +1,6 @@
 package com.example.thoughtchimp.dummyapplication;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,8 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
     private ArrayList<Session> sessionlist=new ArrayList<>();
     String url = SessionArchieveIp;
     Toolbar toolbar;
+    String SessionArchive;
+    SharedPreferences activechildidprefernce;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -52,11 +55,17 @@ public class SessionArchive  extends AppCompatActivity implements Constant {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final SessionAdapter sessionAdapter = new SessionAdapter(this, sessionlist);
         recyclerView.setAdapter(sessionAdapter);
+        Bundle extras = getIntent().getExtras();
+        activechildidprefernce=getSharedPreferences("Activechild",MODE_PRIVATE);
+        String activechildid=activechildidprefernce.getString("activechild","");
+        SessionArchive=url+activechildid;
+
+        System.out.println("Sessionarchive url"+SessionArchive+activechildid);
         toolbar = (Toolbar) findViewById(R.id.sessionundotoolbar);
         setSupportActionBar(toolbar);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, SessionArchive,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
