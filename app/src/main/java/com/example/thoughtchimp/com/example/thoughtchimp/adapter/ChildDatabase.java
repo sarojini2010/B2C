@@ -75,7 +75,7 @@ public class ChildDatabase extends SQLiteOpenHelper {
         contentValues.put("childgrade", childgrade);
         contentValues.put("childimage", childimage);
 
-        db.update("childdata", contentValues, "childid = ? ", new String[]{childid});
+        db.update("childdata", contentValues, "childid = ? ", new String[]{String.valueOf(childid)});
         return true;
     }
 //public void getAll(){

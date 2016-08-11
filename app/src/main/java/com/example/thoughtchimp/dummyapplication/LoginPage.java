@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -64,6 +65,9 @@ public class LoginPage extends Activity implements Constant{
     SharedPreferences.Editor editor,editor1;
     Button login;
     String phone;
+    int status;
+    static  String access_token;
+    static  String tempfirstchild;
     ArrayList<String> childdetails;
     String LoginUrl;
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,11 +97,11 @@ public class LoginPage extends Activity implements Constant{
 
                 otpnum=otpnumber.getText().toString();
 
-                makePostRequest();
-                System.out.println("url"+URL);
-                Intent in=new Intent(getApplicationContext(),MainProfile.class);
+                    makePostRequest();
+                    System.out.println("url" + URL);
+                    Intent in = new Intent(getApplicationContext(), MainProfile.class);
+                    startActivity(in);
 
-                startActivity(in);
             }
         });
     }
@@ -126,7 +130,7 @@ public class LoginPage extends Activity implements Constant{
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             StringBuilder builder = new StringBuilder();
             String str = "";
-            int status=response.getStatusLine().getStatusCode();
+            status=response.getStatusLine().getStatusCode();
             System.out.println("statusssssss"+status);
 
             while ((str = rd.readLine()) != null) {
@@ -155,6 +159,8 @@ public class LoginPage extends Activity implements Constant{
             String emaild=parent.getString("email");
             String mobilenumber=parent.getString("mobile");
             String profileimage=parent.getString("profile_image");
+            access_token=object.getString("access_token");
+            System.out.println("acesstoken"+access_token);
             System.out.println("===================childdetails"+fullname+profileimage);
             parentDatabase.insertparentdata(parentid,fullname,emaild,mobilenumber,profileimage);
             JSONArray childimage=object.getJSONArray("childs");
@@ -164,6 +170,7 @@ public class LoginPage extends Activity implements Constant{
                 JSONObject names=childimage.getJSONObject(i);
                 if(i==0) {
                     firstchild = names.getString("id");
+
                 }
                 childid = names.getString("id");
                 String childname=names.getString("fullname");
@@ -171,6 +178,8 @@ public class LoginPage extends Activity implements Constant{
                 String milestone_id=names.getString("milestone_id");
                 editor = sharedPreferences1.edit();
                 editor.putString("childnameprofile", childname);
+                int tempchildid= Integer.parseInt(childid);
+
                 editor.commit();
                 System.out.println("child sharedprefernce"+sharedPreferences1.getString("childnameprofile",null));
 //                editor.putString("childnameprofile",childname);
@@ -185,7 +194,7 @@ public class LoginPage extends Activity implements Constant{
 //                    childDatabase.updatechilddata(childname,childid,"",profilechildimage);
 //                }
 
-                System.out.println("----------------"+childDatabase.getData("100"));
+//                System.out.println("----------------"+childDatabase.getData("100));
 
             }
 

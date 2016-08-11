@@ -72,9 +72,9 @@ public class ParentProfile extends ActionBarActivity implements Constant{
         parentback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(ParentProfile.this,MainProfile.class);
-                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(in);
+//                Intent in=new Intent(ParentProfile.this,MainProfile.class);
+//                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(in);
             }
         });
         addparent.setOnClickListener(new View.OnClickListener() {
@@ -117,9 +117,9 @@ public class ParentProfile extends ActionBarActivity implements Constant{
 //        String intersted=Interest.getText().toString();
 //        String genders=item.toString();
         makePostRequest();
-        Intent in = new Intent(getApplicationContext(), MainProfile.class);
-        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(in);
+//        Intent in = new Intent(getApplicationContext(), MainProfile.class);
+//        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(in);
 
 
     }

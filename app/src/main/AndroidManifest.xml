@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/MyMaterialTheme.Base">
-        <activity android:name=".Signup">
+        <activity android:name=".OTPScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,36 +29,32 @@
         <activity android:name=".SessionArchive"/>
         <activity android:name=".ActivationCode"/>
         <activity android:name=".DoinPlanWebview"/>
-        <activity android:name=".SessionDetails"/>
+        <!--<activity android:name=".SessionDetails"/>-->
         <activity android:name=".Profile"/>
             <!--<meta-data-->
                 <!--android:name="android.support.PARENT_ACTIVITY"-->
                 <!--android:value="."/></activity>-->
-        <activity android:name=".OTPScreen"/>
-        <activity android:name=".LoginPage"/>
         <activity android:name=".MainProfile"/>
-        <activity android:name=".ParentProfile">
-        <meta-data
-        android:name="android.support.PARENT_ACTIVITY"
-        android:value=".MainActivity"/></activity>
-        <activity android:name=".Youtubevideo"/>
+        <activity android:name=".LoginPage"/>
+        <!--<activity android:name=".MainProfile"/>-->
+        <activity android:name=".ParentProfile"/>
+
+        <!--android:value=".MainActivity"/></activity>-->
+        <!--<activity android:name=".MainActivity3"/>-->
             <!--<meta-data-->
                 <!--android:name="android.support.PARENT_ACTIVITY"-->
                 <!--android:value="SessionDetails"/></activity>-->
         <activity android:name=".Imageshow">
         </activity>
         <activity android:name=".TermsConditionFrgament">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainProfile"/></activity>
+
+            </activity>
         <activity android:name=".FredoMilestone">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainProfile"/></activity>
+
+               </activity>
         <activity android:name=".ContactFragment">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainProfile"/></activity>
+
+               </activity>
         <activity android:name=".Storylistener">
             <meta-data
             android:name="android.support.PARENT_ACTIVITY"

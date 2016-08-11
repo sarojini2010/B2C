@@ -6,9 +6,25 @@ package com.example.thoughtchimp.dummyapplication;
 public class NavDrawerItemes {
     private boolean showNotify;
     private String title;
-    private int icon;
-    String id;
+    int icons;
 
+    public int getIcons() {
+        return icons;
+    }
+
+    public void setIcons(int icons) {
+        this.icons = icons;
+    }
+
+
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getId() {
         return id;
@@ -18,14 +34,43 @@ public class NavDrawerItemes {
         this.id = id;
     }
 
+    private String image;
+    String id;
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    String method;
+
+    public int getViewnumber() {
+        return viewnumber;
+    }
+
+    public void setViewnumber(int viewnumber) {
+        this.viewnumber = viewnumber;
+    }
+
+    int viewnumber;
+
+
+
     public NavDrawerItemes() {
 
     }
 
-    public NavDrawerItemes(int icon, String title,String id) {
-        this.icon = icon;
+    public NavDrawerItemes(int icons, String title,String id,int viewnumber,String method,String images) {
+
         this.title = title;
         this.id=id;
+        this.image=images;
+        this.icons=icons;
+        this.viewnumber=viewnumber;
+        this.method=method;
     }
 
     public boolean isShowNotify() {
@@ -40,15 +85,5 @@ public class NavDrawerItemes {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public int getIcon() {
-        return icon;
-    }
-
-    public void setIcon(int icon) {
-        this.icon = icon;
-    }
 
 }

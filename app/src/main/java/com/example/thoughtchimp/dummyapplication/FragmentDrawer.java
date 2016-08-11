@@ -7,6 +7,8 @@ package com.example.thoughtchimp.dummyapplication;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -19,17 +21,23 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ChildDatabase;
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.NavigationDrawerAdapter;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 
-public class FragmentDrawer extends Fragment {
+public class FragmentDrawer extends Fragment implements  Constant{
 
     private static String TAG = FragmentDrawer.class.getSimpleName();
 
@@ -46,7 +54,9 @@ public class FragmentDrawer extends Fragment {
     static String Names;
     static String childnames;
     int index=1;
-    static String childid;
+    static int childid;
+    static List<NavDrawerItemes> data;
+    NavDrawerItemes navDrawerItemes;
     static ArrayList<Childprofile> arrayList;
 static SharedPreferences sharedPreferences;
 
@@ -69,7 +79,7 @@ static SharedPreferences sharedPreferences;
 
         String childname= String.valueOf(sharedPreferences.getStringSet("tasks_set", (Set<String>) name));
         String images=sharedPreferences.getString("childimages","");
-        List<NavDrawerItemes> data = new ArrayList<>();
+        data = new ArrayList<>();
         System.out.println("=======childname"+childname);
         Cursor childetails = mydb.getChilid();
 
@@ -78,15 +88,18 @@ static SharedPreferences sharedPreferences;
 //
 //        }childetails.moveToNext();
         if(childetails.moveToFirst()) {
+
             do {
                 Childprofile childetail = new Childprofile();
-                childid= childetail.setChildid(childetails.getString(1));
+                childid= Integer.parseInt(childetail.setChildid(childetails.getString(1)));
                 childnames = childetail.setChildname(childetails.getString(2));
                 String childimages = childetail.setProfileimage(childetails.getString(4));
                 arrayList.add(childetail);
                 System.out.println("arraylisttt" + arrayList);
             } while (childetails.moveToNext());
+
         }
+        childetails.close();
 //        childetails.moveToFirst();
 //
 //        while (!AllFriends.isAfterLast()) {
@@ -98,14 +111,28 @@ static SharedPreferences sharedPreferences;
 //        }
         // preparing navigation drawer items
         String edit="edit";
-        for(int i=0;i<arrayList.size();i++) {
-
-            data.add(new NavDrawerItemes(R.drawable.profile,arrayList.get(i).childname, ""));
+        int i=0;
+        for(i=0;i<arrayList.size();i++) {
+            String childimage= arrayList.get(i).profileimage;
+//            try {
+//                URL url = new URL(childimage);
+//                Bitmap bitmap = BitmapFactory.decodeStream(url.openStream());
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+            data.add(new NavDrawerItemes(i,arrayList.get(i).childname, arrayList.get(i).childid,i,"child",childimage));
         }
-//        data.add( new NavDrawerItemes(R.drawable.freado_milestone, "Fredo Miles",""));
-//        data.add(new NavDrawerItemes(R.drawable.star, "Rate this app",""));
-//        data.add(new NavDrawerItemes(R.drawable.contact, "Contact",""));
-//        data.add(new NavDrawerItemes(R.drawable.tnc, "Terms & Condition",""));
+//        String fredo=""+R.drawable.freado_milestone;
+//        String rate=""+R.drawable.star;
+//        String contact=""+R.drawable.contact;
+//        String terms=""+R.drawable.tnc;
+        data.add( new NavDrawerItemes(R.drawable.freado_milestone, "Fredo Miles","",i+1,"fredo",""));
+        data.add(new NavDrawerItemes(R.drawable.star, "Rate this app","",i+2,"rate",""));
+        data.add(new NavDrawerItemes(R.drawable.contact, "Contact","",i+3,"contact",""));
+        data.add(new NavDrawerItemes(R.drawable.tnc, "Terms & Condition","",i+4,"terms",""));
         return data;
     }
 
@@ -121,8 +148,8 @@ static SharedPreferences sharedPreferences;
         arrayList=new ArrayList<Childprofile>();
         String childname=sharedPreferences.getString("childname","");
         titles=new String[]{childname};
+        navDrawerItemes=new NavDrawerItemes();
 //        titles = getActivity().getResources().getStringArray(R.array.nav_drawer_items);
-        navIcons=getActivity().getResources().getIntArray(R.array.nav_drawer_icons1);
     }
 
     @Override
@@ -138,7 +165,8 @@ static SharedPreferences sharedPreferences;
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-
+                System.out.println("drawer click");
+                System.out.println(position);
                 drawerListener.onDrawerItemSelected(view, position);
                 mDrawerLayout.closeDrawer(containerView);
             }
@@ -242,3 +270,9 @@ static SharedPreferences sharedPreferences;
         public void onDrawerItemSelected(View view, int position);
     }
 }
+
+
+
+
+
+

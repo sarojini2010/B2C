@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
-    tools:context="com.example.thoughtchimp.dummyapplication.MainActivity">
+    >
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -25,7 +25,7 @@
                         android:layout_width="100.5dp"
                         android:layout_height="70dp"
                         android:layout_marginTop="30dp"
-                        android:id="@+id/childimages"
+                        android:id="@+id/childimages22"
                         android:src="@drawable/child"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -37,9 +37,9 @@
                         android:paddingLeft="5dp"
                         android:id="@+id/username"
                         android:textSize="20sp"
-                        android:layout_alignTop="@+id/childimages"
-                        android:layout_toRightOf="@+id/childimages"
-                        android:layout_toEndOf="@+id/childimages" />
+                        android:layout_alignTop="@+id/childimages22"
+                        android:layout_toRightOf="@+id/childimages22"
+                        android:layout_toEndOf="@+id/childimages22" />
                     <TextView
                         android:layout_width="112dp"
                         android:layout_height="wrap_content"
@@ -49,22 +49,22 @@
                         android:textSize="10sp"
                         android:layout_marginBottom="10dp"
                         android:textStyle="bold"
-                        android:layout_alignBottom="@+id/childimages"
-                        android:layout_toRightOf="@+id/childimages"
-                        android:layout_toEndOf="@+id/childimages"
+                        android:layout_alignBottom="@+id/childimages22"
+                        android:layout_toRightOf="@+id/childimages22"
+                        android:layout_toEndOf="@+id/childimages22"
                         android:textColor="#ffffff" />
                     <ProgressBar
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/childimages"
+                        android:layout_alignTop="@+id/childimages22"
                         style="@style/CustomProgressBar"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="22dp"
                         android:progress="13"
                         android:max="50"
                         android:layout_marginTop="32dp"
-                        android:layout_toRightOf="@+id/childimages"
-                        android:layout_toEndOf="@+id/childimages"
+                        android:layout_toRightOf="@+id/childimages22"
+                        android:layout_toEndOf="@+id/childimages22"
                         android:id="@+id/progressBar" />
 
                 </RelativeLayout>
@@ -87,9 +87,9 @@
                             android:text="FREDO"
                             android:textSize="10sp"
                             android:textColor="#ffffff"
-                            android:layout_below="@+id/childimages"
-                            android:layout_alignLeft="@+id/childimages"
-                            android:layout_alignStart="@+id/childimages"
+                            android:layout_below="@+id/childimages22"
+                            android:layout_alignLeft="@+id/childimages22"
+                            android:layout_alignStart="@+id/childimages22"
                             android:id="@+id/button"
                             android:background="@drawable/custombutton" />
                         <Button

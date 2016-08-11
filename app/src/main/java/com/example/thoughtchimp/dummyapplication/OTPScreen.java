@@ -185,10 +185,10 @@ public class OTPScreen extends Activity implements Constant {
                                     Intent in = new Intent(OTPScreen.this, LoginPage.class);
                                      in.putExtra("phonenumber",phone);
                                     startActivity(in);
-                                    Toast.makeText(getApplicationContext(), "Login Succesfull", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "OTP Sent", Toast.LENGTH_LONG).show();
 //                                }
 //                                else {
-//                                    Toast.makeText(getApplicationContext(),"check your internet",Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(getApplicationContext(),"Wrong OTP",Toast.LENGTH_LONG).show();
 //                                }
 
 //                                }

@@ -1,13 +1,14 @@
 package com.example.thoughtchimp.dummyapplication;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -47,7 +48,7 @@ import java.util.Map;
 /**
  * Created by thoughtchimp on 7/27/2016.
  */
-public class HomeFragment extends Fragment implements  Constant {
+public class HomeFragment extends android.support.v4.app.Fragment implements  Constant {
     TextView SessionText,ReccoText,SessionArcText,Username;
     ProgressBar progress;
     Button btn_score;
@@ -57,7 +58,8 @@ public class HomeFragment extends Fragment implements  Constant {
     static String title1,sequenceid,childimages;
     ImageView childprofile;
     Bitmap b;
-    String childid;
+    String child_id,childid;
+    ImageView child_image;
     ChildDatabase childDatabase;
     ParentDatabase parentDatabase;
     SharedPreferences sharedPreferences2;
@@ -81,32 +83,50 @@ public class HomeFragment extends Fragment implements  Constant {
         parentDatabase=new ParentDatabase(getActivity());
         System.out.println("childdatabasedetails"+childDatabase.getDatabaseName());
         System.out.println("childdatabasedetails"+parentDatabase.getDatabaseName());
-        System.out.println("childdatabase"+childDatabase.getData("102"));
+        child_image= (ImageView) rootView.findViewById(R.id.childimages22);
+//        System.out.println("childdatabase"+childDatabase.getData("102"));
         Bundle bnd=getArguments();
-        String childids=bnd.getString("childid");
-
-        Cursor childetails = childDatabase.getData(LoginPage.firstchild);
-
-        System.out.println("===========childidetils"+childetails);
-        if (childetails.moveToFirst()) {
-
-            childid = childetails.getString(1);
-            System.out.println("---child"+childid);
+        child_id=bnd.getString("childid");
+        String childimage=bnd.getString("childimages");
+        String childname=bnd.getString("childname");
+        URL newurl;
+        try {
+            newurl = new URL(BaseUrl+"//uploads/profile/child/"+childimage);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            b = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+            child_image.setImageBitmap(b);
+            child_image.setScaleType(ImageView.ScaleType.FIT_XY);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-            childid=childids;
+
+
+
+//        Cursor childetails = childDatabase.getData(LoginPage.firstchild);
+//
+//        System.out.println("===========childidetils"+childetails);
+//        if (childetails.moveToFirst()) {
+//
+//            childid = childetails.getString(1);
+//            System.out.println("---child"+childid);
+//        }
+            childid=child_id;
+
             Urls=BaseUrl1+"child_home?child_id="+childid;
+        System.out.println("childurl"+Urls);
             SessionText= (TextView)rootView.findViewById(R.id.session_text);
             Username= (TextView)rootView.findViewById(R.id.username);
 
             Bundle extras = getArguments();
             final String names = extras.getString("chilprrofile");
-            Username.setText(names);
+            Username.setText(childname);
 
             ReccoText=(TextView)rootView.findViewById(R.id.recco_text);
             SessionArcText= (TextView)rootView.findViewById(R.id.archieve_text);
             progress= (ProgressBar)rootView.findViewById(R.id.progressBar);
             btn_score=(Button)rootView.findViewById(R.id.button_score);
-            childprofile= (ImageView) rootView.findViewById(R.id.childimages);
              final RequestQueue queue = Volley.newRequestQueue(getActivity());
             RecyclerView recyclerView = (RecyclerView)rootView.findViewById(R.id.rvAllUsers);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

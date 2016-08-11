@@ -4,25 +4,34 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:clickable="true"
+    android:focusable="false"
     >
     <ImageView
         android:id="@+id/childimagesprofile"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:src="@drawable/profile"
+        android:focusable="false"
         android:scaleType="fitXY"/>
 
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="30dp"
         android:paddingTop="20dp"
         android:paddingBottom="10dp"
         android:textSize="15dp"
         android:text="Child name"
+        android:focusable="false"
         android:textStyle="bold" />
+    <ImageButton
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:visibility="visible"
+        android:id="@+id/childeditprofile"
+        android:src="@drawable/academy"/>
 
 
 </LinearLayout>

@@ -159,9 +159,9 @@ public class Profile  extends AppCompatActivity implements Constant {
         childbackbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(Profile.this,MainProfile.class);
-                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(in);
+//                Intent in=new Intent(Profile.this,MainProfile.class);
+//                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(in);
             }
         });
 
@@ -223,11 +223,11 @@ public class Profile  extends AppCompatActivity implements Constant {
 //        String genders=item.toString();
         makePostRequest();
         updaterequest();
-        Intent in=new Intent(Profile.this,MainProfile.class);
+//        Intent in=new Intent(Profile.this,MainProfile.class);
 
 
 //        in.putExtra("name",name);
-        startActivity(in);
+//        startActivity(in);
 
 //        System.out.println("checking"+genders+intersted+date+classes+school+name);
 

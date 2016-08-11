@@ -12,7 +12,7 @@ public interface Constant
 {
     String BaseUrl1="http://192.168.0.100/s2m-b2c/Api/";
     String CHILDHOMEIP=BaseUrl1+"child_home?child_id=9";
-    String SessionDetailIp=BaseUrl1+"session_details?session_id=";
+    String SessionDetailIp=BaseUrl1+"session_details?session_id=12";
     String SessionArchieveIp=BaseUrl1+"archive?child_id=9";
     String ACTIVATIONIP=BaseUrl1+"activation_details";
     String SESSIONDONE_URL=BaseUrl1+"session_done";
@@ -25,7 +25,7 @@ public interface Constant
     String CHILDADD=BaseUrl1+"create_child";
     String BaseUrl="http://192.168.0.100/s2m-b2c";
     String Updatechild=BaseUrl1+"update_child_profile";
-    String accesstoken="V49wH0yUXBQZuPMfshEqWgxbY_22";
+    String accesstoken=LoginPage.access_token;
 
 
 

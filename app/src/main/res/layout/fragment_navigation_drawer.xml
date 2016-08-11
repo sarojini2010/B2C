@@ -8,7 +8,7 @@
         android:id="@+id/nav_header_container"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-       android:orientation="vertical"
+        android:orientation="vertical"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary">
         <RelativeLayout
@@ -56,22 +56,22 @@
         </RelativeLayout>
 
         <!--<ImageView-->
-            <!--android:layout_width="70dp"-->
-            <!--android:layout_height="70dp"-->
-            <!--android:src="@drawable/parent"-->
-            <!--android:layout_marginLeft="150dp"-->
-            <!--android:layout_marginTop="20dp"-->
-            <!--android:scaleType="fitCenter"-->
-            <!--android:layout_centerInParent="true" />-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:src="@drawable/parent"-->
+        <!--android:layout_marginLeft="150dp"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:layout_centerInParent="true" />-->
         <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:text="Name"-->
-            <!--android:textColor="#ffffff"-->
-            <!--android:textStyle="italic"-->
-            <!--android:layout_marginLeft="30dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:id="@+id/parentname"/>-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="Name"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textStyle="italic"-->
+        <!--android:layout_marginLeft="30dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:id="@+id/parentname"/>-->
 
 
     </LinearLayout>

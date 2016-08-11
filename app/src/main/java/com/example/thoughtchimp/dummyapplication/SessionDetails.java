@@ -116,7 +116,7 @@ public class SessionDetails extends AppCompatActivity implements Constant {
         backbutton3= (ImageView) findViewById(R.id.audiobackbtn);
         sessiontoolbar = (Toolbar) findViewById(R.id.sessiontoolbar);
         setSupportActionBar(sessiontoolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         backbutton3= (ImageView) findViewById(R.id.sessionbackbtn);
 
@@ -124,33 +124,33 @@ public class SessionDetails extends AppCompatActivity implements Constant {
         doin_plan=(TextView) findViewById(R.id.doingtext);
         resource= (TextView) findViewById(R.id.parenttext);
         Bundle extras = getIntent().getExtras();
-        final String sessionid = extras.getString("Sessionid");
-        sessionnumber =extras.getString("Sequencid");
-        sesionnumbers.setText(sessionid);
-        String sessionss=sessionid.substring(8);
-        sesionurl=url+sessionss;
+//        final String sessionid = extras.getString("Sessionid");
+//        sessionnumber =extras.getString("Sequencid");
+//        sesionnumbers.setText(sessionid);
+//        String sessionss=sessionid.substring(8);
+//        sesionurl=url+sessionss;
         System.out.println("-----url"+sesionurl);
         layout = (LinearLayout) findViewById(R.id.linear);
         String childurl=url.substring(url.lastIndexOf("=") + 1);
         System.out.println("sessionurl--------------"+childurl);
-        int sessions=Integer.parseInt(sessionss);
-        int sesin1=sessions-1;
-        String sessiondetils=String.valueOf(sesin1);
-        System.out.println("------------"+sessionid+sessiondetils);
-        backbutton3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            onBackPressed();
-//
-//                Fragment fragment = null;
-//                fragment = new HomeFragment();
-//
-//                if (fragment != null) {
-//                    FragmentManager fragmentManager = getSupportFragmentManager();
-//                    fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).addToBackStack(null).commit();
-//                }
-            }
-        });
+//        int sessions=Integer.parseInt(sessionss);
+//        int sesin1=sessions-1;
+//        String sessiondetils=String.valueOf(sesin1);
+//        System.out.println("------------"+sessionid+sessiondetils);
+//        backbutton3.setOnClickListener(new View.OnClickListener() {
+////            @Override
+//            public void onClick(View v) {
+//            onBackPressed();
+////
+////                Fragment fragment = null;
+////                fragment = new HomeFragment();
+////
+////                if (fragment != null) {
+////                    FragmentManager fragmentManager = getSupportFragmentManager();
+////                    fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+////                }
+//            }
+//        });
         new Sessiondetail().execute();
     }
     @Override
@@ -176,7 +176,8 @@ public class SessionDetails extends AppCompatActivity implements Constant {
                 getSupportFragmentManager().popBackStackImmediate();
                 return true;
             case R.id.sessiondone:
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(SessionDetails.this,R.style.AppCompatAlertDialogStyle);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(SessionDetails.this);
+                alertDialog.setView(R.layout.mile1customdialog);
 //                alertDialog.
 
 
@@ -221,7 +222,7 @@ public class SessionDetails extends AppCompatActivity implements Constant {
 //        System.out.println("------------childddddddd"+childId+sessionid);
         HttpClient httpClient = new DefaultHttpClient();
         // replace with your url
-        HttpPost httpPost = new HttpPost(Sessiondoneurl);
+        HttpPost httpPost = new HttpPost(url);
         httpPost.addHeader("X-API-KEY","123456");
         httpPost.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
         httpPost.addHeader("access-token",accesstoken);
@@ -280,10 +281,10 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
     ProgressDialog pd;
     @Override
     protected void onPreExecute() {
-        pd=new ProgressDialog(SessionDetails.this);
-        pd.setMessage("Please wait.");
-        pd.show();
-        super.onPreExecute();
+//        pd=new ProgressDialog(SessionDetails.this);
+//        pd.setMessage("Please wait.");
+//        pd.show();
+//        super.onPreExecute();
 
     }
 
@@ -293,17 +294,17 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
 
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpget = new HttpGet(sesionurl);
+            HttpGet httpget = new HttpGet(url);
             httpget.addHeader("X-API-KEY","123456");
             httpget.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
-            httpget.addHeader("access-token","V49wH0yUXBQZuPMfshEqWgxbY_4");
+            httpget.addHeader("access-token",accesstoken);
 
             HttpResponse httpResponse = httpClient.execute(httpget);
             final int statusCode = httpResponse.getStatusLine().getStatusCode();
 
             if (statusCode != HttpStatus.SC_OK) {
                 Log.w(getClass().getSimpleName(),
-                        "Error " + statusCode + " for URL " + sesionurl);
+                        "Error " + statusCode + " for URL " + url);
 
             }
             HttpEntity httpEntity = httpResponse.getEntity();
