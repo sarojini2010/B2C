@@ -55,7 +55,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements  Co
     private ArrayList<User> userlist=new ArrayList<>();
     final String url =BaseUrl;
     String Urls;
-    static String title1,sequenceid,childimages;
+    static String sessionid,sequenceid,childimages;
     ImageView childprofile;
     Bitmap b;
     String child_id,childid;
@@ -179,16 +179,18 @@ public class HomeFragment extends android.support.v4.app.Fragment implements  Co
                             for(int i=0;i<jsonArray.length();i++){
                                 JSONObject id=jsonArray.getJSONObject(i);
                                 User user=new User();
-                                title1=id.getString("id");
-                                sequenceid=id.getString("sequence");
+//                                sessionid=id.getString("id");
+//                                sequenceid=id.getString("sequence");
                                 //                String title2=title1.substring(7);
                                 //                System.out.println("PPPPPPPPPPP"+title2);
                                 //                String title3=title1;
                                 //                System.out.println("____________"+title3);
-                                user.setUserEmail(sequenceid);
-                                user.setUserName(id.optString("title"));
-                                user.setUserMobile(id.optString("parent_note"));
+
+                                user.setSessionid(id.optString("id"));
+                                user.setSessiontitle(id.optString("title"));
+                                user.setParentnote(id.optString("parent_note"));
                                 user.setImageResourceId(R.drawable.arrow_hdpi);
+                                user.setSequencenumber(id.optString("sequence"));
                                 userlist.add(user);
                                 allUserAdapter.notifyDataSetChanged();
                             }

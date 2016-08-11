@@ -100,6 +100,7 @@ public class LoginPage extends Activity implements Constant{
                     makePostRequest();
                     System.out.println("url" + URL);
                     Intent in = new Intent(getApplicationContext(), MainProfile.class);
+                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(in);
 
             }

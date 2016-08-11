@@ -14,7 +14,7 @@
             android:layout_height="49dp"
             android:layout_marginBottom="4dp">
             <TextView
-                android:id="@+id/sesion_id"
+                android:id="@+id/sesion_sequencenumber"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/circulartextview"
@@ -30,18 +30,19 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
+
             <TextView
-                android:id="@+id/session_number"
+                android:id="@+id/session_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Allequida arcticet"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:layout_marginLeft="20dp"
                 android:textColor="#fbfafd"
-                android:layout_toRightOf="@+id/sesion_id"
-                android:layout_toEndOf="@+id/sesion_id"
-                android:layout_marginLeft="15dp"
-                android:layout_marginStart="18dp" />
+                android:layout_alignTop="@+id/sesion_sequencenumber"
+                android:layout_toRightOf="@+id/sesion_sequencenumber"
+                android:layout_toEndOf="@+id/sesion_sequencenumber" />
             <TextView
                 android:id="@+id/session_description"
                 android:layout_width="wrap_content"
@@ -49,13 +50,17 @@
                 android:textSize="11sp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:layout_marginRight="45dp"
                 android:textColor="#d8bbe6"
-                android:layout_marginTop="19dp"
                 android:text="Loading Story for you"
-                android:layout_alignParentTop="true"
-                android:layout_alignLeft="@+id/session_number"
-                android:layout_alignStart="@+id/session_number" />
+                android:layout_below="@+id/session_title"
+                android:layout_alignLeft="@+id/session_title"
+                android:layout_alignStart="@+id/session_title" />
+            <TextView
+                android:id="@+id/session_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                />
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"

@@ -5,9 +5,46 @@ package com.example.thoughtchimp.dummyapplication;
  */
 public class User {
     int imageResourceId;
-    String userName;
-    String userMobile;
-    String userEmail;
+
+    public String getSessiontitle() {
+        return sessiontitle;
+    }
+
+    public void setSessiontitle(String sessiontitle) {
+        this.sessiontitle = sessiontitle;
+    }
+
+    String sessiontitle;
+
+    public String getSessionid() {
+        return sessionid;
+    }
+
+    public void setSessionid(String sessionid) {
+        this.sessionid = sessionid;
+    }
+
+    String sessionid;
+
+    public String getParentnote() {
+        return parentnote;
+    }
+
+    public void setParentnote(String parentnote) {
+        this.parentnote = parentnote;
+    }
+
+    String parentnote;
+
+    public String getSequencenumber() {
+        return sequencenumber;
+    }
+
+    public void setSequencenumber(String sequencenumber) {
+        this.sequencenumber = sequencenumber;
+    }
+
+    String sequencenumber;
     String userCreatedDate;
     public int getImageResourceId() {
         return imageResourceId;
@@ -17,29 +54,6 @@ public class User {
         this.imageResourceId = imageResourceId;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserMobile() {
-        return userMobile;
-    }
-
-    public void setUserMobile(String userMobile) {
-        this.userMobile = userMobile;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
 
     public String getUserCreatedDate() {
         return userCreatedDate;

@@ -37,9 +37,10 @@ public  class  AllUsersAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         UserViewHolder holder1 = (UserViewHolder) holder;
         holder1.iamge.setImageResource(userList.get(position).imageResourceId);
-        holder1.tvName.setText(userList.get(position).userName);
-        holder1.tvMobile.setText(userList.get(position).userMobile);
-        holder1.ivProfile.setText(userList.get(position).userEmail);
+        holder1.sessionid.setText(userList.get(position).sessionid);
+        holder1.parentnote.setText(userList.get(position).parentnote);
+        holder1.session_title.setText(userList.get(position).sessiontitle);
+        holder1.sequencenumber.setText(userList.get(position).sequencenumber);
 
     }
 
@@ -51,9 +52,10 @@ public  class  AllUsersAdapter extends RecyclerView.Adapter {
 
 
     public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView ivProfile;
-        private TextView tvName;
-        private TextView tvMobile;
+        private TextView session_title;
+        private TextView sessionid;
+        private TextView parentnote;
+        private TextView sequencenumber;
         private ImageView iamge;
 
         public UserViewHolder(View itemView) {
@@ -61,9 +63,10 @@ public  class  AllUsersAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(this);
             itemView.setClickable(true);
 
-            ivProfile = (TextView) itemView.findViewById(R.id.sesion_id);
-            tvName = (TextView) itemView.findViewById(R.id.session_number);
-            tvMobile = (TextView) itemView.findViewById(R.id.session_description);
+            session_title = (TextView) itemView.findViewById(R.id.session_title);
+            sequencenumber = (TextView) itemView.findViewById(R.id.sesion_sequencenumber);
+            parentnote = (TextView) itemView.findViewById(R.id.session_description);
+            sessionid = (TextView) itemView.findViewById(R.id.session_id);
             iamge=(ImageView)itemView.findViewById(R.id.imageView);
 
 
@@ -85,17 +88,12 @@ public  class  AllUsersAdapter extends RecyclerView.Adapter {
             Intent in=new Intent(mContext,SessionDetails.class);
 //            Toast.makeText(mContext,"Sessionid"+ tvName.getText(), Toast.LENGTH_SHORT).show();
 //            Toast.makeText(mContext,ivProfile.getText(),Toast.LENGTH_LONG).show();
-            in.putExtra("Sessionid",tvName.getText());
-            in.putExtra("Sequencid",ivProfile.getText());
+            in.putExtra("sessionid",sessionid.getText());
+            in.putExtra("sessiontitle",session_title.getText());
+            in.putExtra("sequencid",sequencenumber.getText());
             mContext.startActivity(in);
         }
 
-//        @Override
-//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            Intent in=new Intent(mContext,SessionDetails.class);
-//            String titles=HomeFragment.title1.
-//            in.putExtra("Sessionid",HomeFragment.title1);
-//            mContext.startActivity(in);
-//        }
+
     }
 }

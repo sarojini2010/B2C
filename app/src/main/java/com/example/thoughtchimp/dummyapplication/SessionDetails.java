@@ -79,7 +79,7 @@ public class SessionDetails extends AppCompatActivity implements Constant {
     String Sessiondoneurl=SESSIONDONE_URL;
 
     String sesionurl,storyimages,youtube;
-    TextView parent_note,doin_plan,resource,story,sesionnumbers;
+    TextView parent_note,doingplans,resource,story,sessiontitles;
     RelativeLayout doinplan;
     LinearLayout youtubelayout,musiclayout,imglayout,layout;
     ViewPager viewPager;
@@ -106,7 +106,7 @@ public class SessionDetails extends AppCompatActivity implements Constant {
         }
 
         parent_note= (TextView) findViewById(R.id.parenttext);
-        sesionnumbers=(TextView) findViewById(R.id.sesionnumber);
+        sessiontitles=(TextView) findViewById(R.id.sessiontitles);
         doinplan= (RelativeLayout) findViewById(R.id.doingplan);
         youtubelayout= (LinearLayout) findViewById(R.id.youtubelayout11);
         musiclayout= (LinearLayout) findViewById(R.id.musiclayout);
@@ -121,15 +121,16 @@ public class SessionDetails extends AppCompatActivity implements Constant {
         backbutton3= (ImageView) findViewById(R.id.sessionbackbtn);
 
 
-        doin_plan=(TextView) findViewById(R.id.doingtext);
-        resource= (TextView) findViewById(R.id.parenttext);
+        doingplans=(TextView) findViewById(R.id.doingtext);
+//        resource= (TextView) findViewById(R.id.parenttext);
         Bundle extras = getIntent().getExtras();
-//        final String sessionid = extras.getString("Sessionid");
-//        sessionnumber =extras.getString("Sequencid");
-//        sesionnumbers.setText(sessionid);
-//        String sessionss=sessionid.substring(8);
-//        sesionurl=url+sessionss;
-        System.out.println("-----url"+sesionurl);
+        final String sessionid = extras.getString("sessionid");
+        String sessiontitle=extras.getString("sessiontitle");
+        sessionnumber =extras.getString("sequencid");
+//        sessiontitles.setText(sessiontitle);
+        sesionurl=url+sessionid;
+        System.out.println("sessionid"+sesionurl);
+//
         layout = (LinearLayout) findViewById(R.id.linear);
         String childurl=url.substring(url.lastIndexOf("=") + 1);
         System.out.println("sessionurl--------------"+childurl);
@@ -281,10 +282,10 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
     ProgressDialog pd;
     @Override
     protected void onPreExecute() {
-//        pd=new ProgressDialog(SessionDetails.this);
-//        pd.setMessage("Please wait.");
-//        pd.show();
-//        super.onPreExecute();
+        pd=new ProgressDialog(SessionDetails.this);
+        pd.setMessage("Please wait.");
+        pd.show();
+        super.onPreExecute();
 
     }
 
@@ -294,7 +295,7 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
 
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpget = new HttpGet(url);
+            HttpGet httpget = new HttpGet(sesionurl);
             httpget.addHeader("X-API-KEY","123456");
             httpget.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
             httpget.addHeader("access-token",accesstoken);
@@ -304,7 +305,7 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
 
             if (statusCode != HttpStatus.SC_OK) {
                 Log.w(getClass().getSimpleName(),
-                        "Error " + statusCode + " for URL " + url);
+                        "Error " + statusCode + " for URL " + sesionurl);
 
             }
             HttpEntity httpEntity = httpResponse.getEntity();
@@ -347,11 +348,16 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
             String sessionids=sessiondetails.getString("session_id");
             String parentnote = sessiondetails.getString("parent_note");
             String doingplan = sessiondetails.getString("doing_plan");
+            parent_note.setText(parentnote);
+            System.out.println("parentnote"+doingplan);
+
             if (doingplan == null) {
+                System.out.println("-------iff part");
                 doinplan.setVisibility(View.GONE);
             } else {
+                System.out.println("-------elsepart");
                 doinplan.setVisibility(View.VISIBLE);
-                doin_plan.setText(doingplan);
+                doingplans.setText(doingplan);
             }
               youtube = sessiondetails.getString("youtube_url");
             System.out.println("---------"+youtube);
@@ -374,11 +380,15 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
                 youtubelayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        pd=new ProgressDialog(SessionDetails.this);
+                        pd.setMessage("Please wait.");
+                        pd.show();
                         String Youtubeurl=youtube.toString();
                         System.out.println("youtubeurl"+Youtubeurl);
                         Intent in=new Intent(SessionDetails.this,Youtubevideo.class);
                         in.putExtra("Youtubeurl", Youtubeurl);
                         startActivity(in);
+                        pd.cancel();
                     }
                 });
 
@@ -429,8 +439,7 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
                 });
             }
             JSONArray resourcearray = sessiondetails.getJSONArray("resource");
-            parent_note.setText(parentnote);
-            doin_plan.setText(doingplan);
+
             if(resourcearray==null){
                 imglayout.setVisibility(View.GONE);
             }else{

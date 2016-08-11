@@ -20,7 +20,7 @@
       android:layout_height="wrap_content"
       android:text="Something"
       android:textStyle="bold"
-      android:id="@+id/sesionnumber"
+      android:id="@+id/sessiontitles"
       android:textColor="@color/list_item_title"
       android:layout_gravity="center"
       />
