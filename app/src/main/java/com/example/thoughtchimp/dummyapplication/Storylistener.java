@@ -105,7 +105,7 @@ public class Storylistener extends AppCompatActivity implements Constant {
 //        mediaPlayer.start();
         URL newurl ;
         try {
-            newurl = new URL(BaseUrl+"/uploads/resource/"+imagesid);
+            newurl = new URL(BaseUrl+"/uploads/story/"+imagesid);
             b = BitmapFactory.decodeStream(newurl.openConnection() .getInputStream());
             image.setImageBitmap(b);
             image.setScaleType(ImageView.ScaleType.FIT_XY);

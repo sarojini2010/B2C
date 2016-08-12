@@ -45,6 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="12dp"
+                android:id="@+id/thumbdown"
+                android:onClick="thumbdown"
                 android:background="@drawable/thumbdown"
                 />
         </LinearLayout>
@@ -58,6 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="12dp"
+                android:id="@+id/thumbup"
+                android:onClick="thumbup"
                 android:background="@drawable/thumbup"
                 android:backgroundTint="@color/orange"
                 />
@@ -69,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:visibility="gone"
+        android:id="@+id/thumbdownlist"
         android:layout_marginRight="50dp"
         android:layout_marginBottom="20dp">
         <TextView
@@ -77,10 +82,11 @@
             android:text="This mile was too easy for us"
             android:gravity="center"
             android:paddingTop="5dp"
+            android:onClick="sessionfeedback1"
             android:paddingBottom="5dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rectangle"
-            android:id="@+id/textView9" />
+            android:id="@+id/feedback1" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,23 +94,25 @@
             android:gravity="center"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
+            android:onClick="sessionfeedback2"
             android:background="@drawable/rectangle"
             android:layout_marginBottom="10dp"
-            android:layout_below="@+id/textView9"
-            android:layout_alignLeft="@+id/textView10"
-            android:layout_alignStart="@+id/textView10"
-            android:id="@+id/textView11" />
+            android:layout_below="@+id/feedback1"
+            android:layout_alignLeft="@+id/feedback3"
+            android:layout_alignStart="@+id/feedback3"
+            android:id="@+id/feedback2" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="This mile was no fun "
             android:gravity="center"
+            android:onClick="sessionfeedback3"
             android:paddingTop="5dp"
             android:background="@drawable/rectangle"
             android:layout_marginBottom="10dp"
             android:paddingBottom="5dp"
-            android:id="@+id/textView10"
-            android:layout_below="@+id/textView11"
+            android:id="@+id/feedback3"
+            android:layout_below="@+id/feedback2"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
     </RelativeLayout>

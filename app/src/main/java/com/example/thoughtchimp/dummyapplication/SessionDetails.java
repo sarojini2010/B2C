@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -29,6 +30,7 @@ import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -95,6 +97,10 @@ public class SessionDetails extends AppCompatActivity implements Constant {
     FragmentManager fragmentManager;
     ImageView backbutton3;
     Toolbar sessiontoolbar;
+     String sessionid;
+    RelativeLayout thumbdownlist;
+    static SharedPreferences activechildprefernce;
+    String activechildid;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +122,9 @@ public class SessionDetails extends AppCompatActivity implements Constant {
         backbutton3= (ImageView) findViewById(R.id.audiobackbtn);
         sessiontoolbar = (Toolbar) findViewById(R.id.sessiontoolbar);
         setSupportActionBar(sessiontoolbar);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        activechildprefernce=getSharedPreferences("Activechild",MODE_PRIVATE);
+        activechildid=activechildprefernce.getString("activechild","");
 
         backbutton3= (ImageView) findViewById(R.id.sessionbackbtn);
 
@@ -124,12 +132,12 @@ public class SessionDetails extends AppCompatActivity implements Constant {
         doingplans=(TextView) findViewById(R.id.doingtext);
 //        resource= (TextView) findViewById(R.id.parenttext);
         Bundle extras = getIntent().getExtras();
-        final String sessionid = extras.getString("sessionid");
+        sessionid= extras.getString("sessionid");
         String sessiontitle=extras.getString("sessiontitle");
         sessionnumber =extras.getString("sequencid");
-//        sessiontitles.setText(sessiontitle);
+        sessiontitles.setText(sessiontitle);
         sesionurl=url+sessionid;
-        System.out.println("sessionid"+sesionurl);
+        System.out.println("sessionid"+sesionurl+sessionid);
 //
         layout = (LinearLayout) findViewById(R.id.linear);
         String childurl=url.substring(url.lastIndexOf("=") + 1);
@@ -138,20 +146,20 @@ public class SessionDetails extends AppCompatActivity implements Constant {
 //        int sesin1=sessions-1;
 //        String sessiondetils=String.valueOf(sesin1);
 //        System.out.println("------------"+sessionid+sessiondetils);
-//        backbutton3.setOnClickListener(new View.OnClickListener() {
-////            @Override
-//            public void onClick(View v) {
-//            onBackPressed();
-////
-////                Fragment fragment = null;
-////                fragment = new HomeFragment();
-////
-////                if (fragment != null) {
-////                    FragmentManager fragmentManager = getSupportFragmentManager();
-////                    fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).addToBackStack(null).commit();
-////                }
-//            }
-//        });
+        backbutton3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+            public void onClick(View v) {
+            onBackPressed();
+//
+//                Fragment fragment = null;
+//                fragment = new HomeFragment();
+//
+//                if (fragment != null) {
+//                    FragmentManager fragmentManager = getSupportFragmentManager();
+//                    fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+//                }
+            }
+        });
         new Sessiondetail().execute();
     }
     @Override
@@ -178,29 +186,38 @@ public class SessionDetails extends AppCompatActivity implements Constant {
                 return true;
             case R.id.sessiondone:
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(SessionDetails.this);
-                alertDialog.setView(R.layout.mile1customdialog);
-//                alertDialog.
+                LayoutInflater inflater = this.getLayoutInflater();
+//                alertDialog.setView(R.layout.mile1customdialog);
+                View dialogView= inflater.inflate(R.layout.mile1customdialog, null);
+                alertDialog.setView(dialogView);
+                ImageView thumbdown=(ImageView)findViewById(R.id.thumbdown);
+                ImageView thumbup=(ImageView)findViewById(R.id.thumbup);
+                thumbdownlist= (RelativeLayout)dialogView.findViewById(R.id.thumbdownlist);
+//                thumbdown.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Toast.makeText(getApplicationContext(),"thumpup",Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//                thumbup.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Toast.makeText(getApplicationContext(),"thumbdown",Toast.LENGTH_LONG).show();
+//
+//                    }
+//                });
 
-
-                // Setting Dialog Title
-                alertDialog.setTitle("Alert Dialog");
-//                alertDialog.setContentView(R.layout.mile1customdialog);
-
-                // Setting Dialog Message
-                alertDialog.setMessage("Welcome ");
-
-                // Setting Icon to Dialog
-                alertDialog.setIcon(R.drawable.play_hdpi);
-
-                // Setting OK Button
-                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
+//
+//                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        finish();
+//                    }
+//                });
                 // Showing Alert Message
                 alertDialog.show();
+                AlertDialog alert = alertDialog.create();
+                alert.getWindow().setLayout(300,300);
 
 //                sesssiondone();
 //                android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
@@ -216,23 +233,45 @@ public class SessionDetails extends AppCompatActivity implements Constant {
         }
     }
 
-    private void sesssiondone() {
+    public void thumbdown(View v){
+        Toast.makeText(getApplicationContext(),"thumpdown",Toast.LENGTH_LONG).show();
+        if(thumbdownlist.getVisibility()!=View.VISIBLE) {
+            System.out.println("Visiblity" + thumbdownlist.getVisibility());
+            thumbdownlist.setVisibility(View.VISIBLE);
+        }
+        else{
+            thumbdownlist.setVisibility(View.GONE);
+
+        }
+
+
+    }
+    public void thumbup(View v){
+        String comment="";
+        String feedback="1";
+        sessiondone(comment,feedback);
+        finish();
+        Toast.makeText(getApplicationContext(),"thumpup",Toast.LENGTH_LONG).show();
+
+    }
+    private void sessiondone(String comment,String feedback) {
         String childid=CHILDHOMEIP;
         String childId=childid.substring(childid.lastIndexOf("=") + 1);
 //        String sessionid=sesionurl.substring(sesionurl.lastIndexOf("=") + 1);
 //        System.out.println("------------childddddddd"+childId+sessionid);
         HttpClient httpClient = new DefaultHttpClient();
         // replace with your url
-        HttpPost httpPost = new HttpPost(url);
+        HttpPost httpPost = new HttpPost(Sessiondoneurl);
         httpPost.addHeader("X-API-KEY","123456");
         httpPost.addHeader("Authorization","Basic YWRtaW46MTIzNA==");
         httpPost.addHeader("access-token",accesstoken);
 
         //Post Data
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
-        nameValuePair.add(new BasicNameValuePair("session_id",sessionnumber));
-        nameValuePair.add(new BasicNameValuePair("child_id", childId));
-        nameValuePair.add(new BasicNameValuePair("feedback","true"));
+        nameValuePair.add(new BasicNameValuePair("session_id",sessionid));
+        nameValuePair.add(new BasicNameValuePair("child_id", activechildid));
+        nameValuePair.add(new BasicNameValuePair("feedback",feedback));
+        nameValuePair.add(new BasicNameValuePair("comment",comment));
 
 //        editTor.putString("birthdate",dateView.getText().toString());
 
@@ -268,6 +307,25 @@ public class SessionDetails extends AppCompatActivity implements Constant {
             // Log exception
             e.printStackTrace();
         }
+    }
+    public void  sessionfeedback1(View v){
+        String comment="This mile was too easy for us";
+        String feedback="0";
+        sessiondone(comment,feedback);
+        finish();
+    }
+    public void  sessionfeedback2(View v){
+        String comment="This mile was difficult to understand";
+        String feedback="0";
+        sessiondone(comment,feedback);
+        finish();
+    }
+    public void  sessionfeedback3(View v){
+        String comment="This mile was no fun";
+        String feedback="0";
+        sessiondone(comment,feedback);
+        finish();
+
     }
 
 
@@ -402,7 +460,7 @@ public class Sessiondetail extends AsyncTask<String,Void,String> implements Cons
                 musiclayout.setVisibility(View.VISIBLE);
                 URL newurl ;
                 try {
-                    newurl = new URL(BaseUrl + "/uploads/story/" + storyimages);
+                    newurl = new URL(BaseUrl +"/uploads/story/"+storyimages);
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     b = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
                     audioiamge.setImageBitmap(b);

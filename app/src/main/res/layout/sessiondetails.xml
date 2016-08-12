@@ -314,9 +314,9 @@
 
                 </LinearLayout>
             </LinearLayout>
-            <!--<include-->
-                <!--android:id="@+id/sessiontoolbar"-->
-                <!--layout="@layout/sessiontollbar" />-->
+            <include
+                android:id="@+id/sessiontoolbar"
+                layout="@layout/sessiontollbar" />
 
         </RelativeLayout>
     </ScrollView>

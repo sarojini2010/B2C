@@ -28,7 +28,8 @@ public interface Constant
     String BaseUrl="http://192.168.0.100/s2m-b2c";
     String Updatechild=BaseUrl1+"update_child_profile";
     String accesstoken=LoginPage.access_token;
-    SharedPreferences activechildidprefernce = null;
+    String SessionUndo=BaseUrl1+"session_undo";
+//    SharedPreferences activechildidprefernce = null;
 
 
 
