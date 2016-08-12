@@ -65,10 +65,10 @@ public class NavDrawerItemes {
 
     public NavDrawerItemes(int icon, String title,String id,int viewnumber,String method,String images) {
 
+        this.icon=icon;
         this.title = title;
         this.id=id;
         this.image=images;
-        this.icon=icon;
         this.viewnumber=viewnumber;
         this.method=method;
     }
