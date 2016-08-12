@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ChildDatabase;
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ParentDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -60,6 +61,7 @@ public class LoginPage extends Activity implements Constant{
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+//        FirebaseMessaging.getInstance().subscribeToTopic("news");
 //        System.out.println("loginurl"+URL);
 
         sharedPreferences=getSharedPreferences(USER_SESSION_ID, MODE_PRIVATE);

@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ChildDatabase;
 import com.example.thoughtchimp.com.example.thoughtchimp.adapter.ParentDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -373,6 +374,7 @@ public class Profile  extends AppCompatActivity implements Constant {
                 String images=names.getString("child_image");
 //                myDb.insertchilddata(childnames);
                 System.out.println("--------chhhhRofilephoto"+images+childnames);
+//                FirebaseMessaging.getInstance().subscribeToTopic(classname.getText().toString());
 
                 editTor.putString("childimages",images);
                 editTor.putString("chilid",id);
