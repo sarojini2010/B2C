@@ -8,12 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.thoughtchimp.dummyapplication.ObjectDrawerItem;
-import com.example.thoughtchimp.dummyapplication.R;
+import com.example.thoughtchimp.freadom.ObjectDrawerItem;
+import com.example.thoughtchimp.freadom.R;
 
-import java.io.ObjectInputValidation;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by admin on 21/12/15.

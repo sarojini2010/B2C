@@ -12,8 +12,15 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/audiobackbtn"
+            android:id="@+id/audiobackbtns"
             android:layout_gravity="start"
             android:background="@mipmap/back"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Now Playing"
+        android:textColor="@color/mdtp_white"
+        android:textSize="22dp"
+        android:layout_marginLeft="60dp"/>
 
     </android.support.v7.widget.Toolbar>

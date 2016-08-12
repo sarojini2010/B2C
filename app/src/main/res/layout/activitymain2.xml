@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:name="com.example.thoughtchimp.dummyapplication.FragmentDrawer"
+        android:name="com.example.thoughtchimp.freadom.FragmentDrawer"
         app:layout="@layout/fragment_navigation_drawer"
         tools:layout="@layout/fragment_navigation_drawer" />
 

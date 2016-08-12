@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--<include-->
-        <!--android:id="@+id/fredotools"-->
-        <!--layout="@layout/fredotoolbar" />-->
+    <include
+        android:id="@+id/fredotolbar"
+        layout="@layout/fredotoolbar" />
+
 </LinearLayout>

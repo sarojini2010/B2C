@@ -2,12 +2,9 @@ package com.example.thoughtchimp.com.example.thoughtchimp.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.util.FloatMath;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,10 +12,9 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 //import com.example.thoughtchimp.dummyapplication.Imageshow;
-import com.example.thoughtchimp.dummyapplication.R;
+import com.example.thoughtchimp.freadom.R;
 
 /**
  * Created by thoughtchimp on 7/28/2016.

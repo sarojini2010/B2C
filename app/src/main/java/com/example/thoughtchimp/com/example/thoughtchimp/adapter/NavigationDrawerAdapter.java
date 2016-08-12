@@ -8,12 +8,11 @@ import android.view.LayoutInflater;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.thoughtchimp.dummyapplication.NavDrawerItemes;
-import com.example.thoughtchimp.dummyapplication.R;
+import com.example.thoughtchimp.freadom.NavDrawerItemes;
+import com.example.thoughtchimp.freadom.R;
 
 import java.util.Collections;
 import java.util.List;
