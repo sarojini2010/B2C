@@ -22,10 +22,12 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp">
                     <ImageView
-                        android:layout_width="100.5dp"
+                        android:layout_width="72dp"
                         android:layout_height="70dp"
                         android:layout_marginTop="30dp"
+                        android:layout_marginLeft="15dp"
                         android:id="@+id/childimages22"
+                        android:onClick="editchildprofile"
                         android:src="@drawable/child"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -34,7 +36,7 @@
                         android:textColor="#ffffff"
                         android:textStyle="bold"
                         android:paddingBottom="5dp"
-                        android:paddingLeft="5dp"
+                        android:paddingLeft="14dp"
                         android:id="@+id/username"
                         android:textSize="20sp"
                         android:layout_alignTop="@+id/childimages22"
@@ -45,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:text=" 13 session completed"
                         android:id="@+id/session_text"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="14dp"
                         android:textSize="10sp"
                         android:layout_marginBottom="10dp"
                         android:textStyle="bold"
@@ -58,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/childimages22"
                         style="@style/CustomProgressBar"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginLeft="14dp"
                         android:layout_marginRight="22dp"
                         android:progress="13"
                         android:max="50"

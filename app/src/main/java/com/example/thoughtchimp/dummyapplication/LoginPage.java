@@ -117,6 +117,7 @@ public class LoginPage extends Activity implements Constant{
         nameValuePair.add(new BasicNameValuePair("mobile", phone));
         nameValuePair.add(new BasicNameValuePair("otp", otpnum));
         nameValuePair.add(new BasicNameValuePair("device_token","fdsfgsdgfd"));
+        nameValuePair.add(new BasicNameValuePair("device_type","android"));
 
 
         try {
